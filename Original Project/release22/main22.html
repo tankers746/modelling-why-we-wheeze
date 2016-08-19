@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Copyright: quackingfrogs.com 2014 -->
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Asthma</title>
+
+    <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+
+    <script type="text/javascript" src="jquery.nouislider.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="jquery.nouislider.min.css">
+
+    <script type="text/javascript" src="asthma22.js"></script>
+    <link rel="stylesheet" type="text/css" href="asthma22.css">
+  </head>
+
+  <body>
+    <div id="contentbox">
+      <div id="title">Cross Section of Airway Wall</div>
+
+      <div id="circles">
+        <div id="circ4"></div>
+        <div id="circ3"></div>
+        <div id="circ2"></div>
+        <div id="circ1"></div>
+      </div>
+
+      <div id="radiuslabel">The radius of the airway lumen is determined by the level of ...</div>
+
+      <div id="highlabel">High</div>
+      <div id="lowlabel">Low</div>
+
+      <div id="controltitle1">Muscle Contraction</div>
+      <div id="controltitle2">Airway Wall Inflammation</div>
+      <div id="controltitle3">Mucus Secretion</div>
+
+      <div id="controls">
+        <div id="controlscontent">
+          <div id="scale0">0</div>
+          <div id="scale2">2</div>
+          <div id="scale4">4</div>
+          <div id="scale6">6</div>
+          <div id="scale8">8</div>
+          <div id="scale10">10</div>
+
+          <div id="scaleIcon">
+            <img src="scale1.png">
+          </div>
+
+          <div id="marker1"></div>
+          <div id="marker2"></div>
+          <div id="marker3"></div>
+
+          <div id="slider1"></div>
+          <div id="slider2"></div>
+          <div id="slider3"></div>
+        </div>
+      </div>
+
+      <div id="amlabel">and the dose &amp; type of asthma medication ...</div>
+
+      <div id="highdoselabel">High</div>
+      <div id="lowdoselabel">Low</div>
+
+      <div id="lowercontrols">
+        <div id="lowercontrolscontent">
+          <div id="amscale0">0</div>
+          <div id="amscale2">2</div>
+          <div id="amscale4">4</div>
+          <div id="amscale6">6</div>
+          <div id="amscale8">8</div>
+          <div id="amscale10">10</div>
+
+          <div id="scaleIcon2">
+            <img src="scale1.png">
+          </div>
+
+          <div id="marker4"></div>
+          <div id="marker5"></div>
+          <div id="marker6"></div>
+
+          <div id="slider4"></div>
+          <div id="slider5"></div>
+          <div id="slider6"></div>
+        </div>
+      </div>
+
+      <div id="controltitle4">Reliever</div>
+      <div id="controltitle5">Preventer (prophylactic)</div>
+      <div id="controltitle6">Preventer (acute)</div>
+
+      <div id="explaintext">
+        <p>&nbsp;</p>
+        <p>As the radius of the airway lumen decreases (airway narrowing), airway resistance (R) increases because:</p>
+        <p>Airway Resistance &#8733; 1/radius&#8308;</p>
+        <p id="pousielle">Pousielle's Law describing airflow through a tube</p>
+      </div>
+
+      <div id="graph">
+        <div id="graphcontent">
+          <canvas id="graphCanvas" height="220" width="220"></canvas>
+          <div id="marker"></div>
+          <div id="xAxes">Lumen Radius</div>
+          <div id="yAxes">Airway Resistance (arbitrary units)</div>
+          <div id="eqntext">Airway Resistance &#8733; 1/radius&#8308;</div>
+
+          <div id="gscale0">0</div>
+          <div id="gscale2">2</div>
+          <div id="gscale4">4</div>
+          <div id="gscale6">6</div>
+          <div id="gscale8">8</div>
+          <div id="gscale10">10</div>
+
+          <div id="gScaleIcon">
+            <img src="scale2.png">
+          </div>
+        </div>
+      </div>
+
+      <div id="footer">
+        <img src="footer.png">
+      </div>
+    </div>
+  </body>
+</html>
