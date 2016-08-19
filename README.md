@@ -16,3 +16,9 @@
   - Deliverable B description -> http://teaching.csse.uwa.edu.au/units/CITS3200/project/DelBdef.htm
   - Deliverable C description -> http://teaching.csse.uwa.edu.au/units/CITS3200/project/DelC2def.htm
   - Deliverable D description -> http://teaching.csse.uwa.edu.au/units/CITS3200/project/DelDdef.htm
+
+### Some self-learning resources:
+  - General JavaScript resource (1) -> http://www.w3schools.com/js/
+  - General JavaScript resource (2) -> https://www.codecademy.com/learn/javascript
+  - JavaScript Charts; Line Graphs -> http://www.jscharts.com/how-to-use-line-graphs
+  - HTML5 & JavaScript Line Charts -> http://canvasjs.com/html5-javascript-line-chart/
