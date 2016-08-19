@@ -22,3 +22,4 @@
   - General JavaScript resource (2) -> https://www.codecademy.com/learn/javascript
   - JavaScript Charts; Line Graphs -> http://www.jscharts.com/how-to-use-line-graphs
   - HTML5 & JavaScript Line Charts -> http://canvasjs.com/html5-javascript-line-chart/
+  - Modularizing -> http://enterprisewebbook.com/ch6_large_js_apps.html
