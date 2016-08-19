@@ -16,6 +16,7 @@
   - Deliverable B description -> http://teaching.csse.uwa.edu.au/units/CITS3200/project/DelBdef.htm
   - Deliverable C description -> http://teaching.csse.uwa.edu.au/units/CITS3200/project/DelC2def.htm
   - Deliverable D description -> http://teaching.csse.uwa.edu.au/units/CITS3200/project/DelDdef.htm
+  - Modeling Why We Wheeze Project Description -> http://teaching.csse.uwa.edu.au/units/CITS3200/project/offered/Projects_2016/Henry_Modelling_Why_We_Wheeze.html
 
 ### Some self-learning resources:
   - General JavaScript resource (1) -> http://www.w3schools.com/js/
