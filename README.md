@@ -1,5 +1,5 @@
+![picture alt](http://static.weboffice.uwa.edu.au/visualid/core-rebrand/img/uwacrest/uwacrest-blue.svg "Title is optional")
 # CITS3200-Project-Group-P
-
 ## Project: Modeling Why We Wheeze
 
 ### Upcoming important dates:
