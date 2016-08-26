@@ -26,3 +26,14 @@
   - JavaScript Charts; Line Graphs -> http://www.jscharts.com/how-to-use-line-graphs
   - HTML5 & JavaScript Line Charts -> http://canvasjs.com/html5-javascript-line-chart/
   - Modularizing -> http://enterprisewebbook.com/ch6_large_js_apps.html
+
+### Project Memebers:
+| Student numbers | Name                |   
+| :-------------: |:-------------       | 
+| 21490093        | Tom Ankers          | 
+| 20503664        | Michael Baxter      | 
+| 21469038        | Dylan Johnson       | 
+| 21480279        | Gary Liao           | 
+| 21522889        | Harrison Marley     | 
+| 21506136        | Damon van der Linde | 
+  
