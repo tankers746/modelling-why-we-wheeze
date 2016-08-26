@@ -27,7 +27,7 @@
   - HTML5 & JavaScript Line Charts -> http://canvasjs.com/html5-javascript-line-chart/
   - Modularizing -> http://enterprisewebbook.com/ch6_large_js_apps.html
 
-### Project Memebers:
+### Project Members:
 | Student numbers | Name                |   
 | :-------------: |:-------------       | 
 | 21490093        | Tom Ankers          | 
