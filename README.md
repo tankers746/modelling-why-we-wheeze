@@ -3,13 +3,13 @@
 ## Project: Modeling Why We Wheeze
 
 ### Upcoming important dates:
-| Due Date                                | Task              |
-| -------------                           |:-------------:    |
-| 5pm Friday 26th August 2016             | Deliverable A due |
-| 5pm Friday 2nd September 2016           | Essay due         |
-| 5pm Friday 9th September 2016           | Deliverable B due |
-| 5pm Friday 21st October 2016            | Deliverable C due |
-| 3pm-6pm, Mon/Wed 31/10/2016, 2/11/2016  | Deliverable D due |
+| Due Date                                | Task              |   Done ?
+| -------------                           |:-------------:    | -------------: 
+| 5pm Friday 26th August 2016             | Deliverable A due | Yes!
+| 5pm Friday 2nd September 2016           | Essay due         | No 
+| 5pm Friday 9th September 2016           | Deliverable B due | No
+| 5pm Friday 21st October 2016            | Deliverable C due | No
+| 3pm-6pm, Mon/Wed 31/10/2016, 2/11/2016  | Deliverable D due | No
 
 ### Some project/unit related resources:
   - Google drive project page -> https://drive.google.com/drive/u/1/folders/0BzpHN4HmStVtQTdmWkZTOUpmOGs
