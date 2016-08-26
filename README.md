@@ -4,7 +4,7 @@
 
 ### Upcoming important dates:
 | Due Date                                | Task              |   Done ?
-| -------------                           |:-------------:    | -------------: 
+| -------------                           |:-------------:    | :-------------: 
 | 5pm Friday 26th August 2016             | Deliverable A due | Yes!
 | 5pm Friday 2nd September 2016           | Essay due         | No 
 | 5pm Friday 9th September 2016           | Deliverable B due | No
