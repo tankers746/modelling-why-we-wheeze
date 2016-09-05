@@ -6,7 +6,7 @@
 | Due Date                                | Task              |   Done ?
 | -------------                           |:-------------:    | :-------------: 
 | 5pm Friday 26th August 2016             | Deliverable A due | Yes!
-| 5pm Friday 2nd September 2016           | Essay due         | No 
+| 5pm Friday 2nd September 2016           | Essay due         | Yes! 
 | 5pm Friday 9th September 2016           | Deliverable B due | No
 | 5pm Friday 21st October 2016            | Deliverable C due | No
 | 3pm-6pm, Mon/Wed 31/10/2016, 2/11/2016  | Deliverable D due | No
