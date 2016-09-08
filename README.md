@@ -26,6 +26,8 @@
   - JavaScript Charts; Line Graphs -> http://www.jscharts.com/how-to-use-line-graphs
   - HTML5 & JavaScript Line Charts -> http://canvasjs.com/html5-javascript-line-chart/
   - Modularizing -> http://enterprisewebbook.com/ch6_large_js_apps.html
+  - Widget factory -> https://jqueryui.com/widget/
+  - Ben Alman's tiny pub/sub -> https://gist.github.com/cowboy/661855
 
 ### Project Members:
 | Student numbers | Name                |   
