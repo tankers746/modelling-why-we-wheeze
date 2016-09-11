@@ -1,0 +1,125 @@
+<!--Only change code above this line.-->
+<div class="container-fluid">
+  <h3 class="text-primary text-center">jQuery Playground</h3>
+  <div class="row">
+    <!-- Cut in half -->
+    <div class="col-lg-6">
+      <h4>#left-part</h4>
+      <div class = "col-lg-12">
+        <p>1.	 Select the severity of asthma </p>
+        <div class = "text-low"> Low </div>
+        <div class = "text-high"> High </div>
+        
+        <!-- slider box begin-->
+       
+          
+            <!-- Scale Image-->
+          <div id="scaleIcon">   
+          
+            <img src="http://www.personal.psu.edu/zwr5027/art003/project4/mileScale.jpg">
+        </div> <!-- Scale Image -->
+                     
+            <!-- sliding button on the scale -->
+            <div id="slider1" class="noUi-target" ><div class="noUi-base noUi-background noUi-vertical"><div class="noUi-origin noUi-origin-lower" style="top: 85.9375%;">
+              <!-- sliding button on the scale -->
+              <div class="noUi-handle noUi-handle-lower" style="width:30px;height:30px;background:red;"></div></div></div></div>
+             
+          <div id = "no-asthma"> no asthma </div>
+          <div id = "severe-asthma">severe asthma </div>
+        </div>
+  
+      <!-- slider box end-->
+      
+      <div class = "col-lg-12">
+        <p>2.  Adjust the dose of methacholine </p>
+        <div class = "text-low"> Low </div>
+        <div class = "text-high"> High </div>
+        
+        <!-- slider box begin-->
+        <div class = 'methacholine-slider'>
+          <div id = "scaleIcon">
+            <img src="http://www.personal.psu.edu/zwr5027/art003/project4/mileScale.jpg"></div>
+            
+           <div id="slider1" class="noUi-target"><div class="noUi-base noUi-background noUi-vertical"><div class="noUi-origin noUi-origin-lower" style="top: 63.2813%;"><div class="noUi-handle noUi-handle-lower"></div></div></div></div>
+            
+            <!-- scale value -->
+             <div id = "methacholine-dose-min"> 0.001</div>
+            <div id = "methacholine-dose-mid"> 1 </div>
+            <div id = "methacholine-dose-max"> 1000 </div>
+          </div>
+        </div>
+   
+      <div class = "col-lg-12">
+        <div id = "Cross-section-text"> 
+          Cross section of airway wall
+        </div>
+        <div id="circ4" >Red</div>
+        <div id="circ3" >Yellow</div>
+        <div id="circ2" >Green</div>
+        <div id="circ1" >White</div>
+      </div>
+    </div>
+    
+    
+    <div class="col-lg-6">
+      <h4>#right-part</h4>
+      
+      <div class = "col-lg-12">  
+        <div id = "graph">
+          <div id='graphcontent'> 
+            <!-- vertical scale -->
+           <div id="yAxes">Resistance</div>
+            <div id="scale10"> 10</div>
+            <div id="scale8"> 8</div>
+            <div id="scale6"> 6</div>
+            <div id="scale4"> 4</div>
+            <div id="scale2"> 2</div>
+            <div id="scale0"> 0</div>
+            
+            
+            <!-- horizontal scale -->
+             <div id="xAxes">[methacholine]</div>
+            <div id="scale0.001"> 0.001</div>
+            <div id="scale0.01"> 0.01</div>
+            <div id="scale0.1"> 0.1</div>
+            <div id="scale1"> 1</div>
+            <div id="scale10"> 10</div>
+            <div id="scale100"> 100</div>
+            <div id="scale1000"> 1000</div>  
+          </div>
+        </div>
+        
+      </div>
+      <div class = "col-lg-12"> 
+        
+        <div id='ASMgraph'>
+          
+          
+          <!-- vertical scale -->
+        <div class="yAxes">ASM shortening (%)</div>
+          
+          <div id="xAxes">Resistance</div>
+            <div id="scale20"> 20</div>
+            <div id="scale15"> 15</div>
+            <div id="scale10"> 10</div>
+            <div id="scale5"> 5</div>
+            <div id="scale0"> 0</div>
+
+          <!-- horizontal scales for ASM shortening graph -->
+        <div class="xAxes">[methacholine]</div>
+          
+          <div id="scale_0.001"> 0.001</div>
+            <div id="scale_0.01"> 0.01</div>
+            <div id="scale_0.1"> 0.1</div>
+            <div id="scale_1"> 1</div>
+            <div id="scale_10"> 10</div>
+            <div id="scale_100"> 100</div>
+            <div id="scale_1000"> 1000</div>
+          
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
