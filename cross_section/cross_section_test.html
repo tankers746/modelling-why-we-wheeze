@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="jquery-1.10.2.min.js" type="text/javascript"></script>
+        <script src="jquery-ui.min.js" type="text/javascript"></script>
+        <script src="jquery.ba-tinypubsub.js" type="text/javascript"></script>
+        
+        <script src="cross_section.js" type="text/javascript"></script>
+        <script src="cross_section_test.js" type="text/javascript"></script>
+        
+        <script>
+            $(document).ready(function() {
+                $("#ra_div").my_test_buttons({name : "ra", value: 25, channel : "mwww/"});
+                $("#rb_div").my_test_buttons({name : "rb", value: 50, channel : "mwww/"});
+                $("#rc_div").my_test_buttons({name : "rc", value: 75, channel : "mwww/"});
+                $("#rd_div").my_test_buttons({name : "rd", value: 100, channel : "mwww/"});
+                $("#diagram_div").cross_section({channel : "mwww/"});
+                //$("#diagram_div").my_subscriber({name : "ra", channel : "mwww/"});
+                alert("Page loaded successfully!");
+            });
+        </script>
+        
+    </head>
+    
+    <body>
+        
+        <h1>Airway cross-section test page</h1>
+        
+        <div id="ra_div"></div>
+        <div id="rb_div"></div>
+        <div id="rc_div"></div>
+        <div id="rd_div"></div>
+        
+        <div id="diagram_div" style = "float: left;"></div>
+        
+    </body>
+</html>
