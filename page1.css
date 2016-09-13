@@ -1,0 +1,68 @@
+/* first graph */
+.first-graph
+{
+  position:relative;
+}
+
+#redScale{
+  position:relative;
+  width:50%; /* half of the row width (3-cols)*/
+  height:33%; /* 1/3 of the row width*/
+  
+  }
+#redScale #asthma-text
+{
+  margin-left:20%; /* relative to #redScale */
+}
+
+
+#redScale #redScaleGraph
+{
+  position:absolute;
+  left:20%; /* relative to #redScale */
+}
+
+#redScale #text-low1
+{
+ top:50%; /* relative to #redScale */
+ font-size:20px;
+ position:absolute;
+ left:10%; /* relative to #redScale */
+}
+
+#redScale #text-high1
+{
+ position:absolute;
+ font-size:20px; 
+ top:50%; /* relative to #redScale */
+ left:90%; /* relative to #redScale */
+}
+
+#redbutton{
+  
+}
+
+
+ .col-lg-12 #no-asthma{
+  position:absolute;
+  top:50%; /* relative to col-lg-12 */
+  left:5%;/* relative to whole screen */
+  color:blue;
+  font-size:20px;
+}
+
+
+ .col-lg-12 #severe-asthma{
+  position:absolute;
+  top:50%; /* relative to col-lg-12 */
+  left:35%; /* relative to whole screen */
+  font-size:20px;
+  color:blue;
+}
+
+/* scale */
+#methacholine-dose-min,#methacholine-dose-mid,#methacholine-dose-max
+{
+  
+}
+
