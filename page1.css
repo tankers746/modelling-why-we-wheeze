@@ -6,63 +6,124 @@
 
 #redScale{
   position:relative;
-  width:50%; /* half of the row width (3-cols)*/
-  height:33%; /* 1/3 of the row width*/
-  
+  width:100%; /* full of the row width (3-cols)*/
+  height:300px;
   }
+
 #redScale #asthma-text
 {
-  margin-left:20%; /* relative to #redScale */
+  top:0%;
+  position:absolute;
+  font-size:20px;
+  left:25%;/* relative to #redScale */
 }
-
 
 #redScale #redScaleGraph
 {
   position:absolute;
-  left:20%; /* relative to #redScale */
+  left:25%; /* relative to #redScale */
+  top:50%;/* relative to #redScale */
 }
+
+#redScale #buttonContainer{
+  position:relative;
+  width:312px;
+  height:130px;
+  top:30%;
+  left:25%; /* relative to #buttonContainer */
+  /*background:red */
+}
+
+#redScale #buttonContainer #redbutton{
+  position:absolute;
+  top:20%; /* relative to #buttonContainer */
+  left: 0%;
+  z-index:2; 
+}
+
 
 #redScale #text-low1
 {
- top:50%; /* relative to #redScale */
- font-size:20px;
  position:absolute;
- left:10%; /* relative to #redScale */
+ font-size:20px; 
+ top:30%; /* relative to #redScale */
+ left:25%; /* relative to #redScale */
 }
 
 #redScale #text-high1
 {
  position:absolute;
  font-size:20px; 
- top:50%; /* relative to #redScale */
- left:90%; /* relative to #redScale */
-}
-
-#redbutton{
-  
+ top:30%; /* relative to #redScale */
+ left:60%; /* relative to #redScale */
 }
 
 
- .col-lg-12 #no-asthma{
+
+ #redScale #no-asthma{
   position:absolute;
-  top:50%; /* relative to col-lg-12 */
-  left:5%;/* relative to whole screen */
-  color:blue;
-  font-size:20px;
+  top:70%; /* relative to #redScale */
+  left:25%;/* relative to #redScale */
+  color:red;
+  font-size:15px;
 }
 
 
- .col-lg-12 #severe-asthma{
+ #redScale #severe-asthma{
   position:absolute;
-  top:50%; /* relative to col-lg-12 */
-  left:35%; /* relative to whole screen */
-  font-size:20px;
+  top:70%; /* relative to #redScale */
+  left:60%; /* relative to #redScale */
+  font-size:15px;
   color:blue;
 }
 
-/* scale */
-#methacholine-dose-min,#methacholine-dose-mid,#methacholine-dose-max
+
+
+/* bluescale */
+
+#blueScale
 {
-  
+  position:relative;
+  width:50%;
+  height:300px;
+
 }
+
+#blueScale #methacholine-text
+{
+ position:absolute;
+ top:20%; 
+ font-size:20px; 
+}
+
+#blueScale #text-low2
+{
+ position:absolute;
+ top:30%; 
+ font-size:20px; 
+}
+
+#blueScale #text-high2
+{
+ position:absolute;
+ top:30%; 
+ font-size:20px; 
+}
+
+#blueScale #blueScaleGraph
+{
+  position:absolute;
+  top:50%;
+  z-index:1;
+}
+
+#blueScale #blueButton
+{
+  position:absolute;
+  top:80%;
+  z-index:10;
+}
+
+
+
 
