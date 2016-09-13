@@ -6,56 +6,43 @@
       <div class="col-lg-6">
          <h4>#left-part</h4>
          <div class = "col-lg-12 ">
-            
-           
-            <!-- slider box begin-->
+             <!-- slider box begin-->
             <!-- Scale Image-->
-            <div id="redScale">  
+            <div id="redScale">   <!-- position:relative -->
               <p id="asthma-text">1.	 Select the severity of asthma </p>
-              <div id = "text-low1"> Low </div>
+             <div id = "text-low1"> Low </div>
             <div id = "text-high1"> High </div>
-               <img  src="https://s18.postimg.io/yw0jut57t/redscale.png" id="redScaleGraph">
+             <div id = "no-asthma"> no asthma </div>
+            <div id = "severe-asthma">severe asthma </div> 
+              
+              <img src="https://s18.postimg.io/yw0jut57t/redscale.png" id="redScaleGraph">
+              <div id = "buttonContainer">
+              <img id = "redbutton" src ="https://s18.postimg.io/6umih3zxl/redbutton.png">
+              </div>
+              
+
+
             </div>
-            <!-- Scale Image -->
-            <!-- sliding button on the scale -->
-            <div id="slider1" class="noUi-target" >
-               <div class="noUi-base noUi-background noUi-vertical">
-                  <div class="noUi-origin noUi-origin-lower" style="top: 85.9375%;">
-                     <!-- sliding button on the scale -->
-                     <div class="noUi-handle noUi-handle-lower">
-                        <img id = "redbutton" src ="https://s18.postimg.io/6umih3zxl/redbutton.png">
-                     </div>
-                  </div>
-               </div>
-            </div>
-           <div id = "no-asthma"> no asthma </div>
-            <div id = "severe-asthma">severe asthma </div>  
          </div>
-         <!-- slider box end-->
+
+        
          <div class = "col-lg-12">
-            <p>2.  Adjust the dose of methacholine </p>
-            <div id = "text-low2"> Low </div>
+          <div id="blueScale">  
+              <p id="methacholine-text">1.	 S2.  Adjust the dose of methacholine </p>
+              <div id = "text-low2"> Low </div>
             <div id = "text-high2"> High </div>
-            <!-- slider box begin-->
-            <div class = 'methacholine-slider'>
-               <div id = "scaleIcon">
-                  <img src="https://s18.postimg.io/3z9fa8vxl/bluescale.png">
-               </div>
-               <div id="slider1" class="noUi-target">
-                  <div class="noUi-base noUi-background noUi-vertical">
-                     <div class="noUi-origin noUi-origin-lower">
-                        <div class="noUi-handle noUi-handle-lower">
-                           <img id = 'bluebutton' src ="https://s18.postimg.io/klqzjbovd/bluebutton.png">
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <!-- scale value -->
-               <div id = "methacholine-dose-min"> 0.001</div>
+               <img  src="https://s18.postimg.io/3z9fa8vxl/bluescale.png" id="blueScaleGraph">
+            </div>          
+     <img src = "https://s10.postimg.io/at5ap1rzd/bluebutton.png" id ='blueButton'>
+             <!-- scale value -->
+            <div id = "methacholine-dose-min"> 0.001</div>
                <div id = "methacholine-dose-mid"> 1 </div>
                <div id = "methacholine-dose-max"> 1000 </div>
-            </div>
          </div>
+     
+     
+     
+
          <div class = "col-lg-12">
             <div id = "Cross-section-text"> 
                Cross section of airway wall
@@ -66,6 +53,12 @@
             <div id="circ1" >White</div>
          </div>
       </div>
+  
+     
+     
+     
+     
+     
       <div class="col-lg-6">
          <h4>#right-part</h4>
          <div class = "col-lg-12">
