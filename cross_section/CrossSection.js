@@ -2,7 +2,7 @@
  * Calculates the inner radius of an airway layer given its outer radius and area.
  * @param outer_r	The radius of the outer circle comprising the layer.
  * @param area 		The internal area of the layer.
- * @return			The radius of the inner circle comprising the layer.
+ * @return		The radius of the inner circle comprising the layer.
  */
 function innerRadius(outer_r, area)
 {
@@ -10,12 +10,12 @@ function innerRadius(outer_r, area)
 }
 
 /**
- * 
- * @param a
- * @param b
- * @param c
- * @param d
- * @returns
+ * Finds the inner radii of all layers in the cross section.
+ * @param a_r	Outer radius of the entire cross-section (model parameter A).
+ * @param b_a	Area of layer B (model parameter B).
+ * @param c	Area of layer C (model parameter C).
+ * @param d	Area of layer D (model parameter D).
+ * @returns	Array containing the inner radii of the layers.
  */
 function layerSizes(a_r, b_a, c_a, d_a)
 {
