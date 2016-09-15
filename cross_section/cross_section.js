@@ -1,6 +1,4 @@
 
-//TODO: use an arrays for everything.
-
 $.widget('mwww.cross_section', {
     options: {
         A : 100,
@@ -9,7 +7,7 @@ $.widget('mwww.cross_section', {
         rc : 75,
         rd : 100,
         
-        channel : "mwww/",
+        channel : "default/",
         default_size : 275,
         
         animation_speed : 400
@@ -18,15 +16,13 @@ $.widget('mwww.cross_section', {
     
     cont_size : 0,
     
-    $circ1 : {},
-    $circ2 : {},
-    $circ3 : {},
-    $circ4 : {},
+    $circles : [],
     
-    handle_ra : {},
-    handle_rb : {},
-    handle_rc : {},
-    handle_rd : {},
+    callbacks : [],
+    
+    topics : ["rd", "rc", "rb", "ra"],
+    
+    colours : ['#F00', '#FF0', '#0F0', '#FFF'],
     
     
     scale: function(r) {
@@ -51,10 +47,10 @@ $.widget('mwww.cross_section', {
     },
     
     update: function() {
-        this.animate_circle(this.$circ4, this.scale(this.options.rd));
-        this.animate_circle(this.$circ3, this.scale(this.options.rc));
-        this.animate_circle(this.$circ2, this.scale(this.options.rb));
-        this.animate_circle(this.$circ1, this.scale(this.options.ra));
+        this.animate_circle(this.$circles[0], this.scale(this.options.rd));
+        this.animate_circle(this.$circles[1], this.scale(this.options.rc));
+        this.animate_circle(this.$circles[2], this.scale(this.options.rb));
+        this.animate_circle(this.$circles[3], this.scale(this.options.ra));
     },
     
     circles_css_rules : {
@@ -78,57 +74,59 @@ $.widget('mwww.cross_section', {
         $container.width(this.cont_size);
         $container.css({'position' : 'relative'});
         //$container.css({'background-color' : 'blue'});
-         
-        this.$circ1 = $("<div/>", {id: $container.attr('id') + "_circ1"}).css(this.circles_css_rules);
-        this.$circ2 = $("<div/>", {id: $container.attr('id') + "_circ2"}).css(this.circles_css_rules);
-        this.$circ3 = $("<div/>", {id: $container.attr('id') + "_circ3"}).css(this.circles_css_rules);
-        this.$circ4 = $("<div/>", {id: $container.attr('id') + "_circ4"}).css(this.circles_css_rules);
         
-        this.$circ1.css({'background-color' : '#FFF'});
-        this.$circ2.css({'background-color' : '#0F0'});
-        this.$circ3.css({'background-color' : '#FF0'});
-        this.$circ4.css({'background-color' : '#F00'});
+        var i;
+        for(i = 0; i<this.topics.length; i++) {
+            this.$circles[i] = $("<div/>", {id: $container.attr('id') + "_circ" + (i+1)})
+                                .css(this.circles_css_rules)
+                                .css({'background-color' : this.colours[i]});
+        }
         
-        
-        this.handel_ra = $.subscribe((options.channel + "ra"), function(e, data) {
-            if(0 <= data && data <= options.rb) {
-                options.ra = data;
-                self.update();
-            }
-        });
-        
-        this.handel_rb = $.subscribe((options.channel + "rb"), function(e, data) {
-            if(options.ra <= data && data <= options.rc) {
-                options.rb = data;
-                self.update();
-            }
-        });
-        
-        this.handel_rc = $.subscribe((options.channel + "rc"), function(e, data) {
-            if(options.rb <= data && data <= options.rd) {
-                options.rc = data;
-                self.update();
-            }
-        });
-        
-        this.handel_rd = $.subscribe((options.channel + "rd"), function(e, data) {
-            if(options.rc <= data && data <= options.A) {
+        this.callbacks[0] = function(e, data) {
+            if(0 <= data && data <= options.A) {
                 options.rd = data;
                 self.update();
             }
-        });
-
+        };
         
-        $($container).append(this.$circ4).append(this.$circ3).append(this.$circ2).append(this.$circ1);
+        this.callbacks[1] = function(e, data) {
+            if(0 <= data && data <= options.A) {
+                options.rc = data;
+                self.update();
+            }
+        };
+        
+        this.callbacks[2] = function(e, data) {
+            if(0 <= data && data <= options.A) {
+                options.rb = data;
+                self.update();
+            }
+        };
+        
+        this.callbacks[3] = function(e, data) {
+            if(0 <= data && data <= options.A) {
+                options.ra = data;
+                self.update();
+            }
+        };
+        
+        for(i=0; i<this.topics.length; i++) {
+            $.subscribe((options.channel + this.topics[i]), this.callbacks[i]);
+        }
+        
+        $($container).append(this.$circles[0])
+                     .append(this.$circles[1])
+                     .append(this.$circles[2])
+                     .append(this.$circles[3]);
         this.update();
         
     },
          
     _destroy: function() {
-        $.unsubscribe((options.channel+"ra"), this.handle_ra);
-        $.unsubscribe((options.channel+"rb"), this.handle_rb);
-        $.unsubscribe((options.channel+"rc"), this.handle_rc);
-        $.unsubscribe((options.channel+"rd"), this.handle_rd);
+        var i;
+        for(i=0; i<this.topics.length; i++) {
+            $.unsubscribe((options.channel + this.topics[i]), this.callbacks[i]);
+        }
         
         $(this.element).empty();
         $(this.element).remove();
