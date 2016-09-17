@@ -31,7 +31,7 @@ $.widget('demo.my_publisher', {
         
         this._on(this.$submit_button, {
             click:  function() {
-                var x = parseInt(this.$textbox.val(),10);
+                var x = parseFloat(this.$textbox.val());
                 if(!isNaN(x)) {
                     //alert("sending " + x);
                     $.publish((options.channel+options.topic), [x]);
