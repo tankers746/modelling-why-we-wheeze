@@ -1,0 +1,129 @@
+/* first graph */
+.first-graph
+{
+  position:relative;
+}
+
+#redScale{
+  position:relative;
+  width:100%; /* full of the row width (3-cols)*/
+  height:300px;
+  }
+
+#redScale #asthma-text
+{
+  top:0%;
+  position:absolute;
+  font-size:20px;
+  left:25%;/* relative to #redScale */
+}
+
+#redScale #redScaleGraph
+{
+  position:absolute;
+  left:25%; /* relative to #redScale */
+  top:50%;/* relative to #redScale */
+}
+
+#redScale #buttonContainer{
+  position:relative;
+  width:312px;
+  height:130px;
+  top:30%;
+  left:25%; /* relative to #buttonContainer */
+  /*background:red */
+}
+
+#redScale #buttonContainer #redbutton{
+  position:absolute;
+  top:20%; /* relative to #buttonContainer */
+  left: 0%;
+  z-index:2; 
+}
+
+
+#redScale #text-low1
+{
+ position:absolute;
+ font-size:20px; 
+ top:30%; /* relative to #redScale */
+ left:25%; /* relative to #redScale */
+}
+
+#redScale #text-high1
+{
+ position:absolute;
+ font-size:20px; 
+ top:30%; /* relative to #redScale */
+ left:60%; /* relative to #redScale */
+}
+
+
+
+ #redScale #no-asthma{
+  position:absolute;
+  top:70%; /* relative to #redScale */
+  left:25%;/* relative to #redScale */
+  color:red;
+  font-size:15px;
+}
+
+
+ #redScale #severe-asthma{
+  position:absolute;
+  top:70%; /* relative to #redScale */
+  left:60%; /* relative to #redScale */
+  font-size:15px;
+  color:blue;
+}
+
+
+
+/* bluescale */
+
+#blueScale
+{
+  position:relative;
+  width:50%;
+  height:300px;
+
+}
+
+#blueScale #methacholine-text
+{
+ position:absolute;
+ top:20%; 
+ font-size:20px; 
+}
+
+#blueScale #text-low2
+{
+ position:absolute;
+ top:30%; 
+ font-size:20px; 
+}
+
+#blueScale #text-high2
+{
+ position:absolute;
+ top:30%; 
+ font-size:20px; 
+}
+
+#blueScale #blueScaleGraph
+{
+  position:absolute;
+  top:50%;
+  z-index:1;
+}
+
+#blueScale #blueButton
+{
+  position:absolute;
+  top:80%;
+  z-index:10;
+}
+
+
+
+
