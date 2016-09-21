@@ -1,0 +1,520 @@
+/* first graph */
+.first-graph
+{
+  position:relative;
+}
+
+#redScale{
+  position:relative;
+  width:100%; /* full of the row width (3-cols)*/
+  height:250px;
+  }
+
+#redScale #asthma-text
+{
+  position:absolute;
+  top:0%;
+  font-size:20px;
+  left:25%;/* relative to #redScale */
+}
+
+#redScale #redScaleGraph
+{
+  position:absolute;
+  left:25%; /* relative to #redScale */
+  top:50%;/* relative to #redScale */
+}
+
+#redScale .buttonContainer{
+  position:relative;
+  width:312px;
+  height:130px;
+  top:30%;
+  left:25%; /* relative to #buttonContainer */
+  /*background:red */
+}
+
+#redScale .buttonContainer #redButton{
+  position:absolute;
+  top:20%; /* relative to #buttonContainer */
+  left: 0%;
+  z-index:2; 
+}
+
+
+#redScale #text-low1
+{
+ position:absolute;
+ font-size:20px; 
+ top:30%; /* relative to #redScale */
+ left:25%; /* relative to #redScale */
+}
+
+#redScale #text-high1
+{
+ position:absolute;
+ font-size:20px; 
+ top:30%; /* relative to #redScale */
+ left:60%; /* relative to #redScale */
+}
+
+
+
+ #redScale #no-asthma{
+  position:absolute;
+  top:70%; /* relative to #redScale */
+  left:25%;/* relative to #redScale */
+  color:red;
+  font-size:15px;
+}
+
+
+ #redScale #severe-asthma{
+  position:absolute;
+  top:70%; /* relative to #redScale */
+  left:60%; /* relative to #redScale */
+  font-size:15px;
+  color:blue;
+}
+
+
+
+/* bluescale */
+
+#blueScale
+{
+  position:relative;
+  width:100%; /* full of the row width (6-cols)*/
+  height:250px;
+}
+
+#blueScale #methacholine-text
+{
+  position:absolute;
+  top:0%;
+  font-size:20px;
+  left:25%;/* relative to #redScale */
+}
+
+#blueScale #text-low2
+{
+ position:absolute;
+ font-size:20px; 
+ top:30%; /* relative to #blueScale */
+ left:25%; /* relative to #blueScale */
+}
+
+#blueScale #text-high2
+{
+position:absolute;
+ font-size:20px; 
+ top:30%; /* relative to #blueScale */
+ left:60%; /* relative to #blueScale */
+}
+
+#blueScale #blueScaleGraph
+{
+  position:absolute;
+  left:25%; /* relative to #blueScale */
+  top:50%;/* relative to #blueScale */
+}
+
+#blueScale .buttonContainer{
+  position:relative;
+  width:312px;
+  height:130px;
+  top:30%;
+  left:25%; /* relative to #buttonContainer */
+}
+
+#blueScale .buttonContainer #blueButton{
+  position:absolute;
+  top:20%; /* relative to #buttonContainer */
+  left: 0%;
+  z-index:2; 
+}
+
+#blueScale #methacholine-dose-min
+{
+  position:absolute;
+  top:70%; /* relative to #redScale */
+  left:25%;/* relative to #redScale */
+  color:red;
+  font-size:15px;
+}
+
+
+#blueScale #methacholine-dose-mid
+{
+   position:absolute;
+  top:70%; /* relative to #redScale */
+  left:44%;/* relative to #redScale */
+  color:red;
+  font-size:15px;
+}
+
+#blueScale #methacholine-dose-max
+{
+  position:absolute;
+  top:70%; /* relative to #redScale */
+  left:60%; /* relative to #redScale */
+  font-size:15px;
+  color:green;
+}
+
+#circleGroup
+{
+  position:relative;
+  width:100%; /* full of the row width (6-cols)*/
+  height:250px;
+  background:blue;
+}
+
+#circleGraph #cross-section-text
+{
+  font-size:20px;
+}
+#circleGroup #circ1
+{
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    border: 1px solid #000;
+    background-color: red;
+    box-sizing: border-box;
+    border-radius: 100%;
+    width: 275px;
+    height: 275px;
+    z-index:1;
+}
+
+#circleGroup #circ2
+{
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    border: 1px solid #000;
+    background-color: yellow;
+    box-sizing: border-box;
+    border-radius: 100%;
+    width: 247.5px;
+    height: 247.5px;
+    z-index: 2;
+}
+
+#circleGroup #circ3
+{
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    border: 1px solid #000;
+    background-color: #00ff00;
+    box-sizing: border-box;
+    border-radius: 100%;
+    width: 192.5px;
+    height: 192.5px;
+    z-index:3;
+}
+
+#circleGroup #circ4
+{
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    border: 1px solid #000;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    border-radius: 100%;
+    width: 184.271px;
+    height: 184.271px;
+    z-index: 4;
+}
+
+/* right side of the page */
+
+/* top part */
+#graphContent
+{
+  position:relative;
+  width:100%;
+  height:450px;
+}
+#graphContent #Yscale
+{
+  position:absolute;
+  top:10%;
+  left:24%;
+  
+}
+#graphContent #Xscale
+{
+  position:absolute;
+  top:75%;
+  left:25%;
+}
+
+#graphContent #title
+{
+  font-size:1.3em;
+  text-align:center;
+  
+}
+
+#graphContent #Yscale12
+{
+  position:absolute;
+   font-size:1.3em;
+   left:21%;
+   top: 10%;
+}
+
+#graphContent #Yscale10
+{
+  position:absolute;
+   font-size:1.3em;
+   left:21%;
+   top: 20%;
+}
+
+#graphContent #Yscale8
+{
+  position:absolute;
+   font-size:1.3em;
+   left: 22%;
+   top:30%;
+}
+#graphContent #Yscale6
+{
+  position:absolute;
+   font-size:1.3em;
+   left: 22%;
+   top:42%;
+}
+#graphContent #Yscale4
+{
+  position:absolute;
+  font-size:1.3em;
+   left: 22%;
+   top:54%;
+}
+#graphContent #Yscale2
+{
+  position:absolute;
+   font-size:1.3em;
+   left: 22%;
+   top:65%;
+}
+
+#graphContent #Yscale0
+{
+  position:absolute;
+  font-size:1.3em;
+   left: 22%;
+   top:75%;
+}
+
+#graphContent #xAxes
+{
+  position:absolute;
+  font-size:1.3em;
+  left:70%;
+  top:90%;
+}
+
+#graphContent #Xscale_pzz1
+{
+  position:absolute;
+   font-size:1.2em;
+   left: 22%;
+   top:85%;
+}
+#graphContent #Xscale_pz1
+{
+  position:absolute;
+   font-size:1.2em;
+  left: 30%;
+   top:85%;
+}
+#graphContent #Xscale_p1
+{
+  position:absolute;
+  font-size:1.2em;
+  left: 38%;
+   top:85%;
+}
+#graphContent #Xscale1
+{
+  position:absolute;
+   font-size:1.2em;
+   left:45%;
+   top:85%;
+}
+#graphContent #Xscale10
+{
+  position:absolute;
+   font-size:1.2em;
+  left: 50%;
+   top:85%;
+}
+#graphContent #Xscale100
+{
+  position:absolute;
+   font-size:1.2em;
+  left: 55%;
+   top:85%;
+}
+#graphContent #Xscale1000
+{
+  position:absolute;
+  font-size:1.2em;
+  left:60%;
+  top:85%;
+}
+
+
+
+/* bottom part */
+#ASMgraph
+{
+  position:relative;
+  width:100%;
+  height:450px;
+}
+#ASMgraph #Yscale
+{
+  position:absolute;
+  top:10%;
+  left:24%;
+  
+}
+#ASMgraph #Xscale
+{
+  position:absolute;
+  top:75%;
+  left:25%;
+}
+
+#ASMgraph #title
+{
+  font-size:1.3em;
+  text-align:center;
+}
+
+#ASMgraph #Yscale30
+{
+   position:absolute;
+   font-size:1.3em;
+   left:21%;
+   top: 10%;
+}
+
+#ASMgraph #Yscale25
+{
+  position:absolute;
+   font-size:1.3em;
+   left:21%;
+   top: 20%;
+}
+
+#ASMgraph #Yscale20
+{
+  position:absolute;
+   font-size:1.3em;
+   left: 22%;
+   top:30%;
+}
+#ASMgraph #Yscale15
+{
+  position:absolute;
+   font-size:1.3em;
+   left: 22%;
+   top:42%;
+}
+#ASMgraph #Yscale10
+{
+  position:absolute;
+  font-size:1.3em;
+   left: 22%;
+   top:54%;
+}
+#ASMgraph #Yscale5
+{
+  position:absolute;
+   font-size:1.3em;
+   left: 22%;
+   top:65%;
+}
+
+#ASMgraph #Yscale0
+{
+  position:absolute;
+  font-size:1.3em;
+   left: 22%;
+   top:75%;
+}
+
+#ASMgraph #xAxes
+{
+  position:absolute;
+  font-size:1.3em;
+  left:70%;
+  top:90%;
+}
+
+#ASMgraph #Xscale_pzz1
+{
+  position:absolute;
+   font-size:1.2em;
+   left: 22%;
+   top:85%;
+}
+#ASMgraph #Xscale_pz1
+{
+  position:absolute;
+   font-size:1.2em;
+  left: 30%;
+   top:85%;
+}
+#ASMgraph #Xscale_p1
+{
+  position:absolute;
+  font-size:1.2em;
+  left: 38%;
+   top:85%;
+}
+#ASMgraph #Xscale1
+{
+  position:absolute;
+   font-size:1.2em;
+   left:45%;
+   top:85%;
+}
+#ASMgraph #Xscale10
+{
+  position:absolute;
+   font-size:1.2em;
+  left: 50%;
+   top:85%;
+}
+#ASMgraph #Xscale100
+{
+  position:absolute;
+   font-size:1.2em;
+  left: 55%;
+   top:85%;
+}
+#ASMgraph #Xscale1000
+{
+  position:absolute;
+  font-size:1.2em;
+  left:60%;
+  top:85%;
+}
+
+
+
+
+
+
+
+
