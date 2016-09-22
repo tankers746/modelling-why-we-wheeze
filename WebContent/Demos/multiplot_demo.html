@@ -9,13 +9,10 @@
         
         <script>
             $(document).ready(function() {
-                $("#x_in").my_publisher({channel : "demo/", topic : "x"});
-                $("#y_in").my_publisher({channel : "demo/", topic : "y"});
-                $("#z_in").my_publisher({channel : "demo/", topic : "z"});
+                $("#S_publisher").my_publisher_buttons({channel : "demo/", topic : "S"});
+                $("#log_d_publisher").my_publisher({channel : "demo/", topic : "log_d"});
                               
-                $("#x_out").my_subscriber({channel : "demo/", topic : "x"});
-                $("#y_out").my_subscriber({channel : "demo/", topic : "y"});
-                $("#z_out").my_subscriber({channel : "demo/", topic : "z"});
+                $("#graph1").my_subscriber({channel : "demo/", topic : "S"});
 
                 alert("Page loaded successfully!");
             });
@@ -25,17 +22,15 @@
     
     <body>
         
-        <h1>Models demo page</h1>
+        <h1>Multi plot graph demo page</h1>
+        <p>Instructions: Please replace the generic subscriber with the graph.</p>
         
-        <div id="x_in"></div>
-        <div id="y_in"></div>
-        <div id="z_in"></div>
+        <div id="S_publisher"></div>
+        <div id="log_d_publisher"></div>
         
         <br/>
         
-        <div id="x_out"></div>
-        <div id="y_out"></div>
-        <div id="z_out"></div>
+        <div id="graph1"></div>
         
     </body>
 </html>
