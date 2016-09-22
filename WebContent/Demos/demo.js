@@ -88,3 +88,64 @@ $.widget('demo.my_subscriber', {
         $(this.element).remove();
     }
 });
+
+
+$.widget('demo.my_publisher_buttons', {
+    options: {
+        channel:    "default/",
+        topic:      "topic",
+        value:      0
+    },
+         
+    $label:         {},
+    $inc_button:    {},
+    $dec_button:    {},
+         
+    _create: function() {
+         
+        var self = this;
+        var container = this.element;
+        var options = this.options;
+         
+         
+        this.$label = $("<span/>", {
+            id:     container.attr('id') + "_label",
+            text:   options.topic + " = " + options.value,
+        });
+        
+        this.$inc_button = $("<button/>", {
+            id:     container.attr('id') + "_inc_button",
+            text:   "+",
+        });
+        
+        this.$dec_button = $("<button/>", {
+            id:     container.attr('id') + "_dec_button",
+            text:   "-",
+        });
+        
+        this._on(this.$inc_button, {
+            click: function() {
+                options.value++;
+                self.$label.text(options.topic + " = " + options.value);
+                $.publish((options.channel+options.topic), [options.value]);
+            }
+        });
+        
+        this._on(this.$dec_button, {
+            click: function() {
+                options.value--;
+                self.$label.text(options.topic + " = " + options.value);
+                $.publish((options.channel+options.topic), [options.value]);
+            }
+        });
+
+        
+        $(this.element).append(this.$dec_button).append(this.$label).append(this.$inc_button);
+         
+    },
+         
+    _destroy: function() {
+        $(this.element).empty();
+        $(this.element).remove();
+    }
+});
