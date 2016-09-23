@@ -8,13 +8,13 @@ function Airway(A,B,C,D,x,y,z)
 	this.areas;
 
 	// The normal radius of the outermost layer with no methacoline present.
-	this.A = A;
+	this.A;
+	
+	// The maximum percentage that the ASM is capable of shrinking.
+	this.max_short;
 	
 	// The radii of the four circles that define the layers, also from outermost to innermost.
 	this.radii;
-
-	// The maximum percentage that the airway is capable of shrinking.
-	this.max_short;
 
 	this.update(A,B,C,D,x,y,z,1);
 }
@@ -56,6 +56,7 @@ Airway.prototype.resistance = function(logd)
 // Updates the airway properties in response to new inputs.
 Airway.prototype.update(A,B,C,D,x,y,z,logd)
 {
+	this.A = A;
 	this.max_short = x;
 
 	this.areas = [B, C*(1+y), D*(1+z)];
