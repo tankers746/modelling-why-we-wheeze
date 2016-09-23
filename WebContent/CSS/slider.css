@@ -7,29 +7,27 @@
 }
 
 .noUi-origin {
-    top: -15px;
-    right: 25px;
+
 }
 
 .noUi-handle {
     background: white;
     width: 15px;
+    height: 40px;
+    margin: -16px 0 0 -8px;
 }
 
-#slider1 .noUi-base {
+#severity_slider .noUi-base {
     background : blue;  
 }
+#severity_slider .noUi-handle {
+    border: 2px solid blue;
+}
 
-#slider2 .noUi-base {
+#dose_slider .noUi-base {
     background : red;    
 }
-
-#slider1 .noUi-handle {
-    border: 3px solid blue;
+#dose_slider .noUi-handle {
+    border: 2px solid red;
 }
-
-#slider2 .noUi-handle {
-    border: 3px solid red;
-}
-
 
