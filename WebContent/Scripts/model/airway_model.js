@@ -45,6 +45,7 @@ Airway.prototype.response = function(logd)
 }
 
 // Airway resistance triggered by a given methacoline dose.
+// TODO: Convert resistance to use a range from 0 to 1.
 Airway.prototype.resistance = function(logd)
 {
 	lumen_radius = this.response(logd)[3];
