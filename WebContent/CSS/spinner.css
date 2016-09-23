@@ -1,0 +1,19 @@
+.ui-spinner {
+	height: 50px;
+	width: 120px;
+
+}
+
+.pi-spinner .ui-spinner:before{
+	content: "%";
+
+}
+
+.ui-spinner-input {
+	height: 30px;
+	width: 80px;
+}
+
+input[type="text"] {
+    font-size:25px;
+}

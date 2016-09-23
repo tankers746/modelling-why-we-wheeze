@@ -25,12 +25,12 @@
 	});	
 
 	var doseRange = {
-		'min': [0.001, 0.009],
-		'17%': [0.01, 0.09],
-		'33%': [0.1, 0.9],	
-		'50%': [1, 9],
-		'67%': [10, 90],	
-		'83%': [100, 900],	
+		'min': [0.001],
+		'16.67%': [0.01],
+		'33.33%': [0.1],	
+		'50;00%': [1],
+		'66.67%': [10],	
+		'83.33%': [100],	
 		'max': [1000]
 	};
 
@@ -41,18 +41,25 @@
 
 	$("#dose_slider").noUiSlider_pips({
 		mode: 'range',
-		density: 28,
-		stepped: true,
+		density: 16,
 	    format : wNumb({
 			edit: function(a){
 				//gets rid of the unwanted decimal places 
 				return parseFloat(a);
 			},    	
-	        decimals : 4
+	        decimals : 5
 	    })	
 	});
 
-	$('#severity_slider').Link('lower').to($('#severity_value'));
-	$('#dose_slider').Link('lower').to($('#dose_value'));
+	$('#severity_slider').Link('lower').to($('#severity_value'), null, wNumb({    	
+        decimals : 0
+	}));
+	$('#dose_slider').Link('lower').to($('#dose_value'), null, wNumb({
+		edit: function(a){
+			//gets rid of the unwanted decimal places 
+			return parseFloat(a);
+		},    	
+        decimals : 3
+	}));
 
 });
