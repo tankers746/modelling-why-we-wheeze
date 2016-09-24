@@ -9,7 +9,14 @@
         
         <script>
             $(document).ready(function() {
+                              
+                var sigmoid_fcn = function(log_d) {
+                    //This is tempory.  Dylan has written the proper functions elsewhere.
+                    return 20/(1+Math.exp(-Math.log(10)*(log_d+6)));
+                };
+                
                 $("#log_d_publisher").my_publisher_buttons({channel : "demo/", topic : "log_d"});
+                $("#ASM_short_publisher").my_publisher({channel : "demo/", topic : "ASM_short"});
                               
                 $("#graph1").my_subscriber({channel : "demo/", topic : "log_d"});
 
@@ -24,7 +31,10 @@
         <h1>Marker plot graph demo page</h1>
         <p>Instructions: Please replace the generic subscriber with the plot of ASM shortening % vs methacholine dose with the moving position marker from the AHR page.</p>
         
+        <p>Your widget will need to recieve a reference to the model function to be drawn.  Do that using widget options.  You may also choose to generate the ASM_Shortening data (y-axis)locally.</p>
+        
         <div id="log_d_publisher"></div>
+        <div id="ASM_short_publisher"></div>
         
         <br/>
         
