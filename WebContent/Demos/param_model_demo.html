@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../scripts/vendor/jquery-1.10.2.min.js" type="text/javascript"></script>
+        <script src="../scripts/vendor/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="../scripts/vendor/jquery.ba-tinypubsub.js" type="text/javascript"></script>
+        
+        <script src="demo.js" type="text/javascript"></script>
+        
+        
+        <script src="DYLAN'S_MODEL_SCRIPT.js" type="text/javascript"></script>
+        
+        <script>
+            $(document).ready(function() {
+                $("#box_A").my_publisher({channel : "demo/", topic : "A"});
+                $("#box_B").my_publisher({channel : "demo/", topic : "B"});
+                $("#box_C").my_publisher({channel : "demo/", topic : "C"});
+                $("#box_D").my_publisher({channel : "demo/", topic : "D"});
+                $("#box_x_max").my_publisher({channel : "demo/", topic : "x_max"});
+                $("#box_y").my_publisher({channel : "demo/", topic : "y"});
+                $("#box_z").my_publisher({channel : "demo/", topic : "z"});
+                              
+                $("#ra_out").my_subscriber({channel : "demo/", topic : "ra"});
+                $("#rb_out").my_subscriber({channel : "demo/", topic : "rb"});
+                $("#rc_out").my_subscriber({channel : "demo/", topic : "rc"});
+                $("#rd_out").my_subscriber({channel : "demo/", topic : "rd"});
+
+                alert("Page loaded successfully!");
+            });
+        </script>
+        
+    </head>
+    
+    <body>
+        
+        <h1>Parameterised Model Demo</h1>
+        <p>Instructions: Create a script that recieves data published on A, B, C, D, x_max, y and z, transforms the data in accordance to the modal and publishes the generated data on ra, rb, rc, rd.  The graph will require a reference to a model function to be drawn.  We'll add that bit in later.</p>
+        
+        <div id="box_A"></div>
+        <div id="box_B"></div>
+        <div id="box_C"></div>
+        <div id="box_D"></div>
+        <div id="box_x_max"></div>
+        <div id="box_y"></div>
+        <div id="box_z"></div>
+        
+        <br/>
+        
+        <div id="ra_out"></div>
+        <div id="rb_out"></div>
+        <div id="rc_out"></div>
+        <div id="rd_out"></div>
+        
+    </body>
+</html>
