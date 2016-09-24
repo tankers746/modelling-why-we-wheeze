@@ -1,6 +1,18 @@
 // TODO: Set up the channel used to communicate airway data.
 // TODO: Setup event listeners to respond to user inputs.
 
+// Calculates the radius of a circular layer given the radius and area of the layer above it.
+layer_radius = function(above_radius, above_area)
+{
+	return Math.sqrt(Math.pow(above_radius, 2) - above_area / Math.PI);
+}
+
+// Poiseuille's Law.
+tube_resistance = function(radius)
+{
+	return 1 / Math.pow(radius, 4);
+}
+
 // Virtual representation of the airway being modelled.
 function Airway(A,B,C,D,x,y,z)
 {
@@ -16,13 +28,7 @@ function Airway(A,B,C,D,x,y,z)
 	// The radii of the four circles that define the layers, also from outermost to innermost.
 	this.radii;
 
-	this.update(A,B,C,D,x,y,z,1);
-}
-
-// Calculates the radius of an airway layer given the radius and area of the layer above it.
-layer_radius = function(above_radius, above_area)
-{
-	return Math.sqrt(Math.pow(above_radius, 2) - above_area / Math.PI);
+	this.update(A,B,C,D,x,y,z,-3);
 }
 
 // ASM shortening triggered by a given methacoline dose.
@@ -44,14 +50,13 @@ Airway.prototype.response = function(logd)
 	return radii;
 }
 
-// Airway resistance triggered by a given methacoline dose.
-// TODO: Convert resistance to use a range from 0 to 1.
+// Airway resistance triggered by a given methacoline dose. Resistance scales from 0 (normal airway) to 1 (fully closed airway).
 Airway.prototype.resistance = function(logd)
 {
 	lumen_radius = this.response(logd)[3];
-	normal_lumen = this.response(1)[3];
+	normal_lumen = this.response(-3)[3];
 	
-	return 1 / Math.pow(lumen_radius, 4);
+	return 1 - (tube_resistance(normal_lumen) / tube_resistance(lumen_radius));
 }
 
 // Updates the airway properties in response to new inputs.
