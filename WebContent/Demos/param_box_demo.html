@@ -8,17 +8,17 @@
         <link rel="stylesheet" href="../CSS/jquery-ui.min.css">
         <link rel="stylesheet" href="../CSS/spinner.css">
         <script src="../scripts/widgets/spinners.js" type="text/javascript"></script>
+		<script src="demo.js" type="text/javascript"></script>
         
         <script>
             $(document).ready(function() {
-                $("#param1").my_publisher_buttons({channel : "demo/", topic : "x"});
-                $("#param2").my_publisher_buttons({channel : "demo/", topic : "y"});
-                $("#param3").my_publisher_buttons({channel : "demo/", topic : "z"});
-                              
-                $("#x_subscriber").my_subscriber({channel : "demo/", topic : "x"});
-                $("#y_subscriber").my_subscriber({channel : "demo/", topic : "y"});
-                $("#z_subscriber").my_subscriber({channel : "demo/", topic : "z"});
-
+                $("#A_input").my_publisher_buttons({channel : "demo/", topic : "A"});
+				$("#B_input").my_publisher_buttons({channel : "demo/", topic : "B"});
+				$("#C_input").my_publisher_buttons({channel : "demo/", topic : "C"});
+				$("#D_input").my_publisher_buttons({channel : "demo/", topic : "D"});
+				$("#X_input").my_publisher_buttons({channel : "demo/", topic : "xmax"});
+				$("#Y_input").my_publisher_buttons({channel : "demo/", topic : "y"});
+				$("#Z_input").my_publisher_buttons({channel : "demo/", topic : "z"});
                 alert("Page loaded successfully!");
             });
         </script>
@@ -28,17 +28,6 @@
     <body>
         
         <h1>Parameter box demo page</h1>
-        <p>Instructions: Please replace the generic publishers with parameter boxes</p>
-        
-        <div id="param1"></div>
-        <div id="param2"></div>
-        <div id="param3"></div>
-        
-        <br/>
-        
-        <div id="x_subscriber"></div>
-        <div id="y_subscriber"></div>
-        <div id="z_subscriber"></div>
 
         <p>A <input id="A_input" type="text" maxlength="5"></p>       
         <p>B <input id="B_input" type="text" maxlength="5"></p>       
@@ -46,7 +35,7 @@
         <p>D <input id="D_input" type="text" maxlength="5"></p>       
         <p>X <input id="X_input" type="text" maxlength="5"></p>       
         <p>Y <input id="Y_input" type="text" maxlength="5"></p>       
-        <P>Z <input id="Z_input" type="text" maxlength="4"></p>       
+        <P>Z <input id="Z_input" type="text" maxlength="5"></p>       
         
     </body>
 </html>

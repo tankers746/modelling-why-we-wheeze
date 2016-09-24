@@ -10,16 +10,13 @@
         <link rel="stylesheet" type="text/css" href="../CSS/jquery.nouislider.pips.min.css">
         <link rel="stylesheet" type="text/css" href="../CSS/jquery.nouislider.pips.min.css">
         <link rel="stylesheet" type="text/css" href="../CSS/slider.css">
-        <script type="text/javascript" src="../scripts/widgets/slider.js"></script>        
+        <script type="text/javascript" src="../scripts/widgets/slider.js"></script>     
+		<script type="text/javascript" src="demo.js"></script> 		
         
         <script>
             $(document).ready(function() {
-                $("#slider1").my_publisher_buttons({channel : "demo/", topic : "x"});
-                $("#slider2").my_publisher_buttons({channel : "demo/", topic : "y"});
-                              
-                $("#x_subscriber").my_subscriber({channel : "demo/", topic : "x"});
-                $("#y_subscriber").my_subscriber({channel : "demo/", topic : "y"});
-
+                //$("#severity_slider").my_publisher({channel : "demo/", topic : "severity"});
+                //$("#dose_value").my_publisher({channel : "demo/", topic : "dose"});
                 alert("Page loaded successfully!");
             });
         </script>
