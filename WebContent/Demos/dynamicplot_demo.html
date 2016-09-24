@@ -9,6 +9,25 @@
         
         <script>
             $(document).ready(function() {
+                              
+                var sigmoid_fcn = function(log_d) {
+                    //This is tempory.  Dylan has written the proper functions elsewhere.
+                    return 1/(1+Math.exp(-Math.log(10)*(log_d+6)));
+                };
+                              
+                var calc_AR = function(log_d, A, B, C, D, x_max, y, z) {
+                    //This is tempory.  Dylan has written the proper functions elsewhere.
+                    var rd_sqr = Math.pow(A*(1-0.01*x_max*sigmoid_fcn(log_d)),2);
+                    var rc_sqr = rd_sqr - B/Math.PI;
+                    var rb_sqr = rc_sqr - C*(1+y)/Math.PI;
+                    var ra_sqr = rb_sqr - D*(1+z)/Math.PI;
+                    return 1/(ra_sqr*ra_sqr);
+                };
+                
+                //For some reason, the values of B, C and D were pre-multiplied by pi in the prototype sheet.
+                //Also, use log_d  from -9 to -3.
+                //alert(calc_AR(-5, 2.75, 1.5*Math.PI, 2.5*Math.PI, 0.32*Math.PI, 20, 0, 0));
+                              
                 $("#A_publisher").my_publisher({channel : "demo/", topic : "A"});
                 $("#B_publisher").my_publisher({channel : "demo/", topic : "B"});
                 $("#C_publisher").my_publisher({channel : "demo/", topic : "C"});
