@@ -9,7 +9,26 @@
         
         <script>
             $(document).ready(function() {
+                
+                var sigmoid_fcn = function(log_d) {
+                    //This is tempory.  Dylan has written the proper functions elsewhere.
+                    return 20/(1+Math.exp(-Math.log(10)*(log_d+6)));
+                };
+                              
+                var calc_AR = function(log_d, S) {
+                    //This is tempory.  Dylan has written the proper functions elsewhere.
+                    var rd_sqr = Math.pow(2.75*(1-0.01*sigmoid_fcn(log_d)),2);
+                    var rc_sqr = rd_sqr - 1.5;
+                    var rb_sqr = rc_sqr - 2.5*(1+0.02*S);
+                    var ra_sqr = rb_sqr - 0.32*(1+0.1*S);
+                    return 1/(ra_sqr*ra_sqr);
+                };
+                
+                // Use log_d from -9 to -3.  Scale in log uM on graph.
+                alert(calc_AR(-5, 2));
+                              
                 $("#S_publisher").my_publisher_buttons({channel : "demo/", topic : "S"});
+                $("#AR_publisher").my_publisher({channel : "demo/", topic : "AR"});
                 $("#log_d_publisher").my_publisher({channel : "demo/", topic : "log_d"});
                               
                 $("#graph1").my_subscriber({channel : "demo/", topic : "S"});
@@ -24,8 +43,10 @@
         
         <h1>Multi plot graph demo page</h1>
         <p>Instructions: Please replace the generic subscriber with the airway resistance vs methacholine graph from the AHR page.</p>
+        <p>Your widget will need to recieve a reference to the model function to be drawn.  Do that using widget options.  You may also choose to generate the AR data (y-axis)locally.</p>
         
         <div id="S_publisher"></div>
+        <div id="AR_publisher"></div>
         <div id="log_d_publisher"></div>
         
         <br/>
