@@ -7,6 +7,8 @@
         
         <script src="demo.js" type="text/javascript"></script>
         
+        <script src="../scripts/widgets/multi_plot.js" type="text/javascript"></script>
+        
         <script>
             $(document).ready(function() {
                 
@@ -25,13 +27,14 @@
                 };
                 
                 // Use log_d from -9 to -3.  Scale in log uM on graph.
-                alert(calc_AR(-5, 2));
+                //alert(calc_AR(-5, 2));
                               
                 $("#S_publisher").my_publisher_buttons({channel : "demo/", topic : "S"});
-                $("#AR_publisher").my_publisher({channel : "demo/", topic : "AR"});
                 $("#log_d_publisher").my_publisher({channel : "demo/", topic : "log_d"});
+                $("#AR_publisher").my_publisher({channel : "demo/", topic : "AR"});
                               
-                $("#graph1").my_subscriber({channel : "demo/", topic : "S"});
+                //$("#graph1").my_subscriber({channel : "demo/", topic : "S"});
+                $("#graph1").multi_plot();
 
                 alert("Page loaded successfully!");
             });
@@ -46,8 +49,9 @@
         <p>Your widget will need to recieve a reference to the model function to be drawn.  Do that using widget options.  You may also choose to generate the AR data (y-axis)locally.</p>
         
         <div id="S_publisher"></div>
-        <div id="AR_publisher"></div>
         <div id="log_d_publisher"></div>
+        <div id="AR_publisher"></div>
+
         
         <br/>
         

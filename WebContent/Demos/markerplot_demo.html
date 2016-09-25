@@ -7,6 +7,8 @@
         
         <script src="demo.js" type="text/javascript"></script>
         
+        <script src="../scripts/widgets/marker_plot.js" type="text/javascript"></script>
+        
         <script>
             $(document).ready(function() {
                               
@@ -17,8 +19,13 @@
                 
                 $("#log_d_publisher").my_publisher_buttons({channel : "demo/", topic : "log_d"});
                 $("#ASM_short_publisher").my_publisher({channel : "demo/", topic : "ASM_short"});
+                
                               
-                $("#graph1").my_subscriber({channel : "demo/", topic : "log_d"});
+                //-------------------//
+                // CHANGE THIS LINE  //
+                //-------------------//
+                //$("#graph1").my_subscriber({channel : "demo/", topic : "log_d"});
+                $("#graph1").marker_plot();
 
                 alert("Page loaded successfully!");
             });
