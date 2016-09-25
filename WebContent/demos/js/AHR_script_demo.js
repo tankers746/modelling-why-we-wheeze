@@ -1,4 +1,4 @@
-var ASM_Controller = (function() {
+var AHR_demo = (function() {
     var channel = "demo/";
     
     //These parameters do not change for the ASM page.
@@ -64,8 +64,8 @@ var ASM_Controller = (function() {
 })();
 
 //Start the controller.
-ASM_Controller.create();
+AHR_demo.create();
 
 //Stop the controller.
-//ASM_Controller.destroy();
+//AHR_demo.destroy();
 
