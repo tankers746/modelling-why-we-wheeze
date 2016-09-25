@@ -1,6 +1,7 @@
-$.widget('mwww.dynamic_plot', {
+$.widget('mwww.multi_plot', {
     options: {
-        channel:    "default/"
+        channel:    "default/",
+        image_dir:  "./widgets/multi_plot/"
     },
     
     $image:   {},
@@ -8,11 +9,9 @@ $.widget('mwww.dynamic_plot', {
     
     _create: function() {
         
-        var container = this.element;
-        
         this.$image = $("<img>/", {
-            id:     container.attr('id') + "_image",
-            src:    "../media/dynamic_graph.png",
+            id:     this.element.attr('id') + "_image",
+            src:    this.options.image_dir + "multi_plot_image.png",
             alt:    "Placeholder widget"
         });
         

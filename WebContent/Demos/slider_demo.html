@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="../scripts/vendor/jquery-1.10.2.min.js" type="text/javascript"></script>
-        <script src="../scripts/vendor/jquery-ui.min.js" type="text/javascript"></script>
-        <script src="../scripts/vendor/jquery.ba-tinypubsub.js" type="text/javascript"></script>
-        <script src="../scripts/vendor/jquery.nouislider.all.min.js" type="text/javascript"></script>
-
-        <link rel="stylesheet" type="text/css" href="../CSS/jquery.nouislider.min.css">
-        <link rel="stylesheet" type="text/css" href="../CSS/jquery.nouislider.pips.min.css">
-        <link rel="stylesheet" type="text/css" href="../CSS/jquery.nouislider.pips.min.css">
-        <link rel="stylesheet" type="text/css" href="../CSS/slider.css">
-        <script type="text/javascript" src="../scripts/widgets/slider.js"></script>     
-		<script type="text/javascript" src="demo.js"></script> 		
+        <script src="../vendor/jquery/jquery-1.10.2.min.js" type="text/javascript"></script>
+        <script src="../vendor/jqueryui/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="../vendor/tinypubsub/jquery.ba-tinypubsub.js" type="text/javascript"></script>
+        
+        
+        <script src="../vendor/nouislider/jquery.nouislider.all.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="../vendor/nouislider/jquery.nouislider.min.css">
+        <link rel="stylesheet" type="text/css" href="../vendor/nouislider/jquery.nouislider.pips.min.css">
+            
+        <script src="./js/demo.js" type="text/javascript"></script>
+            
+        <script type="text/javascript" src="../widgets/slider/slider.js"></script>
+        <link rel="stylesheet" type="text/css" href="../widgets/slider/slider.css">
+            
+            
+            
+			
         
         <script>
             $(document).ready(function() {
-                //$("#severity_slider").my_publisher({channel : "demo/", topic : "severity"});
-                //$("#dose_value").my_publisher({channel : "demo/", topic : "dose"});
+                $("#discrete_slider").discrete_slider({channel : "demo/", topic : "S"});
+                $("#continuous_slider").continuous_slider({channel : "demo/", topic : "logd"});
+                              
+                $("#S_subscriber").my_subscriber({channel : "demo/", topic : "S"});
+                $("#logd_subscriber").my_subscriber({channel : "demo/", topic : "logd"});
+                
                 alert("Page loaded successfully!");
             });
         </script>
@@ -26,18 +36,14 @@
     <body>
 
         <h1>Sliders demo page</h1>
-
-
-        <div id="severity_slider" class="slider"></div>
-        <span id="severity_value"></span>
-
-        <div id="dose_slider" class="slider"></div>
-        <span id="dose_value"></span>
+        
+        <div id="discrete_slider"></div>
+        <div id="continuous_slider"></div>
         
         <br/>
         
-        <div id="x_subscriber"></div>
-        <div id="y_subscriber"></div>
+        <div id="S_subscriber"></div>
+        <div id="logd_subscriber"></div>
         
     </body>
 </html>

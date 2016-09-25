@@ -1,4 +1,4 @@
-var param_Controller = (function() {
+var param_demo = (function() {
     var channel = "demo/";
     
     //Now, all the parameters are variables.
@@ -101,8 +101,8 @@ var param_Controller = (function() {
 })();
 
 //Start the controller.
-param_Controller.create();
+param_demo.create();
 
 //Stop the controller.
-//param_Controller.destroy();
+//param_demo.destroy();
 

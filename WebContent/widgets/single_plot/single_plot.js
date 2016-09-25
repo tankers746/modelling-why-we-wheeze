@@ -1,6 +1,7 @@
-$.widget('mwww.marker_plot', {
+$.widget('mwww.single_plot', {
     options: {
-        channel:    "default/"
+        channel:    "default/",
+        image_dir:  "./widgets/single_plot/"
     },
     
     $image:   {},
@@ -11,8 +12,8 @@ $.widget('mwww.marker_plot', {
         var container = this.element;
         
         this.$image = $("<img>/", {
-            id:     container.attr('id') + "_image",
-            src:    "../media/marker_graph.png",
+            id:     this.element.attr('id') + "_image",
+            src:    this.options.image_dir + "single_plot_image.png",
             alt:    "Placeholder widget"
         });
         

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="./vendor/jquery/jquery-1.10.2.min.js" type="text/javascript"></script>
+        <script src="./vendor/jqueryui/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="./vendor/tinypubsub/jquery.ba-tinypubsub.js" type="text/javascript"></script>
+        <script src="./vendor/nouislider/jquery.nouislider.all.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="./vendor/nouislider/jquery.nouislider.min.css">
+            <link rel="stylesheet" type="text/css" href="./vendor/nouislider/jquery.nouislider.pips.min.css">
+        
+        
+        <script type="text/javascript" src="./widgets/slider/slider.js"></script>
+        <link rel="stylesheet" type="text/css" href="./widgets/slider/slider.css">
+        <script src="./widgets/cross_section/cross_section.js" type="text/javascript"></script>
+        <script src="./widgets/multi_plot/multi_plot.js" type="text/javascript"></script>
+        <script src="./widgets/single_plot/single_plot.js" type="text/javascript"></script>
+        
+        
+        <script src="./models/airway_model.js" type="text/javascript"></script>
+        <script src="./js/AHR_script.js" type="text/javascript"></script>
+        
+        <script>
+            $(document).ready(function() {
+                alert("Page loaded successfully!");
+            });
+        </script>
+    </head>
+    
+    <body>
+        
+        <h1>AHR model page (poor)</h1>
+        
+        <table style="width:100%">
+            <tr style="height:300px">
+                <td style="width:50%; vertical-align: top;">
+                    <div id="discrete_slider"></div>
+                    <div id="continuous_slider"></div>
+                </td>
+                <td style="width:50%">
+                    <div id="multi_plot"></div>
+                </td>
+            </tr>
+            <tr style="height:300px">
+                <td style="width:50%">
+                    <div id="cross_section"></div>
+                </td>
+                <td style="width:50%">
+                    <div id="single_plot"></div>
+                </td>
+            </tr>
+        </table>
+        
+    </body>
+</html>
+

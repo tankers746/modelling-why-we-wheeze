@@ -1,5 +1,5 @@
-var ASM_Controller = (function() {
-    var channel = "demo/";
+var AHR = (function() {
+    var channel = "mwww/";
     
     //These parameters do not change for the ASM page.
     var A = 2.75;
@@ -19,13 +19,11 @@ var ASM_Controller = (function() {
     
     //Callback function for when S changes
     function callback_S(e, S) {
+        //alert(S);
         y = 0.01*S;
         z = 0.2*S;
         model.update(A, B, C, D, x, y, z, logd);
-        $.publish(channel + "ra", [model.radii[3]]);
-        $.publish(channel + "rb", [model.radii[2]]);
-        $.publish(channel + "rc", [model.radii[1]]);
-        $.publish(channel + "rd", [model.radii[0]]);
+        $.publish(channel + "radii", [model.radii[3], model.radii[2], model.radii[1], model.radii[0]]);
         $.publish(channel + "AR", [model.tube_resistance(logd)]);
         $.publish(channel + "ASM_short", [model.shortening(logd)]);
         
@@ -35,10 +33,7 @@ var ASM_Controller = (function() {
     function callback_logd(e, logd_) {
         logd = logd_;
         model.update(A, B, C, D, x, y, z, logd);
-        $.publish(channel + "ra", [model.radii[3]]);
-        $.publish(channel + "rb", [model.radii[2]]);
-        $.publish(channel + "rc", [model.radii[1]]);
-        $.publish(channel + "rd", [model.radii[0]]);
+        $.publish(channel + "radii", [model.radii[3], model.radii[2], model.radii[1], model.radii[0]]);
         $.publish(channel + "AR", [model.tube_resistance(logd)]);
         $.publish(channel + "ASM_short", [model.shortening(logd)]);
     }
@@ -46,13 +41,13 @@ var ASM_Controller = (function() {
     //Initialise the subscribers.
     function create() {
         $.subscribe((channel+"S"),callback_S);
-        $.subscribe((channel+"log_d"),callback_logd);
+        $.subscribe((channel+"logd"),callback_logd);
     }
     
     //Unsubscribe all.
     function destroy() {
         $.unsubscribe((channel+"S"),callback_S);
-        $.unsubscribe((channel+"log_d"),callback_logd);
+        $.unsubscribe((channel+"logd"),callback_logd);
     }
     
     //This is the magic of the revealing module pattern: public interfaces.
@@ -63,9 +58,12 @@ var ASM_Controller = (function() {
     
 })();
 
-//Start the controller.
-ASM_Controller.create();
-
-//Stop the controller.
-//ASM_Controller.destroy();
+$(document).ready(function() {
+    AHR.create();
+    $("#discrete_slider").discrete_slider({channel : "mwww/", topic : "S"});
+    $("#continuous_slider").continuous_slider({channel : "mwww/", topic : "logd"});
+    $("#multi_plot").multi_plot({image_dir : "./widgets/multi_plot/"});
+    $("#cross_section").cross_section({channel : "mwww/", ra: 1.2, rb: 1.7, rc: 2.4, rd: 2.75, A:2.75});
+    $("#single_plot").single_plot({image_dir : "./widgets/single_plot/"});
+});
 
