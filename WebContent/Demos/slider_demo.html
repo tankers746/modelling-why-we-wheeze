@@ -24,12 +24,10 @@
         <script>
             $(document).ready(function() {
                 $("#discrete_slider").discrete_slider({channel : "demo/", topic : "S"});
-                              
-                //$("#severity_slider").my_publisher({channel : "demo/", topic : "severity"});
-                //$("#dose_value").my_publisher({channel : "demo/", topic : "dose"});
+                $("#continuous_slider").continuous_slider({channel : "demo/", topic : "logd"});
                               
                 $("#S_subscriber").my_subscriber({channel : "demo/", topic : "S"});
-                //$("#y_out").my_subscriber({channel : "demo/", topic : "y"});
+                $("#logd_subscriber").my_subscriber({channel : "demo/", topic : "logd"});
                 alert("Page loaded successfully!");
             });
         </script>
@@ -41,18 +39,12 @@
         <h1>Sliders demo page</h1>
         
         <div id="discrete_slider"></div>
-
-
-        <div id="severity_slider" class="slider"></div>
-        <span id="severity_value"></span>
-
-        <div id="dose_slider" class="slider"></div>
-        <span id="dose_value"></span>
+        <div id="continuous_slider"></div>
         
         <br/>
         
         <div id="S_subscriber"></div>
-        <div id="y_subscriber"></div>
+        <div id="logd_subscriber"></div>
         
     </body>
 </html>

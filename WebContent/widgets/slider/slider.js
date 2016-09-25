@@ -44,10 +44,12 @@ $.widget('mwww.discrete_slider', {
         
         
         this._on(this.$slider, {
-            change: function(e, severity) {
-                //alert(parseInt(severity));
+            slide: function(e, severity) {
                 $.publish(options.channel + options.topic, [parseInt(severity)]);
             }
+            //change: function(e, severity) {
+                //alert(parseInt(severity));
+            //}
         });
         
         $(this.element).append(this.$slider);
@@ -62,6 +64,69 @@ $.widget('mwww.discrete_slider', {
 
 
 
+$.widget('mwww.continuous_slider', {
+    options: {
+        channel:    "default/",
+        topic:      "logd",
+    },
+    
+    $slider:    {},
+    
+    doseRange: {
+        'min': [0.001],
+        '16.67%': [0.01],
+        '33.33%': [0.1],
+        '50;00%': [1],
+        '66.67%': [10],
+        '83.33%': [100],
+        'max': [1000]
+    },
+    
+    _create:    function() {
+        
+        var self = this;
+        var options = this.options;
+        var container = this.element;
+        
+        this.$slider = $("<div/>", {
+            id:     this.element.attr('id') + "_slider",
+            class:  "slider"
+        });
+        
+        this.$slider.noUiSlider({
+            start: 0.001,
+            range: this.doseRange
+        });
+        
+        this.$slider.noUiSlider_pips({
+            mode: 'range',
+            density: 16,
+            format : wNumb({
+                edit: function(a){
+                    //gets rid of the unwanted decimal places
+                    return parseFloat(a);
+                },    	
+                decimals : 5
+            })	
+        });
+        
+        this._on(this.$slider, {
+            slide: function(e, d) {
+                $.publish(options.channel + options.topic, [Math.log(d)-6]);
+            }
+        });
+        
+        $(this.element).append(this.$slider);
+        
+    },
+    
+    _destroy:   function() {
+        $(this.element).empty();
+        $(this.element).remove();
+    }
+});
+
+/*
   $(function() {
 	$("#severity_slider").noUiSlider({
 		start: 0,
@@ -126,3 +191,5 @@ $.widget('mwww.discrete_slider', {
 	}));
 
 });
+
+*/
