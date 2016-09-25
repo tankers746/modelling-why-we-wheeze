@@ -1,4 +1,67 @@
 
+$.widget('mwww.discrete_slider', {
+    options: {
+        channel:    "default/",
+        topic:      "S",
+    },
+    
+    $slider:    {},
+    
+    _create:    function() {
+        
+        var self = this;
+        var options = this.options;
+        var container = this.element;
+        
+        this.$slider = $("<div/>", {
+            id:     this.element.attr('id') + "_slider",
+            class:  "slider"
+        });
+        
+        this.$slider.noUiSlider({
+            start: 0,
+            step : 1,
+            range: {
+                'min': [0],
+                'max': [6]
+            }
+        });
+        
+        this.$slider.noUiSlider_pips({
+            mode: 'range',
+            density: 16,
+            stepped: true,
+            format : wNumb({
+                edit: function(a){
+                    if(a==0) {
+                        return "No asthma"
+                    } else {
+                        return "Severe asthma"
+                    }
+                },
+            })
+        });
+        
+        
+        this._on(this.$slider, {
+            change: function(e, severity) {
+                //alert(parseInt(severity));
+                $.publish(options.channel + options.topic, [parseInt(severity)]);
+            }
+        });
+        
+        $(this.element).append(this.$slider);
+    
+    },
+    
+    _destroy:   function() {
+        $(this.element).empty();
+        $(this.element).remove();
+    }
+});
+
+
+
   $(function() {
 	$("#severity_slider").noUiSlider({
 		start: 0,
