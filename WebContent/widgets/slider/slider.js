@@ -94,25 +94,28 @@ $.widget('mwww.continuous_slider', {
         });
         
         this.$slider.noUiSlider({
-            start: 0.001,
-            range: this.doseRange
+            start: -6,
+            range: {
+                'min': [-9],
+                'max': [-3]
+            }
         });
         
         this.$slider.noUiSlider_pips({
-            mode: 'range',
+            mode: 'count',
             density: 16,
+            values: 7,
             format : wNumb({
                 edit: function(a){
-                    //gets rid of the unwanted decimal places
-                    return parseFloat(a);
-                },    	
+                    return Math.pow(10, parseInt(a)+6);
+                },
                 decimals : 5
-            })	
+            })
         });
         
         this._on(this.$slider, {
-            slide: function(e, d) {
-                $.publish(options.channel + options.topic, [Math.log(d)-6]);
+            slide: function(e, logd) {
+                $.publish(options.channel + options.topic, [logd]);
             }
         });
         
