@@ -7,6 +7,8 @@
         
         <script src="demo.js" type="text/javascript"></script>
         
+        <script src="../scripts/widgets/dynamic_plot.js" type="text/javascript"></script>
+        
         <script>
             $(document).ready(function() {
                               
@@ -36,7 +38,8 @@
                 $("#y_publisher").my_publisher({channel : "demo/", topic : "y"});
                 $("#z_publisher").my_publisher({channel : "demo/", topic : "z"});
                               
-                $("#graph1").my_subscriber({channel : "demo/", topic : "A"});
+                //$("#graph1").my_subscriber({channel : "demo/", topic : "A"});
+                $("#graph1").dynamic_plot();
 
                 alert("Page loaded successfully!");
             });
