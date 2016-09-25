@@ -8,21 +8,23 @@ $.widget('mwww.cross_section', {
         rd : 100,
         
         channel : "default/",
+        topic_A : "A",
+        topic_radii : "radii",
+         
+         
         default_size : 275,
         
         animation_speed : 400
         
     },
     
-    cont_size : 0,
+    cont_size:  0,
     
-    $circles : [],
+    $circles:   [{},{},{},{}],
+    colours:    ['#F00', '#FF0', '#0F0', '#FFF'],
     
-    callbacks : [],
-    
-    topics : ["rd", "rc", "rb", "ra"],
-    
-    colours : ['#F00', '#FF0', '#0F0', '#FFF'],
+    callback_radii: {},
+    callback_A:     {},
     
     
     scale: function(r) {
@@ -64,7 +66,7 @@ $.widget('mwww.cross_section', {
     
     _create: function() {
          
-        var self = this // is a popular phrase.
+        var self = this;
         var options = this.options;
         var $container = this.element;
         this.cont_size = options.default_size;
@@ -76,43 +78,32 @@ $.widget('mwww.cross_section', {
         //$container.css({'background-color' : 'blue'});
         
         var i;
-        for(i = 0; i<this.topics.length; i++) {
+        for(i = 0; i<this.$circles.length; i++) {
             this.$circles[i] = $("<div/>", {id: $container.attr('id') + "_circ" + (i+1)})
                                 .css(this.circles_css_rules)
                                 .css({'background-color' : this.colours[i]});
         }
         
-        this.callbacks[0] = function(e, data) {
-            if(0 <= data && data <= options.A) {
-                options.rd = data;
+        
+        this.callback_radii = function(e, ra_, rb_, rc_, rd_) {
+            if(0 <= ra_ && ra_ <= options.A)    options.ra = ra_;
+            if(0 <= rb_ && rb_ <= options.A)    options.rb = rb_;
+            if(0 <= rc_ && rc_ <= options.A)    options.rc = rc_;
+            if(0 <= rd_ && rd_ <= options.A)    options.rd = rd_;
+            self.update();
+        };
+        
+        this.callback_A = function(e, A_) {
+            if(A_ > 0) {
+                options.A = A_;
                 self.update();
             }
         };
         
-        this.callbacks[1] = function(e, data) {
-            if(0 <= data && data <= options.A) {
-                options.rc = data;
-                self.update();
-            }
-        };
         
-        this.callbacks[2] = function(e, data) {
-            if(0 <= data && data <= options.A) {
-                options.rb = data;
-                self.update();
-            }
-        };
         
-        this.callbacks[3] = function(e, data) {
-            if(0 <= data && data <= options.A) {
-                options.ra = data;
-                self.update();
-            }
-        };
-        
-        for(i=0; i<this.topics.length; i++) {
-            $.subscribe((options.channel + this.topics[i]), this.callbacks[i]);
-        }
+        $.subscribe(options.channel + options.topic_A, this.callback_A);
+        $.subscribe(options.channel + options.topic_radii, this.callback_radii);
         
         $($container).append(this.$circles[0])
                      .append(this.$circles[1])
@@ -123,10 +114,8 @@ $.widget('mwww.cross_section', {
     },
          
     _destroy: function() {
-        var i;
-        for(i=0; i<this.topics.length; i++) {
-            $.unsubscribe((options.channel + this.topics[i]), this.callbacks[i]);
-        }
+        $.unsubscribe(options.channel + options.topic_A, this.callback_A);
+        $.unsubscribe(options.channel + options.topic_radii, this.callback_radii);
         
         $(this.element).empty();
         $(this.element).remove();
