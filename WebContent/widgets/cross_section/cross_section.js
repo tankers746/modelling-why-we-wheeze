@@ -12,13 +12,11 @@ $.widget('mwww.cross_section', {
         topic_radii : "radii",
          
          
-        default_size : 275,
+        size : 275,
         
         animation_speed : 400
         
     },
-    
-    cont_size:  0,
     
     $container: {},
     $circles:   [{},{},{},{}],
@@ -30,7 +28,7 @@ $.widget('mwww.cross_section', {
     
     scale: function(r) {
         if(this.options.A > 0) {
-            return this.cont_size * r / this.options.A;
+            return this.$container.width() * r / this.options.A;
         }
         alert("Error: scale(r), A cannot be 0");
         return 0;
@@ -69,15 +67,13 @@ $.widget('mwww.cross_section', {
          
         var self = this;
         var options = this.options;
-        this.cont_size = options.default_size;
          
         // Change size of container div
-        
         this.$container = $("<div/>", {id: this.element.attr('id') + "_container"})
-        this.$container.height(this.cont_size);
-        this.$container.width(this.cont_size);
-        this.$container.css({'position': 'relative', 'left': '50%', 'margin-left': -this.cont_size/2 + "px"});
-        //$container.css({'background-color' : 'blue'});
+        this.$container.height(options.size);
+        this.$container.width(options.size);
+        this.$container.css({'position': 'relative', 'left': '50%', 'margin-left': -this.$container.width()/2 + "px"});
+        //this.$container.css({'background-color' : 'blue'});
         
         var i;
         for(i = 0; i<this.$circles.length; i++) {
