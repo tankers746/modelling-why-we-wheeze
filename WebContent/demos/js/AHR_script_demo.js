@@ -1,11 +1,5 @@
 var AHR_demo = (function() {
     var channel = "demo/";
-
-    //These parameters do not change for the ASM page.
-    var A = 2.75;
-    var B = 1.5*Math.PI;
-    var C = 2.5*Math.PI;
-    var D = 0.32*Math.PI;
     
     //Need to store these variables for when S changes and logd doesn't,
     //  and vice versa
@@ -34,7 +28,7 @@ var AHR_demo = (function() {
     //Callback function for when logd changes
     function callback_logd(e, logd_) {
         logd = logd_;
-        model.update(A, B, C, D, x, y, z, logd);
+        model.update(defaults.A, defaults.B, defaults.C, defaults.D, x, y, z, logd);
         $.publish(channel + "ra", [model.radii.lumen]);
         $.publish(channel + "rb", [model.radii.mucosal]);
         $.publish(channel + "rc", [model.radii.sub_mucosal]);

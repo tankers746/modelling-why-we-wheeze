@@ -1,4 +1,4 @@
-var defaults = {A:2.75, B:1.5, C:2.5, D:0.32, x:0.2,y:0,z:0};
+defaults = {A:2.75, B:1.5, C:2.5, D:0.32, x:0.2,y:0,z:0};
 
 // Virtual representation of the airway being modelled.
 function Airway()
@@ -13,7 +13,7 @@ function Airway()
     this.radii = new Object();
     
     this.update(defaults.A, defaults.B, defaults.C, defaults.D, defaults.x, defaults.y, defaults.z, -3);
-}
+};
 
 // Calculates the radius of a circular layer given the radius and area of the layer above it.
 Airway.prototype.layer_radius = function(above_radius, above_area)
