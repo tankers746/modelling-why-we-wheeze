@@ -20,6 +20,7 @@ $.widget('mwww.cross_section', {
     
     cont_size:  0,
     
+    $container: {},
     $circles:   [{},{},{},{}],
     colours:    ['#F00', '#FF0', '#0F0', '#FFF'],
     
@@ -68,20 +69,21 @@ $.widget('mwww.cross_section', {
          
         var self = this;
         var options = this.options;
-        var $container = this.element;
         this.cont_size = options.default_size;
          
         // Change size of container div
-        $container.height(this.cont_size);
-        $container.width(this.cont_size);
-        $container.css({'position' : 'relative'});
+        
+        this.$container = $("<div/>", {id: this.element.attr('id') + "_container"})
+        this.$container.height(this.cont_size);
+        this.$container.width(this.cont_size);
+        this.$container.css({'position': 'relative', 'left': '50%', 'margin-left': -this.cont_size/2 + "px"});
         //$container.css({'background-color' : 'blue'});
         
         var i;
         for(i = 0; i<this.$circles.length; i++) {
-            this.$circles[i] = $("<div/>", {id: $container.attr('id') + "_circ" + (i+1)})
-                                .css(this.circles_css_rules)
-                                .css({'background-color' : this.colours[i]});
+            this.$circles[i] = $("<div/>", {
+                id: this.element.attr('id') + "_circ" + (i+1)
+            }).css(this.circles_css_rules).css({'background-color' : this.colours[i]});
         }
         
         
@@ -105,10 +107,15 @@ $.widget('mwww.cross_section', {
         $.subscribe(options.channel + options.topic_A, this.callback_A);
         $.subscribe(options.channel + options.topic_radii, this.callback_radii);
         
-        $($container).append(this.$circles[0])
-                     .append(this.$circles[1])
-                     .append(this.$circles[2])
-                     .append(this.$circles[3]);
+        this.$container.append(this.$circles[0])
+                       .append(this.$circles[1])
+                       .append(this.$circles[2])
+                       .append(this.$circles[3]);
+                       
+        $(this.element).append(this.$container);
+                       
+                       
+                       
         this.update();
         
     },
