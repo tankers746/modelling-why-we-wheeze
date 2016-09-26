@@ -11,6 +11,7 @@
         
         <script>
             $(document).ready(function() {
+                $("#A_div").my_publisher_buttons({channel : "mwww/", topic : "A", value : 100});
                 $("#ra_div").my_publisher_buttons({channel : "mwww/", topic : "ra", value : 25});
                 $("#rb_div").my_publisher_buttons({channel : "mwww/", topic : "rb", value : 50});
                 $("#rc_div").my_publisher_buttons({channel : "mwww/", topic : "rc", value : 75});
@@ -45,6 +46,7 @@
         
         <h1>Airway cross-section demo page</h1>
         
+        <div id="A_div"></div>
         <div id="ra_div"></div>
         <div id="rb_div"></div>
         <div id="rc_div"></div>

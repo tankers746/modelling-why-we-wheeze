@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="./vendor/jquery/jquery-1.10.2.min.js" type="text/javascript"></script>
+        <script src="./vendor/jqueryui/jquery-ui.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="./vendor/jqueryui/jquery-ui.min.css">
+        <script src="./vendor/tinypubsub/jquery.ba-tinypubsub.js" type="text/javascript"></script>
+        <script src="./vendor/nouislider/jquery.nouislider.all.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="./vendor/nouislider/jquery.nouislider.min.css">
+            <link rel="stylesheet" type="text/css" href="./vendor/nouislider/jquery.nouislider.pips.min.css">
+        
+        
+        <script type="text/javascript" src="./widgets/spinner/spinner.js"></script>
+        <link rel="stylesheet" type="text/css" href="./widgets/spinner/spinner.css">
+        <script src="./widgets/cross_section/cross_section.js" type="text/javascript"></script>
+        <script src="./widgets/dynamic_plot/dynamic_plot.js" type="text/javascript"></script>
+        
+        
+        <script src="./models/airway_model.js" type="text/javascript"></script>
+        <script src="./js/param_script.js" type="text/javascript"></script>
+        
+        <script>
+            $(document).ready(function() {
+                alert("Page loaded successfully!");
+            });
+        </script>
+    </head>
+    
+    <body>
+        
+        <h1>Parameterised model page (poor)</h1>
+        
+        <table style="width:100%">
+            <tr style="height:100px">
+                <td colspan="2" style="vertical-align: top;">
+                    <div id="A_spinner" style = "float: left"></div>
+                    <div id="B_spinner" style = "float: left"></div>
+                    <div id="C_spinner" style = "float: left"></div>
+                    <div id="D_spinner" style = "float: left"></div>
+                </td>
+            </tr>
+            <tr style="height:100px">
+                <td colspan="2" style="vertical-align: top;">
+                    <div id="xmax_spinner" style = "float: left"></div>
+                    <div id="y_spinner" style = "float: left"></div>
+                    <div id="z_spinner" style = "float: left"></div>
+                </td>
+            </tr>
+            <tr style="height:300px">
+                <td style="width:50%">
+                    <div id="cross_section"></div>
+                </td>
+                <td style="width:50%">
+                    <div id="dynamic_plot"></div>
+                </td>
+            </tr>
+        </table>
+        
+    </body>
+</html>
+
