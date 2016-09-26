@@ -22,7 +22,7 @@
                 $("#X_spinner").spinner2({channel: "demo/", topic: "X", initval: 20,   min: 15,   max: 30,  step: 0.5,  pi: false});
                 $("#Y_spinner").spinner2({channel: "demo/", topic: "Y", initval: 0,    min: 0,    max: 1,   step: 0.01, pi: false});
                 $("#Z_spinner").spinner2({channel: "demo/", topic: "Z", initval: 0,    min: 0,    max: 5,   step: 0.05, pi: false});
-                              
+                
                 $("#A_output").my_subscriber({channel : "demo/", topic : "A"});
                 $("#B_output").my_subscriber({channel : "demo/", topic : "B"});
                 $("#C_output").my_subscriber({channel : "demo/", topic : "C"});
@@ -30,7 +30,7 @@
                 $("#X_output").my_subscriber({channel : "demo/", topic : "X"});
                 $("#Y_output").my_subscriber({channel : "demo/", topic : "Y"});
                 $("#Z_output").my_subscriber({channel : "demo/", topic : "Z"});
-                              
+				
                 alert("Page loaded successfully!");
             });
         </script>
@@ -40,24 +40,24 @@
     <body>
         
         <h1>Spinner demo page</h1>
-
-        <div id="A_spinner"><div/>
-        <div id="B_spinner"><div/>
-        <div id="C_spinner"><div/>
-        <div id="D_spinner"><div/>
-        <div id="X_spinner"><div/>
-        <div id="Y_spinner"><div/>
-        <div id="Z_spinner"><div/>
+		
+		<input id="A_spinner" type="text" maxlength="5">
+		<input id="B_spinner" type="text" maxlength="5">
+		<input id="C_spinner" type="text" maxlength="5">
+		<input id="D_spinner" type="text" maxlength="5">
+		<input id="X_spinner" type="text" maxlength="5">
+		<input id="Y_spinner" type="text" maxlength="5">
+		<input id="Z_spinner" type="text" maxlength="5">
             
         <br/>
         
-        <div id="A_output"><div/>
-        <div id="B_output"><div/>
-        <div id="C_output"><div/>
-        <div id="D_output"><div/>
-        <div id="X_output"><div/>
-        <div id="Y_output"><div/>
-        <div id="Z_output"><div/>
+        <div id="A_output"></div>
+        <div id="B_output"></div>
+        <div id="C_output"></div>
+        <div id="D_output"></div>
+        <div id="X_output"></div>
+        <div id="Y_output"></div>
+        <div id="Z_output"></div>
         
     </body>
 </html>
