@@ -57,8 +57,8 @@ var AHR = (function() {
 
 $(document).ready(function() {
     AHR.create();
-    $("#discrete_slider").discrete_slider({channel : "mwww/", topic : "S"});
-    $("#continuous_slider").continuous_slider({channel : "mwww/", topic : "logd"});
+    $("#discrete").discrete_slider({channel : "mwww/", topic : "S"});
+    $("#continuous").continuous_slider({channel : "mwww/", topic : "logd"});
     $("#multi_plot").multi_plot({image_dir : "./widgets/multi_plot/"});
     $("#cross_section").cross_section({channel : "mwww/", A: defaults.A});
     $("#single_plot").single_plot({image_dir : "./widgets/single_plot/"});

@@ -13,17 +13,17 @@
     margin: -16px 0 0 -8px;
 }
 
-#severity_slider .noUi-base {
+.severity .noUi-base {
     background : blue;  
 }
-#severity_slider .noUi-handle {
+.severity .noUi-handle {
     border: 2px solid blue;
 }
 
-#dose_slider .noUi-base {
+.dose .noUi-base {
     background : red;    
 }
-#dose_slider .noUi-handle {
+.dose .noUi-handle {
     border: 2px solid red;
 }
 
