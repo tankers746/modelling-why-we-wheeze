@@ -12,13 +12,14 @@ $.widget( "mwww.spinner2", $.ui.spinner, {
         pi:     false
     },
     
-    $label: {},
-    $input: {},
-    
-    
-	 _format: function(value) { return value; },
-	//remove the pi when parsing values
-	_parse: function(value) { return parseFloat(value.toString().split('\u03C0')[0]); },  
+	 _format: function(value) { 
+		return value; 
+	 },
+	 
+	_parse: function(value) { 
+		//remove the pi when parsing values
+		return parseFloat(value.toString().split('\u03C0')[0]); 
+		},  
 	
     _create: function() {
         
