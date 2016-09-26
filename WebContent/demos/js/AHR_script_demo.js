@@ -1,6 +1,6 @@
 var AHR_demo = (function() {
     var channel = "demo/";
-    
+
     //These parameters do not change for the ASM page.
     var A = 2.75;
     var B = 1.5*Math.PI;
@@ -9,24 +9,24 @@ var AHR_demo = (function() {
     
     //Need to store these variables for when S changes and logd doesn't,
     //  and vice versa
-    var x=20;
+    var x=0.2;
     var y=0;
     var z=0;
     var logd=-6;
     
     //Create the model usign default starting values;
-    var model = new Airway(A, B, C, D, x, y, z);
+    var model = new Airway();
     
     //Callback function for when S changes
     function callback_S(e, S) {
         y = 0.01*S;
         z = 0.2*S;
         model.update(A, B, C, D, x, y, z, logd);
-        $.publish(channel + "ra", [model.radii[3]]);
-        $.publish(channel + "rb", [model.radii[2]]);
-        $.publish(channel + "rc", [model.radii[1]]);
-        $.publish(channel + "rd", [model.radii[0]]);
-        $.publish(channel + "AR", [model.tube_resistance(logd)]);
+        $.publish(channel + "ra", [model.radii.lumen]);
+        $.publish(channel + "rb", [model.radii.mucosal]);
+        $.publish(channel + "rc", [model.radii.sub_mucosal]);
+        $.publish(channel + "rd", [model.radii.asm]);
+        $.publish(channel + "AR", [model.resistance()]);
         $.publish(channel + "ASM_short", [model.shortening(logd)]);
         
     }
@@ -35,11 +35,11 @@ var AHR_demo = (function() {
     function callback_logd(e, logd_) {
         logd = logd_;
         model.update(A, B, C, D, x, y, z, logd);
-        $.publish(channel + "ra", [model.radii[3]]);
-        $.publish(channel + "rb", [model.radii[2]]);
-        $.publish(channel + "rc", [model.radii[1]]);
-        $.publish(channel + "rd", [model.radii[0]]);
-        $.publish(channel + "AR", [model.tube_resistance(logd)]);
+        $.publish(channel + "ra", [model.radii.lumen]);
+        $.publish(channel + "rb", [model.radii.mucosal]);
+        $.publish(channel + "rc", [model.radii.sub_mucosal]);
+        $.publish(channel + "rd", [model.radii.asm]);
+        $.publish(channel + "AR", [model.resistance()]);
         $.publish(channel + "ASM_short", [model.shortening(logd)]);
     }
     
