@@ -1,4 +1,4 @@
-defaults = {A:2.75, B:1.5, C:2.5, D:0.32, x:0.2,y:0,z:0};
+defaults = {A:2.75, B:1.5*Math.PI, C:2.5*Math.PI, D:0.32*Math.PI, x:0.2,y:0,z:0};
 
 // Virtual representation of the airway being modelled.
 function Airway()

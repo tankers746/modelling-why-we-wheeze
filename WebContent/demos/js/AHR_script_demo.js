@@ -11,30 +11,29 @@ var AHR_demo = (function() {
     //Create the model usign default starting values;
     var model = new Airway();
     
-    //Callback function for when S changes
-    function callback_S(e, S) {
-        y = 0.01*S;
-        z = 0.2*S;
-        model.update(A, B, C, D, x, y, z, logd);
-        $.publish(channel + "ra", [model.radii.lumen]);
-        $.publish(channel + "rb", [model.radii.mucosal]);
-        $.publish(channel + "rc", [model.radii.sub_mucosal]);
-        $.publish(channel + "rd", [model.radii.asm]);
-        $.publish(channel + "AR", [model.resistance()]);
-        $.publish(channel + "ASM_short", [model.shortening(logd)]);
-        
-    }
     
-    //Callback function for when logd changes
-    function callback_logd(e, logd_) {
-        logd = logd_;
+    function update_and_publish() {
         model.update(defaults.A, defaults.B, defaults.C, defaults.D, x, y, z, logd);
         $.publish(channel + "ra", [model.radii.lumen]);
         $.publish(channel + "rb", [model.radii.mucosal]);
         $.publish(channel + "rc", [model.radii.sub_mucosal]);
         $.publish(channel + "rd", [model.radii.asm]);
         $.publish(channel + "AR", [model.resistance()]);
-        $.publish(channel + "ASM_short", [model.shortening(logd)]);
+        $.publish(channel + "ASM_short", [100*model.shortening(logd)]);
+    }
+    
+    
+    //Callback function for when S changes
+    function callback_S(e, S) {
+        y = 0.02*S;
+        z = 0.1*S;
+        update_and_publish();
+    }
+    
+    //Callback function for when logd changes
+    function callback_logd(e, logd_) {
+        logd = logd_;
+        update_and_publish();
     }
     
     //Initialise the subscribers.
