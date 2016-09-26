@@ -2,76 +2,69 @@ var param_demo = (function() {
     var channel = "demo/";
     
     //Now, all the parameters are variables.
-    var A = 2.75;
-    var B = 1.5*Math.PI;
-    var C = 2.5*Math.PI;
-    var D = 0.32*Math.PI;
-    var xmax=20;
-    var y=0;
-    var z=0;
-    logd = -12;
+    var A = defaults.A;
+    var B = defaults.B;
+    var C = defaults.C;
+    var D = defaults.D;
+    var xmax=defaults.x;
+    var y = defaults.y;
+    var z = defaults.z;
+    var logd = -18;
     
     
     //Create the model usign default starting values;
-    var model = new Airway(A, B, C, D, xmax, y, z);
+    var model = new Airway();
 
     
-    //function for publishing on all channels
-    function publish_all() {
-        $.publish(channel + "ra", [model.radii[3]]);
-        $.publish(channel + "rb", [model.radii[2]]);
-        $.publish(channel + "rc", [model.radii[1]]);
-        $.publish(channel + "rd", [model.radii[0]]);
+    //Update and publish all
+    function update_and_publish() {
+        model.update(A, B, C, D, xmax, y, z, logd);
+        $.publish(channel + "ra", [model.radii.lumen]);
+        $.publish(channel + "rb", [model.radii.mucosal]);
+        $.publish(channel + "rc", [model.radii.sub_mucosal]);
+        $.publish(channel + "rd", [model.radii.asm]);
     }
 
     //Callback function for when A changes
     function callback_A(e, A_) {
         A = A_;
-        model.update(A, B, C, D, xmax, y, z, logd);
-        publish_all();
+        update_and_publish();
     }
     
     //And B etc.
     function callback_B(e, B_) {
         B = B_;
-        model.update(A, B, C, D, xmax, y, z, logd);
-        publish_all();
+        update_and_publish();
     }
     
     //Really need an array.  TODO.
     function callback_C(e, C_) {
         C = C_;
-        model.update(A, B, C, D, xmax, y, z, logd);
-        publish_all();
+        update_and_publish();
     }
     
     function callback_D(e, D_) {
         D = D_;
-        model.update(A, B, C, D, xmax, y, z, logd);
-        publish_all();
+        update_and_publish();
     }
     
     function callback_xmax(e, xmax_) {
-        xmax = xmax_;
-        model.update(A, B, C, D, xmax, y, z, logd);
-        publish_all();
+        xmax = xmax_/100;
+        update_and_publish();
     }
     
     function callback_y(e, y_) {
         y = y_;
-        model.update(A, B, C, D, xmax, y, z, logd);
-        publish_all();
+        update_and_publish();
     }
     
     function callback_z(e, z_) {
         z = z_;
-        model.update(A, B, C, D, xmax, y, z, logd);
-        publish_all();
+        update_and_publish();
     }
     
     //Initialise the subscribers.
     function create() {
-        
         $.subscribe((channel+"A"),callback_A);
         $.subscribe((channel+"B"),callback_B);
         $.subscribe((channel+"C"),callback_C);
