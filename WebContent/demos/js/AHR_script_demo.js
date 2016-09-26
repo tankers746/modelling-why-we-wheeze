@@ -11,7 +11,7 @@ var AHR_demo = (function() {
     //Create the model usign default starting values;
     var model = new Airway();
     
-    
+    //Function to update model and publish results.
     function update_and_publish() {
         model.update(defaults.A, defaults.B, defaults.C, defaults.D, x, y, z, logd);
         $.publish(channel + "ra", [model.radii.lumen]);
@@ -48,7 +48,7 @@ var AHR_demo = (function() {
         $.unsubscribe((channel+"log_d"),callback_logd);
     }
     
-    //This is the magic of the revealing module pattern: public interfaces.
+    //Revealing module.
     return {
         create : create,
         destroy : destroy

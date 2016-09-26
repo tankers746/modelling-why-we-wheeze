@@ -94,7 +94,7 @@ $.widget('mwww.continuous_slider', {
         });
         
         this.$slider.noUiSlider({
-            start: -6,
+            start: -9,
             range: {
                 'min': [-9],
                 'max': [-3]

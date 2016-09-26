@@ -1,41 +1,37 @@
 var AHR = (function() {
     var channel = "mwww/";
     
-    //These parameters do not change for the ASM page.
-    var A = 2.75;
-    var B = 1.5*Math.PI;
-    var C = 2.5*Math.PI;
-    var D = 0.32*Math.PI;
-    
     //Need to store these variables for when S changes and logd doesn't,
     //  and vice versa
-    var x=20;
+    var x=0.2;
     var y=0;
     var z=0;
-    var logd=-6;
+    var logd=-9;
     
-    //Create the model usign default starting values;
-    var model = new Airway(A, B, C, D, x, y, z);
+    //Create the model using default starting values;
+    var model = new Airway();
+    
+    //Function to update model and publish results
+    function update_and_publish() {
+        model.update(defaults.A, defaults.B, defaults.C, defaults.D, x, y, z, logd);
+        $.publish(channel + "radii", [model.radii.lumen, model.radii.mucosal, model.radii.sub_mucosal, model.radii.asm]);
+        $.publish(channel + "AR", [model.resistance()]);
+        $.publish(channel + "ASM_short", [100*model.shortening(logd)]);
+    }
     
     //Callback function for when S changes
     function callback_S(e, S) {
         //alert(S);
-        y = 0.01*S;
-        z = 0.2*S;
-        model.update(A, B, C, D, x, y, z, logd);
-        $.publish(channel + "radii", [model.radii[3], model.radii[2], model.radii[1], model.radii[0]]);
-        $.publish(channel + "AR", [model.tube_resistance(logd)]);
-        $.publish(channel + "ASM_short", [model.shortening(logd)]);
-        
+        y = 0.02*S;
+        z = 0.1*S;
+        // Magic numbers. Bad Michael!
+        update_and_publish();
     }
     
     //Callback function for when logd changes
     function callback_logd(e, logd_) {
         logd = logd_;
-        model.update(A, B, C, D, x, y, z, logd);
-        $.publish(channel + "radii", [model.radii[3], model.radii[2], model.radii[1], model.radii[0]]);
-        $.publish(channel + "AR", [model.tube_resistance(logd)]);
-        $.publish(channel + "ASM_short", [model.shortening(logd)]);
+        update_and_publish();
     }
     
     //Initialise the subscribers.
@@ -50,10 +46,11 @@ var AHR = (function() {
         $.unsubscribe((channel+"logd"),callback_logd);
     }
     
-    //This is the magic of the revealing module pattern: public interfaces.
+    //The magic revealing module pattern.
     return {
         create : create,
-        destroy : destroy
+        destroy : destroy,
+        update : update_and_publish
     };
     
 })();
@@ -63,7 +60,8 @@ $(document).ready(function() {
     $("#discrete_slider").discrete_slider({channel : "mwww/", topic : "S"});
     $("#continuous_slider").continuous_slider({channel : "mwww/", topic : "logd"});
     $("#multi_plot").multi_plot({image_dir : "./widgets/multi_plot/"});
-    $("#cross_section").cross_section({channel : "mwww/", ra: 1.2, rb: 1.7, rc: 2.4, rd: 2.75, A:2.75});
+    $("#cross_section").cross_section({channel : "mwww/", A: defaults.A});
     $("#single_plot").single_plot({image_dir : "./widgets/single_plot/"});
+    AHR.update();
 });
 
