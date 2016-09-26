@@ -69,7 +69,7 @@ $.widget('mwww.cross_section', {
         var options = this.options;
          
         // Change size of container div
-        this.$container = $("<div/>", {id: this.element.attr('id') + "_container"})
+        this.$container = $("<div/>", {id: this.element.attr('id') + "_container"});
         this.$container.height(options.size);
         this.$container.width(options.size);
         this.$container.css({'position': 'relative', 'left': '50%', 'margin-left': -this.$container.width()/2 + "px"});

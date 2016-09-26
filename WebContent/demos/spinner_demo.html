@@ -15,13 +15,22 @@
         
         <script>
             $(document).ready(function() {
-                $("#A_input").my_publisher_buttons({channel : "demo/", topic : "A"});
-				$("#B_input").my_publisher_buttons({channel : "demo/", topic : "B"});
-				$("#C_input").my_publisher_buttons({channel : "demo/", topic : "C"});
-				$("#D_input").my_publisher_buttons({channel : "demo/", topic : "D"});
-				$("#X_input").my_publisher_buttons({channel : "demo/", topic : "xmax"});
-				$("#Y_input").my_publisher_buttons({channel : "demo/", topic : "y"});
-				$("#Z_input").my_publisher_buttons({channel : "demo/", topic : "z"});
+                $("#A_spinner").spinner2({channel: "demo/", topic: "A", initval: 2.75, min: 1.75, max: 4.4, step: 0.05, pi: false});
+                $("#B_spinner").spinner2({channel: "demo/", topic: "B", initval: 1.5,  min: 0.5,  max: 4,   step: 0.05, pi: true});
+                $("#C_spinner").spinner2({channel: "demo/", topic: "C", initval: 2.5,  min: 1,    max: 6,   step: 0.1,  pi: true});
+                $("#D_spinner").spinner2({channel: "demo/", topic: "D", initval: 0.32, min: 0.05, max: 2,   step: 0.01, pi: true});
+                $("#X_spinner").spinner2({channel: "demo/", topic: "X", initval: 20,   min: 15,   max: 30,  step: 0.5,  pi: false});
+                $("#Y_spinner").spinner2({channel: "demo/", topic: "Y", initval: 0,    min: 0,    max: 1,   step: 0.01, pi: false});
+                $("#Z_spinner").spinner2({channel: "demo/", topic: "Z", initval: 0,    min: 0,    max: 5,   step: 0.05, pi: false});
+                              
+                $("#A_output").my_subscriber({channel : "demo/", topic : "A"});
+                $("#B_output").my_subscriber({channel : "demo/", topic : "B"});
+                $("#C_output").my_subscriber({channel : "demo/", topic : "C"});
+                $("#D_output").my_subscriber({channel : "demo/", topic : "D"});
+                $("#X_output").my_subscriber({channel : "demo/", topic : "X"});
+                $("#Y_output").my_subscriber({channel : "demo/", topic : "Y"});
+                $("#Z_output").my_subscriber({channel : "demo/", topic : "Z"});
+                              
                 alert("Page loaded successfully!");
             });
         </script>
@@ -30,15 +39,25 @@
     
     <body>
         
-        <h1>Parameter box demo page</h1>
+        <h1>Spinner demo page</h1>
 
-        <p>A <input id="A_input" type="text" maxlength="5"></p>       
-        <p>B <input id="B_input" type="text" maxlength="5"></p>       
-        <p>C <input id="C_input" type="text" maxlength="5"></p>       
-        <p>D <input id="D_input" type="text" maxlength="5"></p>       
-        <p>X <input id="X_input" type="text" maxlength="5"></p>       
-        <p>Y <input id="Y_input" type="text" maxlength="5"></p>       
-        <P>Z <input id="Z_input" type="text" maxlength="5"></p>       
+        <div id="A_spinner"><div/>
+        <div id="B_spinner"><div/>
+        <div id="C_spinner"><div/>
+        <div id="D_spinner"><div/>
+        <div id="X_spinner"><div/>
+        <div id="Y_spinner"><div/>
+        <div id="Z_spinner"><div/>
+            
+        <br/>
+        
+        <div id="A_output"><div/>
+        <div id="B_output"><div/>
+        <div id="C_output"><div/>
+        <div id="D_output"><div/>
+        <div id="X_output"><div/>
+        <div id="Y_output"><div/>
+        <div id="Z_output"><div/>
         
     </body>
 </html>
