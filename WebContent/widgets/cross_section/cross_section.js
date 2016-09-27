@@ -35,6 +35,7 @@ $.widget('mwww.cross_section', {
     },
     
     animate_circle: function($circ, size) {
+        $circ.stop();
         $circ.animate({
             height: size + "px",
             width: size + "px",

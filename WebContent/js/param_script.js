@@ -26,7 +26,9 @@ var param = (function() {
     //Callback function for when A changes
     function callback_A(e, A_) {
         A = A_;
+        $.publish(channel + "r_max", [A]);
         update_and_publish();
+        //setTimeout(update_and_publish(), 2);
     }
     
     //And B etc.
@@ -104,7 +106,7 @@ $(document).ready(function() {
     $("#y_spinner").spinner2({channel: "mwww/", topic: "y", initval: 0,    min: 0,    max: 1,   step: 0.01, pi: false});
     $("#z_spinner").spinner2({channel: "mwww/", topic: "z", initval: 0,    min: 0,    max: 5,   step: 0.05, pi: false});
     
-    $("#cross_section").cross_section({channel : "mwww/", A: defaults.A});
+    $("#cross_section").cross_section({channel : "mwww/", A: defaults.A, topic_A: "r_max"});
     $("#dynamic_plot").dynamic_plot({image_dir : "./widgets/dynamic_plot/"});
     
     param.update();
