@@ -2,7 +2,6 @@
     background-color: black;
     text-align: center;
     padding-bottom: 30px;
-    margin-bottom: 30px;
 }
 
 #Logo {
@@ -10,25 +9,62 @@
 	margin-top: 30px;
 }
 
-.ModelSelect {
-	text-align: center;
-	width: 300px;
+.Model1 {
+	/*background-color: red; */
+    width: 300px;
     height: 300px;
-    display: inline-block;
+    display: inline-block;   
     padding-top: 10px;
-    padding-bottom: 50px;
-    padding-left: 30px;
     padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 30px; 
     vertical-align: middle;
 }
 
-.ModelSelect:hover {
+.Model1:hover {
 	background-color: grey;
+}
+
+.Model2:hover {
+	background-color: grey;
+}
+
+.Model3:hover {
+	background-color: grey;
+}
+
+.Model2 {
+	/*background-color: blue; */
+    width: 300px;
+    height: 300px;
+    display: inline-block;
+    padding-top: 10px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 30px;
+    vertical-align: middle;  
+}
+
+.Model3 {
+	/*background-color: green; */
+    width: 300px;
+    height: 300px;
+    padding-top: 10px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 30px;
+    display: inline-block; 
+    vertical-align: middle; 
+}
+
+.Models {
+	padding-top: 30px;
+	text-align: center;
 }
 
 .Footer {
 	background-color: black;
-	margin-top: 30px;
+	margin-top: 50px;
     text-align: center;
     height: 200px;
     padding-bottom: 30px;
@@ -37,10 +73,10 @@
 
 #footerText {
 	color: white;
-	padding-top: 30px;
-    padding-bottom: 30px;
-    padding-left: 30px;
+	padding-top: 40px;
     padding-right: 30px;
+    padding-bottom: 30px
+    padding-left: 30px;
     text-align: center;
 }
 
