@@ -31,7 +31,10 @@ $.widget( "mwww.spinner2", $.ui.spinner, {
             text: this.options.topic + " "
         });
 		
-        $(this.element).wrap("<p></p>").before(this.$label);       
+        //$(this.element).wrap("<p></p>").before(this.$label);
+        //$(this.element).wrap("<span></span>").before(this.$label);
+        //$(this.element).wrap("<div></div>").before(this.$label);
+        $(this.element).before(this.$label);
        
         function checkInput(sp, initval, pi) {
             var value = $(sp).spinner2("value");
