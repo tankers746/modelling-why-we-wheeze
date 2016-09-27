@@ -93,11 +93,6 @@ $.widget('mwww.cross_section', {
         
         this.callback_A = function(e, A_) {
             if(A_ > 0) {
-                options.ra = options.ra * A_ / options.A;
-                options.rb = options.rb * A_ / options.A;
-                options.rc = options.rc * A_ / options.A;
-                options.rd = options.rd * A_ / options.A;
-         
                 options.A = A_;
                 self.update();
             }
