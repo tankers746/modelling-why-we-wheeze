@@ -1,111 +1,144 @@
+<html>
+<head>
+    <script src="vendor/jquery/jquery-1.10.2.min.js" type="text/javascript"></script>
+        <script src="vendor/jqueryui/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="vendor/tinypubsub/jquery.ba-tinypubsub.js" type="text/javascript"></script>
+        <script src="vendor/d3/d3.js" type="text/javascript"></script>
+        <script src="vendor/nouislider/jquery.nouislider.all.min.js" type="text/javascript"></script>
+      
+    
+        <script type="text/javascript" src="widgets/slider/slider.js"></script>
+        <script src="widgets/cross_section/cross_section.js" type="text/javascript"></script>
+        <script src="widgets/multi_plot/multi_plot_d3.js" type="text/javascript"></script>
+        <script src="widgets/single_plot/single_plot_d3.js" type="text/javascript"></script>
+        
+        
+        <script src="models/airway_model.js" type="text/javascript"></script>
+        <script src="js/AHR_script.js" type="text/javascript"></script>
+        
+        <script>
+            $(document).ready(function() {
+                alert("Page loaded successfully!");
+            });
+        </script>
+    
+      <link rel="stylesheet" type="text/css" href="vendor/nouislider/jquery.nouislider.min.css">
+        <link rel="stylesheet" type="text/css" href="vendor/nouislider/jquery.nouislider.pips.min.css">
+        <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+       
+         <link rel="stylesheet" type = "text/css" href="..CSS/page1.css">
+</head>
+   
+   
 <!--Only change code above this line.-->
+   <body>
 <div class="container-fluid">
    <h3 class="text-primary text-center">jQuery Playground</h3>
    <div class="row">
       <!-- Cut in half -->
       <div class="col-lg-6">
-         <h4>#left-part</h4>
+   
          <div class = "col-lg-12 ">
-             <!-- slider box begin-->
-            <!-- Scale Image-->
+
             <div id="redScale">   <!-- position:relative -->
-              <p id="asthma-text">1.	 Select the severity of asthma </p>
+              <div id="asthma-text">1.	 Select the severity of asthma </div>
              <div id = "text-low1"> Low </div>
             <div id = "text-high1"> High </div>
              <div id = "no-asthma"> no asthma </div>
             <div id = "severe-asthma">severe asthma </div> 
-              
-              <img src="https://s18.postimg.io/yw0jut57t/redscale.png" id="redScaleGraph">
-              <div id = "buttonContainer">
-              <img id = "redbutton" src ="https://s18.postimg.io/6umih3zxl/redbutton.png">
+              <img src="https://s17.postimg.org/qbmr38g7z/redscale.png" id="redScaleGraph">
+              <div class = "buttonContainer">
+              <img src ="https://s18.postimg.io/6umih3zxl/redbutton.png" id = "redButton" >
               </div>
-              
-
-
             </div>
          </div>
 
         
          <div class = "col-lg-12">
           <div id="blueScale">  
-              <p id="methacholine-text">1.	 S2.  Adjust the dose of methacholine </p>
+              <div id="methacholine-text">2.	 S2.  Adjust the dose of methacholine </div>
               <div id = "text-low2"> Low </div>
             <div id = "text-high2"> High </div>
-               <img  src="https://s18.postimg.io/3z9fa8vxl/bluescale.png" id="blueScaleGraph">
-            </div>          
-     <img src = "https://s10.postimg.io/at5ap1rzd/bluebutton.png" id ='blueButton'>
-             <!-- scale value -->
             <div id = "methacholine-dose-min"> 0.001</div>
-               <div id = "methacholine-dose-mid"> 1 </div>
-               <div id = "methacholine-dose-max"> 1000 </div>
+             <div id = "methacholine-dose-mid"> 1 </div>
+             <div id = "methacholine-dose-max"> 1000 </div>
+               <img id="blueScaleGraph"  src="https://s17.postimg.org/486ec3927/bluescale.png" > 
+           <div class = 'buttonContainer' >
+     <img src = "https://s10.postimg.io/at5ap1rzd/bluebutton.png" id ='blueButton' >
+           </div>          
          </div>
-     
-     
+        </div>
      
 
-         <div class = "col-lg-12">
-            <div id = "Cross-section-text"> 
+         <div class = "col-lg-12 circleGraph">
+            <div id = "cross-section-text"> 
                Cross section of airway wall
             </div>
+           <div id = 'circleGroup'>
             <div id="circ4" >Red</div>
             <div id="circ3" >Yellow</div>
             <div id="circ2" >Green</div>
             <div id="circ1" >White</div>
+           </div>
          </div>
       </div>
   
-     
-     
-     
-     
-     
+ 
       <div class="col-lg-6">
          <h4>#right-part</h4>
          <div class = "col-lg-12">
-            <div id = "graph">
-               <div id='graphcontent'>
+           
+               <div id='graphContent'>
                   <!-- vertical scale -->
-                  <div id="yAxes">Resistance</div>
-                  <div id="scale10"> 10</div>
-                  <div id="scale8"> 8</div>
-                  <div id="scale6"> 6</div>
-                  <div id="scale4"> 4</div>
-                  <div id="scale2"> 2</div>
-                  <div id="scale0"> 0</div>
+                   <img src = "https://s10.postimg.org/nxag5p58p/redscale.png" id= "Yscale">
+                 <img src = "https://s17.postimg.org/qbmr38g7z/redscale.png" id= "Xscale">
+                  <div id="title">Air Resistance</div>
+                   <div id="Yscale12"> 12</div>
+                  <div id="Yscale10"> 10</div>
+                  <div id="Yscale8"> 8</div>
+                  <div id="Yscale6"> 6</div>
+                  <div id="Yscale4"> 4</div>
+                  <div id="Yscale2"> 2</div>
+                  <div id="Yscale0"> 0</div>
                   <!-- horizontal scale -->
                   <div id="xAxes">[methacholine]</div>
-                  <div id="scale0.001"> 0.001</div>
-                  <div id="scale0.01"> 0.01</div>
-                  <div id="scale0.1"> 0.1</div>
-                  <div id="scale1"> 1</div>
-                  <div id="scale10"> 10</div>
-                  <div id="scale100"> 100</div>
-                  <div id="scale1000"> 1000</div>
+                  <div id="Xscale_pzz1"> 0.001</div>
+                  <div id="Xscale_pz1"> 0.01</div>
+                  <div id="Xscale_p1"> 0.1</div>
+                  <div id="Xscale1"> 1</div>
+                  <div id="Xscale10"> 10</div>
+                  <div id="Xscale100"> 100</div>
+                  <div id="Xscale1000"> 1000</div>
                </div>
-            </div>
-         </div>
+           </div>
          <div class = "col-lg-12">
             <div id='ASMgraph'>
                <!-- vertical scale -->
-               <div class="yAxes">ASM shortening (%)</div>
+              <img src = "https://s10.postimg.org/nxag5p58p/redscale.png" id= "Yscale">
+                 <img src = "https://s17.postimg.org/qbmr38g7z/redscale.png" id= "Xscale">
+              
+               <div id="title">ASM shortening (%)</div>
                <div id="marker"> </div>
-               <div id="xAxes">Resistance</div>
-               <div id="scale20"> 20</div>
-               <div id="scale15"> 15</div>
-               <div id="scale10"> 10</div>
-               <div id="scale5"> 5</div>
-               <div id="scale0"> 0</div>
+              <div id="Yscale30"> 30</div>
+               <div id="Yscale25"> 25</div>
+               <div id="Yscale20"> 20</div>
+               <div id="Yscale15"> 15</div>
+               <div id="Yscale10"> 10</div>
+               <div id="Yscale5"> 5</div>
+               <div id="Yscale0"> 0</div>
                <!-- horizontal scales for ASM shortening graph -->
-               <div class="xAxes">[methacholine]</div>
-               <div id="scale_0.001"> 0.001</div>
-               <div id="scale_0.01"> 0.01</div>
-               <div id="scale_0.1"> 0.1</div>
-               <div id="scale_1"> 1</div>
-               <div id="scale_10"> 10</div>
-               <div id="scale_100"> 100</div>
-               <div id="scale_1000"> 1000</div>
+               <div id="xAxes">[methacholine]</div>
+                  <div id="Xscale_pzz1"> 0.001</div>
+                  <div id="Xscale_pz1"> 0.01</div>
+                  <div id="Xscale_p1"> 0.1</div>
+                  <div id="Xscale1"> 1</div>
+                  <div id="Xscale10"> 10</div>
+                  <div id="Xscale100"> 100</div>
+                  <div id="Xscale1000"> 1000</div>
             </div>
          </div>
       </div>
    </div>
 </div>
+         </body>
+</html>
