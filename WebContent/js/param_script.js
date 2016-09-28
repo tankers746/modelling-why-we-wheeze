@@ -65,6 +65,7 @@ var param = (function() {
     
     //Initialise the subscribers.
     function create() {
+        model.update(A, B, C, D, xmax, y, z, logd);
         $.subscribe((channel+"A"),callback_A);
         $.subscribe((channel+"B"),callback_B);
         $.subscribe((channel+"C"),callback_C);
@@ -87,9 +88,11 @@ var param = (function() {
     
     //The magic revealing module pattern.
     return {
-        create : create,
-        destroy : destroy,
-        update : update_and_publish
+        create:     create,
+        destroy:    destroy,
+        update:     update_and_publish,
+        //Also really poor, but does the trick.
+        resistance: function(logd_) {model.update(A, B, C, D, xmax, y, z, logd_); return model.resistance();}
     };
     
 })();
@@ -107,7 +110,7 @@ $(document).ready(function() {
     $("#z_spinner").spinner2({channel: "mwww/", topic: "z", initval: 0,    min: 0,    max: 5,   step: 0.05, pi: false});
     
     $("#cross_section").cross_section({channel : "mwww/", A: defaults.A, topic_A: "r_max"});
-    $("#dynamic_plot").dynamic_plot({image_dir : "./widgets/dynamic_plot/"});
+    $("#dynamic_plot").dynamic_plot_d3({channel : "mwww/", model : param.resistance});
     
     param.update();
 });
