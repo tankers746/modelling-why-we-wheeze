@@ -3,9 +3,9 @@ var AHR = (function() {
     
     //Need to store these variables for when S changes and logd doesn't,
     //  and vice versa
-    var x=0.2;
-    var y=0;
-    var z=0;
+    var x=defaults.x;
+    var y=defaults.y;
+    var z=defaults.z;
     var logd=-9;
     
     //Create the model using default starting values;
@@ -36,6 +36,7 @@ var AHR = (function() {
     
     //Initialise the subscribers.
     function create() {
+        model.update(defaults.A, defaults.B, defaults.C, defaults.D, x, y, z, logd);
         $.subscribe((channel+"S"),callback_S);
         $.subscribe((channel+"logd"),callback_logd);
     }
@@ -48,9 +49,12 @@ var AHR = (function() {
     
     //The magic revealing module pattern.
     return {
-        create : create,
-        destroy : destroy,
-        update : update_and_publish
+        create:     create,
+        destroy:    destroy,
+        update:     update_and_publish,
+        //This is really bad.  Cannot be updating model every time this function is called.
+        resistance: function(logd, S) {model.update(defaults.A, defaults.B, defaults.C, defaults.D, x, 0.02*S, 0.1*S, logd); return model.resistance(logd);},
+        shortening: function(logd) {return 100*model.shortening(logd);}
     };
     
 })();
@@ -59,9 +63,9 @@ $(document).ready(function() {
     AHR.create();
     $("#discrete").discrete_slider({channel : "mwww/", topic : "S"});
     $("#continuous").continuous_slider({channel : "mwww/", topic : "logd"});
-    $("#multi_plot").multi_plot({image_dir : "./widgets/multi_plot/"});
+    $("#multi_plot").multi_plot_d3({channel : "mwww/", model : AHR.resistance});
     $("#cross_section").cross_section({channel : "mwww/", A: defaults.A});
-    $("#single_plot").single_plot({image_dir : "./widgets/single_plot/"});
+    $("#single_plot").single_plot_d3({channel : "mwww/", model : AHR.shortening});
     AHR.update();
 });
 

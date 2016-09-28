@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../vendor/jquery/jquery-1.10.2.min.js" type="text/javascript"></script>
+        <script src="../vendor/jqueryui/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="../vendor/tinypubsub/jquery.ba-tinypubsub.js" type="text/javascript"></script>
+        <script src="../vendor/d3/d3.js" type="text/javascript"></script>
+        
+        <script src="js/demo.js" type="text/javascript"></script>
+        
+        <script src="../widgets/single_plot/single_plot_d3.js" type="text/javascript"></script>
+        
+        <script>
+            $(document).ready(function() {
+                              
+                var sigmoid_fcn = function(log_d) {
+                    //This is tempory.  Dylan has written the proper functions elsewhere.
+                    return 20/(1+Math.exp(-Math.log(10)*(log_d+6)));
+                };
+                
+                $("#log_d_publisher").my_publisher_buttons({channel : "demo/", topic : "logd", value : -9});
+                $("#graph1").single_plot_d3({channel : "demo/", model : sigmoid_fcn});
+
+                alert("Page loaded successfully!");
+            });
+        </script>
+        
+    </head>
+    
+    <body>
+        
+        <h1>Single plot graph demo page</h1>
+        <p>Instructions: Please replace the generic subscriber with the plot of ASM shortening % vs methacholine dose with the moving position marker from the AHR page.</p>
+        
+        <p>Your widget will need to recieve a reference to the model function to be drawn.  Do that using widget options.  You may also choose to generate the ASM_Shortening data (y-axis)locally.</p>
+        
+        <div id="log_d_publisher"></div>
+        
+        <br/>
+        
+        <div id="graph1"></div>
+        
+    </body>
+</html>
