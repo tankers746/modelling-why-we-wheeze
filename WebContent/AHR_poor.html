@@ -7,7 +7,8 @@
         <script src="vendor/d3/d3.js" type="text/javascript"></script>
         <script src="vendor/nouislider/jquery.nouislider.all.min.js" type="text/javascript"></script>
         <link rel="stylesheet" type="text/css" href="vendor/nouislider/jquery.nouislider.min.css">
-            <link rel="stylesheet" type="text/css" href="vendor/nouislider/jquery.nouislider.pips.min.css">
+         <link rel="stylesheet" type="text/css" href="vendor/nouislider/jquery.nouislider.pips.min.css">
+          <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
         
         
         <script type="text/javascript" src="widgets/slider/slider.js"></script>
@@ -29,27 +30,33 @@
     
     <body>
         
-        <h1>AHR model page (poor)</h1>
+     
+        <div class ="row" >
+        <!-- cut in half -->
+        		  <div class="col-lg-6">
+                  
+                  	<div id = "asthma-text"> Select the severity of asthma </div>	
+                    <div id="discrete" class="severity"></div>                                
+                    <div id = "methacholine-text">  Adjust the dose of methacholine </div>	
+                    <div id="continuous" class="dose"></div>                    
+                    <div id="cross-section-text"> Cross section of airway wall</div>
+                    <div id="cross_section"> </div>
+                   
+                                
+                  </div>
+                    
+                   <div class="col-lg-6">
+                   		<div class="col-lg-12">
+                    	<div id="multi_plot"></div>      
+                    	</div>          
+                        
+                        <div class="col-lg-12">
+                    	<div id="single_plot"></div>
+                    	</div>
+       			   </div>
+
+		</div>
         
-        <table style="width:100%">
-            <tr style="height:300px">
-                <td style="width:50%; vertical-align: top;">
-                    <div id="discrete" class="severity"></div>
-                    <div id="continuous" class="dose"></div>
-                </td>
-                <td style="width:50%">
-                    <div id="multi_plot"></div>
-                </td>
-            </tr>
-            <tr style="height:300px">
-                <td style="width:50%">
-                    <div id="cross_section"></div>
-                </td>
-                <td style="width:50%">
-                    <div id="single_plot"></div>
-                </td>
-            </tr>
-        </table>
         
     </body>
 </html>
