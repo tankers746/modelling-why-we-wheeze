@@ -1,3 +1,6 @@
+// TODO: Add checks to prevent lumen area/radius becoming negative.
+// TODO: Alter resistance function to accept logd input (for drawing line graph).
+
 defaults = {A:2.75, B:1.5*Math.PI, C:2.5*Math.PI, D:0.32*Math.PI, x:0.2,y:0,z:0};
 
 // Virtual representation of the airway being modelled.
@@ -44,10 +47,10 @@ Airway.prototype.update = function(A,B,C,D,x,y,z,logd)
     this.areas.mucosal = D*(1+z);
     
     this.radii.asm = this.normal_asm * (1 - this.shortening(logd));
+    
     this.radii.sub_mucosal = this.layer_radius(this.radii.asm, this.areas.asm);
     this.radii.mucosal = this.layer_radius(this.radii.sub_mucosal, this.areas.sub_mucosal);
     this.radii.lumen = this.layer_radius(this.radii.mucosal, this.areas.mucosal);
     
 	this.areas.lumen = Math.PI * Math.pow(this.radii.lumen, 2);
 };
-
