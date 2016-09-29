@@ -31,7 +31,7 @@ $.widget('mwww.multi_plot_d3', {
             height: this.options.height + "px",
             width:  this.options.width + "px"
             
-        }).css({'border' : '1px solid #000'});
+        }).css({'border' : '1px solid #000', 'position': 'relative', 'left': '50%', 'margin-left': -this.options.width/2 + "px"});
         
         $(this.element).append(this.$container);
         
