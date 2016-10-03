@@ -9,10 +9,8 @@ $.widget('mwww.cross_section_d3', {
         
         channel:        "default/",
         topic_radii:    "radii",
-        topic_rmax:     "rmax",
         
         animation_speed : 400,
-        
     },
     
     default_size:   275,
@@ -22,7 +20,7 @@ $.widget('mwww.cross_section_d3', {
     g:      {},
     scale:  {},
     
-    circles:    [,,,,],
+    circles:    {},
     colours:    ['#ffffff', '#00ff00', '#ffff00', '#ff0000'],
     
     callback_radii: function(e, ra_, rb_, rc_, rd_) {
@@ -57,10 +55,11 @@ $.widget('mwww.cross_section_d3', {
             return;
         } else {
             //console.log("animate");
+            //this.circles[i].attr("r", this.scale(r));
             this.circles[i].transition()
-            .attr("r", this.scale(r))
-            .duration(this.options.animation_speed)
-            .ease(d3.easeLinear);
+                .attr("r", this.scale(r))
+                .duration(this.options.animation_speed)
+                .ease(d3.easeLinear);
         }
     },
     
@@ -99,6 +98,8 @@ $.widget('mwww.cross_section_d3', {
             .range([0, this.size/2]);
         
         //Create circles
+        this.circles = new Array(this.colours.length);
+        
         for(var i=this.circles.length-1; i>-1; i--) {
             this.circles[i] = this.g.append("circle")
                 .attr("cx", 0)
