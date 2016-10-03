@@ -10,7 +10,8 @@ $.widget('mwww.single_plot_d3', {
         
         aspect:     4/3,
         
-        //animation_speed:    400,
+        animate:            false,
+        animation_speed:    400,
     },
     
     default_height:   300,
@@ -29,14 +30,17 @@ $.widget('mwww.single_plot_d3', {
     
     callback_logd:  function(e, logd_) {
         //console.log("event");
-        /*this.marker.transition()
+        if(this.options.animate) {
+            this.marker.transition()
             .attr("cx", this.x_scale(logd_))
             .attr("cy", this.y_scale(this.options.model(logd_)))
             .duration(this.options.animation_speed)
-            .ease(d3.easeLinear);*/
-        this.marker
-            .attr("cx", this.x_scale(logd_))
-            .attr("cy", this.y_scale(this.options.model(logd_)));
+            .ease(d3.easeCubic);
+        } else {
+            this.marker
+                .attr("cx", this.x_scale(logd_))
+                .attr("cy", this.y_scale(this.options.model(logd_)));
+        }
     },
     
     
