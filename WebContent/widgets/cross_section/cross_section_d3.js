@@ -10,7 +10,7 @@ $.widget('mwww.cross_section_d3', {
         channel:        "default/",
         topic_radii:    "radii",
         
-        animation_speed : 400,
+        animation_speed: 400,
     },
     
     default_size:   275,
@@ -76,6 +76,9 @@ $.widget('mwww.cross_section_d3', {
         //First resize widget if too small.
         if(this.element.height() < 1) {
             this.element.height(this.default_size);
+        }
+        
+        if(this.element.width() < 1) {
             this.element.width(this.default_size);
         }
         
