@@ -25,8 +25,28 @@ $.widget('mwww.cross_section_d3', {
     circles:    [,,,,],
     colours:    ['#ffffff', '#00ff00', '#ffff00', '#ff0000'],
     
-    callback_radii: {},
-    
+    callback_radii: function(e, ra_, rb_, rc_, rd_) {
+        //USE $.PROXY WHEN INVOVIKING THIS METHOD IN $.SUBSCRIBE
+        if(0 <= ra_ && ra_ <= this.options.rmax) {
+            this.options.ra = ra_;
+            this.animate(0, this.options.ra);
+        }
+        
+        if(0 <= rb_ && rb_ <= this.options.rmax) {
+            this.options.rb = rb_;
+            this.animate(1, this.options.rb);
+        }
+        
+        if(0 <= rc_ && rc_ <= this.options.rmax) {
+            this.options.rc = rc_;
+            this.animate(2, this.options.rc);
+        }
+        
+        if(0 <= rd_ && rd_ <= this.options.rmax) {
+            this.options.rd = rd_;
+            this.animate(3, this.options.rd);
+        }
+    },
     
     animate: function(i, r) {
         if(i<0 || i >= this.circles.length) {
@@ -36,7 +56,7 @@ $.widget('mwww.cross_section_d3', {
             console.log("Error: Radius r must be +ve (animate)");
             return;
         } else {
-            console.log("animate");
+            //console.log("animate");
             this.circles[i].transition()
             .attr("r", this.scale(r))
             .duration(this.options.animation_speed)
@@ -89,19 +109,8 @@ $.widget('mwww.cross_section_d3', {
                 .attr("stroke-width", "1px");
         }
         
-        //Callback function for subscribe events.
-        var self = this;    //access this from inside function.
-        
-        this.callback_radii = function(e, ra_, rb_, rc_, rd_) {
-            if(0 <= ra_ && ra_ <= self.options.rmax)    self.options.ra = ra_;
-            if(0 <= rb_ && rb_ <= self.options.rmax)    self.options.rb = rb_;
-            if(0 <= rc_ && rc_ <= self.options.rmax)    self.options.rc = rc_;
-            if(0 <= rd_ && rd_ <= self.options.rmax)    self.options.rd = rd_;
-            self.update();
-        };
-        
-        //Subscribe
-        $.subscribe(this.options.channel + this.options.topic_radii, this.callback_radii);
+        //Set up subscriber
+        $.subscribe(this.options.channel + this.options.topic_radii, $.proxy(this.callback_radii, this));
         
         //Starting animation
         this.update();
@@ -109,7 +118,10 @@ $.widget('mwww.cross_section_d3', {
     },
          
     _destroy: function() {
+        //Unsubscribe
         $.unsubscribe(this.options.channel + this.options.topic_radii, this.callback_radii);
+        
+        //Remove widget, but leave original div.
         $(this.element).empty();
     }
     
