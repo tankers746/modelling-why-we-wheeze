@@ -45,6 +45,9 @@ $.widget('mwww.single_plot_d3', {
         //Resize widget if too small
         if(this.element.height() < 1) {
             this.element.height(this.default_height);
+        }
+        
+        if(this.element.width() < 1) {
             this.element.width(Math.floor(this.default_height * this.options.aspect));
         }
         
