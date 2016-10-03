@@ -55,6 +55,7 @@ $.widget('mwww.single_plot_d3', {
         
         
         //Find size for svg and set it to center.
+        if(this.options.aspect < 1e-12) throw ("ERROR: aspect cannot be <= 0 (in single_plot_d3._create())");
         this.height = Math.min(this.element.height(), Math.floor(this.element.width() / this.options.aspect));
         this.element.css({"text-align": 'center'});
         
