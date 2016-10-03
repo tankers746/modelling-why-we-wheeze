@@ -6,7 +6,7 @@ $.widget('mwww.single_plot_d3', {
         
         x_min:      -9,
         x_max:      -3,
-        num_points: 50,
+        num_points: 20,
         
         aspect:     4/3,
         
@@ -116,7 +116,9 @@ $.widget('mwww.single_plot_d3', {
         //Plot line
         var line = d3.line()
             .x($.proxy(function(d) {return this.x_scale(d.x);}, this))
-            .y($.proxy(function(d) {return this.y_scale(d.y);}, this));
+            .y($.proxy(function(d) {return this.y_scale(d.y);}, this))
+            //.curve(d3.curveLinear);
+            .curve(d3.curveMonotoneX);
             
         this.path = this.g.append("path")
             .attr("d", line(data))
