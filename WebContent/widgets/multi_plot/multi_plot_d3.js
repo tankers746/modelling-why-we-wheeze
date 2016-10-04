@@ -15,7 +15,7 @@ $.widget('mwww.multi_plot_d3', {
         
         aspect:     4/3,
         
-        animation_speed:    20,
+        animation_speed:    200,
         
     },
     
@@ -49,7 +49,7 @@ $.widget('mwww.multi_plot_d3', {
             this.marker.transition()
                 .attr("cx", this.x_scale(this.logd))
                 .attr("cy", this.y_scale(this.options.model(this.logd, S_)))
-                .duration(200)
+                .duration(this.options.animation_speed)
                 .ease(d3.easeCubic);
         }
     },
@@ -62,7 +62,7 @@ $.widget('mwww.multi_plot_d3', {
         this.marker.transition()
             .attr("cx", this.x_scale(logd_))
             .attr("cy", this.y_scale(this.options.model(logd_, this.S)))
-            .duration(this.options.animation_speed)
+            .duration(20)
             .ease(d3.easeLinear);
         
         //this.marker
@@ -119,6 +119,7 @@ $.widget('mwww.multi_plot_d3', {
             for(var i=0; i<this.options.num_points; i++) {
                 data[j].push({x: (this.x_scale.domain()[0]+i*step), y: 0});
                 data[j][i].y = this.options.model(data[j][i].x, j);
+                if(isNaN(data[j][i].y))    data[j][i].y = 10*this.y_scale.domain()[1];
                 //console.log(j + " " + data[j][i].x + " " + data[j][i].y);
             }
         }
