@@ -11,6 +11,18 @@ var AHR = (function() {
     //Create the model using default starting values;
     var model = new Airway();
     
+    //y and z as a function of asthma severity
+    function S(s) {
+        if(s<0) {
+            return {y: 0, z: 0};
+        } else {
+            //return {y: 0.02*s, z: 0.1*s};
+            //return {y: 0.016*s*(s+0.1), z: 0.08*s*(s+0.1)};
+            return {y: 0.016*s*(s+0.2), z: 0.08*s*(s+0.2)};
+            //return {y: 0.016*s*(s+0.3), z: 0.08*s*(s+0.3)};
+        }
+    }
+    
     //Function to update model and publish results
     function update_and_publish() {
         model.update(defaults.A, defaults.B, defaults.C, defaults.D, x, y, z, logd);
@@ -20,10 +32,10 @@ var AHR = (function() {
     }
     
     //Callback function for when S changes
-    function callback_S(e, S) {
+    function callback_S(e, S_) {
         //alert(S);
-        y = 0.02*S;
-        z = 0.1*S;
+        y = S(S_).y;
+        z = S(S_).z;
         // Magic numbers. Bad Michael!
         update_and_publish();
     }
@@ -53,8 +65,8 @@ var AHR = (function() {
         destroy:    destroy,
         update:     update_and_publish,
         //This is really bad.  Cannot be updating model every time this function is called.
-        resistance: function(logd, S) {model.update(defaults.A, defaults.B, defaults.C, defaults.D, x, 0.02*S, 0.1*S, logd); return model.resistance(logd);},
-        shortening: function(logd) {return 100*model.shortening(logd);}
+        resistance: function(logd_, S_) {model.update(defaults.A, defaults.B, defaults.C, defaults.D, x, S(S_).y, S(S_).z, logd_); return model.resistance(logd_);},
+        shortening: function(logd_) {return 100*model.shortening(logd_);}
     };
     
 })();
