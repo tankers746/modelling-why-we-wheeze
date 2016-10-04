@@ -11,7 +11,7 @@ $.widget('mwww.multi_plot_d3', {
         x_max:      -3,
         y_min:      0,
         y_max:      20,
-        num_points: 20,
+        num_points: 30,
         
         aspect:     4/3,
         
@@ -45,12 +45,23 @@ $.widget('mwww.multi_plot_d3', {
             this.paths[S_].attr("stroke", "blue");
             
             this.S = S_;
-            
+            /*
             this.marker.transition()
                 .attr("cx", this.x_scale(this.logd))
                 .attr("cy", this.y_scale(this.options.model(this.logd, S_)))
                 .duration(this.options.animation_speed)
                 .ease(d3.easeCubic);
+            */
+            
+            var y = this.options.model(this.logd, S_);
+            if(isNaN(y))    y = 2*this.y_scale.domain()[1];
+            
+            this.marker.transition()
+                .attr("cx", this.x_scale(this.logd))
+                .attr("cy", this.y_scale(y))
+                .duration(this.options.animation_speed)
+                .ease(d3.easeCubic);
+            
         }
     },
     
@@ -58,16 +69,26 @@ $.widget('mwww.multi_plot_d3', {
         //console.log("event");
         
         this.logd = logd_;
-        
+        /*
         this.marker.transition()
             .attr("cx", this.x_scale(logd_))
             .attr("cy", this.y_scale(this.options.model(logd_, this.S)))
             .duration(20)
             .ease(d3.easeLinear);
+        */
         
         //this.marker
         //    .attr("cx", this.x_scale(logd_))
         //    .attr("cy", this.y_scale(this.options.model(logd_, this.S)));
+        
+        var y = this.options.model(logd_, this.S);
+        if(isNaN(y))    y = 2*this.y_scale.domain()[1];
+        
+        this.marker.transition()
+            .attr("cx", this.x_scale(logd_))
+            .attr("cy", this.y_scale(y))
+            .duration(20)
+            .ease(d3.easeLinear);
     },
     
     
