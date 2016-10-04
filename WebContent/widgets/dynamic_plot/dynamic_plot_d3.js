@@ -61,7 +61,8 @@ $.widget('mwww.dynamic_plot_d3', {
         
         generate_points();
          
-        y_scale.domain(d3.extent(data, function(d) {return d.y})).nice();
+        //y_scale.domain(d3.extent(data, function(d) {return d.y})).nice();
+        y_scale.domain([0, 10]);
     
         
         //Add an sgv canvas
