@@ -1,127 +1,164 @@
 $.widget('mwww.dynamic_plot_d3', {
     options: {
+        
         channel:    "default/",
         topics:     ["A", "B", "C", "D", "xmax", "y", "z"],
-        model:      function(x) {return -(x+6)*(x+6);},
-        height:     300,
-        width:      400,
-        min:        -9,
-        max:        -3,
-        num_points: 50
+        model:      function(x) {return x+9;},
+        
+        x_min:      -9,
+        x_max:      -3,
+        y_min:      0,
+        y_max:      20,
+        num_points: 20,
+        
+        aspect:     4/3,
+        
+        animation_speed:    400,
+
     },
     
-    $container:   {},
-    callback:      {},
+    default_height:   300,
+    height:           0,
+    
+    data:       {},
+    
+    svg:        {},
+    g:          {},
+    x_scale:    {},
+    y_scale:    {},
+    
+    path:       {},
+    x_axis:     {},
+    y_axis:     {},
     
     
-    _create: function() {
-        
-        var self = this;
-        //var options = this.options;
-        
-        this.$container = $("<div/>", {
-            id:     this.element.attr('id') + "_container",
-            height: this.options.height + "px",
-            width:  this.options.width + "px"
-            
-        }).css({'border' : '1px solid #000'});
-        
-        $(this.element).append(this.$container);
-        
-        
-        
-        //Set a few constants
-        var margin = {top: 30, right: 30, bottom: 30, left: 30};
-        var inner_height = this.options.height - margin.top - margin.bottom;
-        var inner_width = this.options.width - margin.left - margin.right;
-        var x_scale = d3.scaleLinear().range([0, inner_width]);
-        var y_scale = d3.scaleLinear().range([inner_height, 0]);
-        
-        x_scale.domain([this.options.min, this.options.max]);
-        
-        
-        //Generate a set of points:
-        var step = (x_scale.domain()[1]-x_scale.domain()[0])/(this.options.num_points-1);
-        var data = [];
-        
-        function generate_points() {
-            data = [];
-        
-            for(var i=0; i<self.options.num_points; i++) {
-                data.push({
-                    x: x_scale.domain()[0]+i*step,
-                    y: self.options.model(x_scale.domain()[0]+i*step)
-                });
-                //console.log(data[i].x + " " + data[i].y);
-            }
-
-            //y_scale.domain(d3.extent(data, function(d) {return d.y})).nice();
-            //console.log(y_scale.domain()[0] + " " + y_scale.domain()[1]);
+    generate_data:  function(data, model) {
+        for(var i=0; i<data.length; i++) {
+            data[i].y = model(data[i].x);
+            //console.log(data[i].x + " " + data[i].y);
         }
-        
-        generate_points();
-         
-        //y_scale.domain(d3.extent(data, function(d) {return d.y})).nice();
-        y_scale.domain([0, 10]);
+    },
     
+    callback:   function(e) {
+        console.log("event");
+        this.generate_data(this.data, this.options.model);
         
-        //Add an sgv canvas
-        var svg = d3.select(this.$container.get(0)).append("svg")
-            .attr("height",  this.options.height)
-            .attr("width", this.options.width);
-
-
-        //Plot line
         var line = d3.line()
-            .x(function(d) {return x_scale(d.x);})
-            .y(function(d) {return y_scale(d.y);});
-
-        var g = svg.append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+            .x($.proxy(function(d) {return this.x_scale(d.x);}, this))
+            .y($.proxy(function(d) {return this.y_scale(d.y);}, this))
+            //.curve(d3.curveLinear);
+            .curve(d3.curveMonotoneX);
         
-        var path = g.append("path")
-            .attr("d", line(data))
+        
+        this.path.remove();
+        this.path = this.g.append("path")
+            .attr("d", line(this.data))
             .attr("fill", "none")
             .attr("stroke", "green")
             .attr("stroke-width", "3px");
         
+    },
+    
+    _create: function() {
+        
+        //Resize widget if too small
+        if(this.element.height() < 1) {
+            this.element.height(this.default_height);
+        }
+        
+        if(this.element.width() < 1) {
+            this.element.width(Math.floor(this.default_height * this.options.aspect));
+        }
+        
+        
+        //Find size for svg and set it to center.
+        if(this.options.aspect < 1e-12) throw ("ERROR: aspect cannot be <= 0 (in dynamic_plot_d3._create())");
+        this.height = Math.min(this.element.height(), Math.floor(this.element.width() / this.options.aspect));
+        this.element.css({"text-align": 'center'});
+        
+        
+        //Create svg element
+        this.svg = d3.select(this.element.get(0)).append("svg")
+            .attr("height",  this.height)
+            .attr("width",   Math.floor(this.height * this.options.aspect))
+            .attr("style", "outline: 1px solid black;");
+        
+        
+        //Set up margins and scales
+        var margin = {top: 30, right: 30, bottom: 30, left: 30};
+        var inner_height = this.svg.attr("height") - margin.top - margin.bottom;
+        var inner_width = this.svg.attr("width") - margin.left - margin.right;
+        
+        this.x_scale = d3.scaleLinear()
+            .range([0, inner_width])
+            .domain([this.options.x_min, this.options.x_max]);
+        
+        this.y_scale = d3.scaleLinear()
+            .range([inner_height, 0])
+            .domain([this.options.y_min, this.options.y_max]);
+            
+        //Generate the points
+        var step = (this.x_scale.domain()[1]-this.x_scale.domain()[0])/(this.options.num_points-1);
+        this.data = [];
+        
+        for(var i=0; i<this.options.num_points; i++) {
+            this.data.push({x: (this.x_scale.domain()[0]+i*step), y: 0});
+        }
+        
+        this.generate_data(this.data, this.options.model);
+        //console.log(this.data);
+        
+        
+        
+        //Create svg group element
+        this.g = this.svg.append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        
+        
         //Add axis
-        x_axis = d3.axisBottom().scale(x_scale)
-            .ticks(x_scale.domain()[1] - x_scale.domain()[0])
+        var x_axis = d3.axisBottom()
+            .scale(this.x_scale)
+            .ticks(this.x_scale.domain()[1] - this.x_scale.domain()[0])
             .tickFormat(function (d) {return Math.pow(10,d+6);});
         
-        y_axis = d3.axisLeft().scale(y_scale);
+        this.g.append("g")
+            .attr("transform", "translate(0," + this.y_scale.range()[0] + ")").call(x_axis);
         
-        g.append("g").attr("transform", "translate(0," + y_scale.range()[0] + ")").call(x_axis);
-        g.append("g").call(y_axis);
+        var y_axis = d3.axisLeft()
+            .scale(this.y_scale);
+        
+        this.g.append("g")
+            .call(y_axis);
         
         
-        this.callback = function(e) {
-            //This part should be done using .enter(), .exit() etc. methods.
-            //console.log("event");
-            generate_points();
-            path.remove();
-            path = g.append("path")
-                .attr("d", line(data))
-                .attr("fill", "none")
-                .attr("stroke", "green")
-                .attr("stroke-width", "3px");
-        }
+        //Plot line
+        var line = d3.line()
+            .x($.proxy(function(d) {return this.x_scale(d.x);}, this))
+            .y($.proxy(function(d) {return this.y_scale(d.y);}, this))
+            //.curve(d3.curveLinear);
+            .curve(d3.curveMonotoneX);
         
+        this.path = this.g.append("path")
+            .attr("d", line(this.data))
+            .attr("fill", "none")
+            .attr("stroke", "green")
+            .attr("stroke-width", "3px");
+        
+        
+        //Set up subscriber
         for(var i=0; i<this.options.topics.length; i++) {
-            $.subscribe(this.options.channel + this.options.topics[i], this.callback);
+            $.subscribe(this.options.channel + this.options.topics[i], $.proxy(this.callback, this));
         }
-    
-        
         
     },
     
     _destroy: function() {
+        //Unsubscribe
         for(var i=0; i<this.options.topics.length; i++) {
             $.unsubscribe(this.options.channel + this.options.topics[i], this.callback);
         }
+        //Remove widget, but leave original div.
         $(this.element).empty();
-        $(this.element).remove();
     }
 
 });
