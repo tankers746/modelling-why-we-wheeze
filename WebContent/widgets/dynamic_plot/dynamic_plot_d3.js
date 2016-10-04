@@ -33,19 +33,19 @@ $.widget('mwww.dynamic_plot_d3', {
     y_axis:     {},
     
     
-    generate_data:  function(data, model) {
+    generate_data:  function(data, model, y_max) {
         for(var i=0; i<data.length; i++) {
             data[i].y = model(data[i].x);
-            if(isNaN(data[i].y) || data[i].y > 100) {
-                data[i].y = 100;
-            }
+            
+            if(isNaN(data[i].y))    data[i].y = 10*y_max;
+            //data[i].y = Math.min(data[i].y, 10*y_max);
             //console.log(data[i].x + " " + data[i].y);
         }
     },
     
     callback:   function(e) {
         //console.log("event");
-        this.generate_data(this.data, this.options.model);
+        this.generate_data(this.data, this.options.model, this.options.y_max);
 
         //this.path.attr("d", this.line(this.data));
         
@@ -102,7 +102,7 @@ $.widget('mwww.dynamic_plot_d3', {
             this.data.push({x: (this.x_scale.domain()[0]+i*step), y: 0});
         }
         
-        this.generate_data(this.data, this.options.model);
+        this.generate_data(this.data, this.options.model, this.options.y_max);
         //console.log(this.data);
         
         
