@@ -9,8 +9,6 @@ $.widget('mwww.single_plot_d3', {
         num_points: 20,
         
         aspect:     4/3,
-        
-        animation_speed:    20,
     },
     
     default_height:   300,
@@ -33,7 +31,7 @@ $.widget('mwww.single_plot_d3', {
         this.marker.transition()
         .attr("cx", this.x_scale(logd_))
         .attr("cy", this.y_scale(this.options.model(logd_)))
-        .duration(this.options.animation_speed)
+        .duration(20)
         .ease(d3.easeLinear);
         
         //this.marker
