@@ -13,7 +13,7 @@ $.widget('mwww.dynamic_plot_d3', {
         
         aspect:     4/3,
         
-        animation_speed:    400,
+        animation_speed:    200,
 
     },
     
@@ -27,6 +27,7 @@ $.widget('mwww.dynamic_plot_d3', {
     x_scale:    {},
     y_scale:    {},
     
+    line:       {},
     path:       {},
     x_axis:     {},
     y_axis:     {},
@@ -35,28 +36,24 @@ $.widget('mwww.dynamic_plot_d3', {
     generate_data:  function(data, model) {
         for(var i=0; i<data.length; i++) {
             data[i].y = model(data[i].x);
+            if(isNaN(data[i].y) || data[i].y > 100) {
+                data[i].y = 100;
+            }
             //console.log(data[i].x + " " + data[i].y);
         }
     },
     
     callback:   function(e) {
-        console.log("event");
+        //console.log("event");
         this.generate_data(this.data, this.options.model);
+
+        //this.path.attr("d", this.line(this.data));
         
-        var line = d3.line()
-            .x($.proxy(function(d) {return this.x_scale(d.x);}, this))
-            .y($.proxy(function(d) {return this.y_scale(d.y);}, this))
-            //.curve(d3.curveLinear);
-            .curve(d3.curveMonotoneX);
-        
-        
-        this.path.remove();
-        this.path = this.g.append("path")
-            .attr("d", line(this.data))
-            .attr("fill", "none")
-            .attr("stroke", "green")
-            .attr("stroke-width", "3px");
-        
+        this.path.transition()
+            .attr("d", this.line(this.data))
+            .duration(this.options.animation_speed)
+            .ease(d3.easeCubic);
+            
     },
     
     _create: function() {
@@ -132,14 +129,14 @@ $.widget('mwww.dynamic_plot_d3', {
         
         
         //Plot line
-        var line = d3.line()
+        this.line = d3.line()
             .x($.proxy(function(d) {return this.x_scale(d.x);}, this))
             .y($.proxy(function(d) {return this.y_scale(d.y);}, this))
             //.curve(d3.curveLinear);
             .curve(d3.curveMonotoneX);
         
         this.path = this.g.append("path")
-            .attr("d", line(this.data))
+            .attr("d", this.line(this.data))
             .attr("fill", "none")
             .attr("stroke", "green")
             .attr("stroke-width", "3px");
