@@ -10,7 +10,7 @@
 }
 
 .ui-spinner-input {
-	height: 30px;
+	height: 100%;
 	width: 100px;
 }
 
@@ -19,43 +19,7 @@ input[type="text"] {
 	margin-top:2%;
 }
 
-/*
-#A_spinner
-{
-	position:absolute;
-}
 
-#B_spinner
-{
-	position:absolute;
-}
-
-#C_spinner
-{
-	position:absolute;
-}
-
-#D_spinner
-{
-	position:absolute;
-}
-
-#xmax_spinner
-{
-	position:absolute;
-}
-
-#y_spinner
-{
-	position:absolute;
-	left:10%;
-}
-	
-#z_spinner
-{
-	position:absolute;
-}	
-*/	
 
 #cross_section
 {
