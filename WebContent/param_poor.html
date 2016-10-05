@@ -8,9 +8,10 @@
         <script src="vendor/d3/d3.js" type="text/javascript"></script>
         <script src="vendor/nouislider/jquery.nouislider.all.min.js" type="text/javascript"></script>
         <link rel="stylesheet" type="text/css" href="./vendor/nouislider/jquery.nouislider.min.css">
-            <link rel="stylesheet" type="text/css" href="./vendor/nouislider/jquery.nouislider.pips.min.css">
+        <link rel="stylesheet" type="text/css" href="./vendor/nouislider/jquery.nouislider.pips.min.css">
         
         
+        <link rel="stylesheet" type = "text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
         <script type="text/javascript" src="widgets/spinner/spinner.js"></script>
         <link rel="stylesheet" type="text/css" href="widgets/spinner/spinner.css">
         <script src="widgets/cross_section/cross_section.js" type="text/javascript"></script>
@@ -29,34 +30,29 @@
     
     <body>
         
-        <h1>Parameterised model page (poor)</h1>
-        
-        <table style="width:100%">
-            <tr style="height:100px">
-                <td colspan="2" style="vertical-align: top;">
-                    <input id="A_spinner" type="text" maxlength="5">
-					<input id="B_spinner" type="text" maxlength="5">
-					<input id="C_spinner" type="text" maxlength="5">
-					<input id="D_spinner" type="text" maxlength="5">
-                </td>
-            </tr>
-            <tr style="height:100px">
-                <td colspan="2" style="vertical-align: top;">
-                    <input id="xmax_spinner" type="text" maxlength="5">
-					<input id="y_spinner" type="text" maxlength="5">
-					<input id="z_spinner" type="text" maxlength="5">
-                </td>
-            </tr>
-            <tr style="height:300px">
-                <td style="width:50%">
-                    <div id="cross_section"></div>
-                </td>
-                <td style="width:50%">
-                    <div id="dynamic_plot"></div>
-                </td>
-            </tr>
-        </table>
-        
+       
+        <h3 class="text-primary text-center"> <strong>How change in airway dimensions impact the </strong> log  <strong> <i>d</i> versus  <i>R</i> plot</strong></h3>
+        <img class="col-lg-12" src="http://s18.postimg.org/hl47kip8p/formula.png">
+          
+          <div id="cross_section"></div>
+          <div id="dynamic_plot"></div>  
+                
+
+               
+               		
+        					 <!-- relative positioning --> 
+         						 <div class="col-lg-6 col-lg-offset-2 param">
+           							
+                                    	<div id="A_spinner" type="text" > </div>   
+										<div id="B_spinner" type="text" > </div>   
+										<div id="C_spinner" type="text" > </div>   
+										<div id="D_spinner" type="text" > </div>  
+                                        <div id="xmax_spinner" ></div> <br> 
+										<div id="y_spinner" type="text" ></div> <br> 
+										<div  id="z_spinner" type="text" ></div><br>       
+                                                                           
+                                  </div>    
+
     </body>
 </html>
 
