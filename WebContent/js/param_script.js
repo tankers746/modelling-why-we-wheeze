@@ -10,7 +10,7 @@ var param = (function() {
     var xmax=defaults.x;
     var y = defaults.y;
     var z = defaults.z;
-    var logd = -18;
+    var logd = defaults.logd;
     
     
     //Create the model usign default starting values;
@@ -26,9 +26,8 @@ var param = (function() {
     //Callback function for when A changes
     function callback_A(e, A_) {
         A = A_;
-        $.publish(channel + "r_max", [A]);
+        //$.publish(channel + "rmax", [A]);
         update_and_publish();
-        //setTimeout(update_and_publish(), 2);
     }
     
     //And B etc.
@@ -91,7 +90,6 @@ var param = (function() {
         create:     create,
         destroy:    destroy,
         update:     update_and_publish,
-        //Also really poor, but does the trick.
         resistance: function(logd_) {return model.resistance(logd_);}
     };
     
@@ -109,7 +107,7 @@ $(document).ready(function() {
     $("#y_spinner").spinner2({channel: "mwww/", topic: "y", initval: 0,    min: 0,    max: 1,   step: 0.01, pi: false});
     $("#z_spinner").spinner2({channel: "mwww/", topic: "z", initval: 0,    min: 0,    max: 5,   step: 0.05, pi: false});
     
-    $("#cross_section").cross_section({channel : "mwww/", A: defaults.A, topic_A: "r_max"});
+    $("#cross_section").cross_section_d3({channel : "mwww/", rmax: 4.4});
     $("#dynamic_plot").dynamic_plot_d3({channel : "mwww/", model : param.resistance});
     
     param.update();
