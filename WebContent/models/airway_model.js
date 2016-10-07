@@ -18,7 +18,7 @@ function Airway()
 // Calculates the radius of a circular layer given the radius and area of the layer above it.
 Airway.prototype.layer_radius = function(above_radius, above_area)
 {
-    return Math.sqrt(Math.pow(above_radius, 2) - above_area / Math.PI);
+    return Math.sqrt(Math.max(0, Math.pow(above_radius, 2) - above_area / Math.PI));
 };
 
 // ASM shortening triggered by a given methacoline dose.
@@ -29,11 +29,11 @@ Airway.prototype.shortening = function(logd)
 
 // The shortened layer radii after receiving a methacholine dose.
 // Needed to separate this from the update() function so the resistance graph can be drawn without changing the Airway's properties.
-Airway.prototype.mc_response = function(areas, logd)
+Airway.prototype.mc_response = function(max_asm, areas, logd)
 {
 	var radii = new Object();
 
-	radii.asm = this.max_asm * (1 - this.shortening(logd));
+	radii.asm = max_asm * (1 - this.shortening(logd));
 	radii.sub_mucosal = this.layer_radius(radii.asm, areas.asm);
     radii.mucosal = this.layer_radius(radii.sub_mucosal, areas.sub_mucosal);
     radii.lumen = this.layer_radius(radii.mucosal, areas.mucosal);
@@ -44,7 +44,12 @@ Airway.prototype.mc_response = function(areas, logd)
 // Poiseuille's Law.
 Airway.prototype.resistance = function(logd)
 {
-	return 1 / Math.pow(this.mc_response(this.areas, logd).lumen, 4);
+    var lumen = this.mc_response(this.max_asm, this.areas, logd).lumen;
+    if(lumen < 1e-3) {
+        return 1e12;
+    } else {
+        return Math.pow(lumen, -4);
+    }
 };
 
 // Updates the airway properties in response to new inputs.
@@ -61,7 +66,11 @@ Airway.prototype.update = function(A,B,C,D,x,y,z,logd)
     areas.sub_mucosal = C*(1+y);
     areas.mucosal = D*(1+z);
 
-    var radii = this.mc_response(areas, logd);
+    var radii = this.mc_response(max_asm, areas, logd);
+    
+    this.max_asm = max_asm;
+    this.areas = areas;
+    this.radii = radii;
 
 	// Check that the airway has enough area to contain all layers.
     if(areas.asm + areas.sub_mucosal + areas.mucosal > Math.pow(radii.asm, 2)*Math.PI)
@@ -70,9 +79,9 @@ Airway.prototype.update = function(A,B,C,D,x,y,z,logd)
 	}
 	else
 	{
-		this.max_asm = max_asm;
-		this.areas = areas;
-		this.radii = radii;
+		//this.max_asm = max_asm;
+		//this.areas = areas;
+		//this.radii = radii;
 		
 		return 0;
 	}

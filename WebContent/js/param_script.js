@@ -92,7 +92,7 @@ var param = (function() {
         destroy:    destroy,
         update:     update_and_publish,
         //Also really poor, but does the trick.
-        resistance: function(logd_) {model.update(A, B, C, D, xmax, y, z, logd_); return model.resistance();}
+        resistance: function(logd_) {return model.resistance(logd_);}
     };
     
 })();
