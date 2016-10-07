@@ -9,7 +9,7 @@ $.widget('mwww.dynamic_plot_d3', {
         x_max:      -3,
         y_min:      0,
         y_max:      20,
-        num_points: 20,
+        num_points: 50,
         
         aspect:     4/3,
         
@@ -37,8 +37,13 @@ $.widget('mwww.dynamic_plot_d3', {
         for(var i=0; i<data.length; i++) {
             data[i].y = model(data[i].x);
             
-            if(isNaN(data[i].y))    data[i].y = 10*y_max;
-            //data[i].y = Math.min(data[i].y, 10*y_max);
+            if(isNaN(data[i].y)) {
+                data[i].y = 2*y_max;
+            } else {
+                data[i].y = Math.min(data[i].y, 2*y_max);
+                data[i].y = Math.max(data[i].y, 0);
+            }
+            
             //console.log(data[i].x + " " + data[i].y);
         }
     },
