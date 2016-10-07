@@ -22,6 +22,7 @@ $.widget('mwww.cross_section_d3', {
     
     circles:    {},
     colours:    ['#ffffff', '#00ff00', '#ffff00', '#ff0000'],
+    dot:        {},
     
     callback_radii: function(e, ra_, rb_, rc_, rd_) {
         //USE $.PROXY WHEN INVOVIKING THIS METHOD IN $.SUBSCRIBE
@@ -43,6 +44,17 @@ $.widget('mwww.cross_section_d3', {
         if(0 <= rd_ && rd_ <= this.options.rmax) {
             this.options.rd = rd_;
             this.animate(3, this.options.rd);
+        }
+        
+        if(ra_ == 0 && this.dot.attr("fill") == "none") {
+            //this.dot.attr("fill", "black");
+            this.dot.transition()
+                .attr("fill", "black")
+                .delay(this.options.animation_speed);
+        }
+        
+        if(ra_ > 0 && this.dot.attr("fill") != "none"){
+            this.dot.attr("fill", "none");
         }
     },
     
@@ -98,7 +110,7 @@ $.widget('mwww.cross_section_d3', {
         //Create a scale for the circles.
         this.scale = d3.scaleLinear()
             .domain([0, this.options.rmax])
-            .range([0, this.size/2]);
+            .range([0, this.size/2-1]);
         
         //Create circles
         this.circles = new Array(this.colours.length);
@@ -107,11 +119,18 @@ $.widget('mwww.cross_section_d3', {
             this.circles[i] = this.g.append("circle")
                 .attr("cx", 0)
                 .attr("cy", 0)
-                .attr("r", this.scale(0))
+                .attr("r", 0)
                 .attr("fill", this.colours[i])
                 .attr("stroke", "black")
                 .attr("stroke-width", "1px");
         }
+        
+        //Create center dot for when ra = 0
+        this.dot = this.g.append("circle")
+            .attr("cx", 0)
+            .attr("cy", 0)
+            .attr("r", 1)
+            .attr("fill", "none");
         
         //Set up subscriber
         $.subscribe(this.options.channel + this.options.topic_radii, $.proxy(this.callback_radii, this));
