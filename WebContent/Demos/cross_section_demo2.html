@@ -17,7 +17,7 @@
                 $("#rc_div").my_publisher_buttons({channel : "mwww/", topic : "rc", value : 75});
                 $("#rd_div").my_publisher_buttons({channel : "mwww/", topic : "rd", value : 100});
           
-                $("#diagram_div").cross_section_d3({channel : "mwww/"});
+                $("#diagram_div").cross_section_d3({channel : "mwww/", ra: 25, rb: 50, rc: 75, rd: 100, rmax: 100});
                 //$("#diagram_div").my_subscriber({channel : "mwww/", topic : "rd"});
                               
                 $.subscribe("mwww/ra", function(e, ra) {

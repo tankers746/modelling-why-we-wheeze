@@ -76,7 +76,7 @@ $(document).ready(function() {
     $("#discrete").discrete_slider({channel : "mwww/", topic : "S"});
     $("#continuous").continuous_slider({channel : "mwww/", topic : "logd"});
     $("#multi_plot").multi_plot_d3({channel : "mwww/", model : AHR.resistance});
-    $("#cross_section").cross_section_d3({channel : "mwww/", rmax: defaults.A, ra: 0, rb: 0, rc: 0, rd: 0});
+    $("#cross_section").cross_section_d3({channel : "mwww/", rmax: defaults.A});
     $("#single_plot").single_plot_d3({channel : "mwww/", model : AHR.shortening});
     AHR.update();
 });

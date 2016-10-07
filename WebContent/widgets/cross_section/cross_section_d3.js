@@ -1,11 +1,11 @@
 
 $.widget('mwww.cross_section_d3', {
     options: {
-        ra:     25,
-        rb:     50,
-        rc:     75,
-        rd:     100,
-        rmax:  100,
+        ra:     0,
+        rb:     0,
+        rc:     0,
+        rd:     0,
+        rmax:  0,
         
         channel:        "default/",
         topic_radii:    "radii",
