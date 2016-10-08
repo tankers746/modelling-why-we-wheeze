@@ -2,7 +2,7 @@ $.widget('mwww.single_plot_d3', {
     options: {
         channel:    "default/",
         topic_logd: "logd",
-        model:      function(x) {return x+9;},
+        model:      function(logd_) {return logd_+9;},
         
         x_min:      -9,
         x_max:      -3,

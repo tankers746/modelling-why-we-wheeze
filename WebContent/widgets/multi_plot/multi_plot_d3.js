@@ -3,7 +3,7 @@ $.widget('mwww.multi_plot_d3', {
         channel:    "default/",
         topic_logd: "logd",
         topic_S:    "S",
-        model:      function(x, y) {return (x+9) + y;},
+        model:      function(logd_, S_) {return (logd_+9) + S_;},
         
         num_plots:  7,
         

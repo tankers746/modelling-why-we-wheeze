@@ -3,7 +3,7 @@ $.widget('mwww.dynamic_plot_d3', {
         
         channel:    "default/",
         topics:     ["A", "B", "C", "D", "xmax", "y", "z"],
-        model:      function(x) {return x+9;},
+        model:      function(logd_) {return logd_+9;},
         
         x_min:      -9,
         x_max:      -3,
