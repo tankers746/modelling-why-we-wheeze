@@ -159,7 +159,15 @@ $.widget('mwww.multi_plot_d3', {
             .scale(this.y_scale);
         
         this.g.append("g")
-            .call(y_axis);  
+            .call(y_axis); 
+
+		//Add y Axis Text lable
+		var xPosMargin = 65,
+			yPosMargin = 17;
+		this.svg.append("text")
+			.attr("transform", "translate(" + xPosMargin + "," + yPosMargin + ")")
+			.style("text-anchor", "middle")
+			.text("Airway Resistance");
             
         //Plot lines
         var line = d3.line()
