@@ -20,8 +20,7 @@ $.widget('mwww.multi_plot_d3', {
     },
     
     S:      0,
-    logd:   -9,
-    
+    logd:   -9, 
     
     default_height:   300,
     height:           0,
@@ -106,10 +105,9 @@ $.widget('mwww.multi_plot_d3', {
             .attr("height",  this.height)
             .attr("width",   Math.floor(this.height * this.options.aspect))
             .attr("style", "outline: 1px solid black;");
-        
-        
+            
         //Set up margins and scales
-        var margin = {top: 30, right: 30, bottom: 30, left: 30};
+        var margin = {top: 30, right: 30, bottom: 60, left: 60};
         var inner_height = this.svg.attr("height") - margin.top - margin.bottom;
         var inner_width = this.svg.attr("width") - margin.left - margin.right;
         
@@ -140,8 +138,7 @@ $.widget('mwww.multi_plot_d3', {
         //Create svg group element
         this.g = this.svg.append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-        
-        
+			
         //Add axis
         var x_axis = d3.axisBottom()
             .scale(this.x_scale)
@@ -150,13 +147,19 @@ $.widget('mwww.multi_plot_d3', {
         
         this.g.append("g")
             .attr("transform", "translate(0," + this.y_scale.range()[0] + ")").call(x_axis);
+		
+		//Add x Axis Text lable
+		var xAxisTextFromBottom = 15;
+		this.svg.append("text")
+			.attr("transform", "translate(" + this.svg.attr("width")/2 + "," + (this.svg.attr("height") - xAxisTextFromBottom) + ")")
+			.style("text-anchor", "middle")
+			.text("Methocholine dose [m]");
         
         var y_axis = d3.axisLeft()
             .scale(this.y_scale);
         
         this.g.append("g")
-            .call(y_axis);
-            
+            .call(y_axis);  
             
         //Plot lines
         var line = d3.line()
