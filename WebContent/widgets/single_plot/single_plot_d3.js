@@ -66,7 +66,7 @@ $.widget('mwww.single_plot_d3', {
         
         
         //Set up margins and x scale
-        var margin = {top: 30, right: 30, bottom: 30, left: 30};
+        var margin = {top: 30, right: 30, bottom: 60, left: 60};
         var inner_height = this.svg.attr("height") - margin.top - margin.bottom;
         var inner_width = this.svg.attr("width") - margin.left - margin.right;
         this.x_scale = d3.scaleLinear()
@@ -103,12 +103,27 @@ $.widget('mwww.single_plot_d3', {
             
         this.g.append("g")
             .attr("transform", "translate(0," + this.y_scale.range()[0] + ")").call(x_axis);
+			
+		//Add x Axis Text lable
+		var xAxisTextFromBottom = 15;
+		this.svg.append("text")
+			.attr("transform", "translate(" + this.svg.attr("width")/2 + "," + (this.svg.attr("height") - xAxisTextFromBottom) + ")")
+			.style("text-anchor", "middle")
+			.text("Methocholine dose [m]");
         
         var y_axis = d3.axisLeft()
             .scale(this.y_scale);
             
         this.g.append("g")
             .call(y_axis);
+			
+		//Add y Axis Text lable
+		var xPosMargin = 70,
+			yPosMargin = 17;
+		this.svg.append("text")
+			.attr("transform", "translate(" + xPosMargin + "," + yPosMargin + ")")
+			.style("text-anchor", "middle")
+			.text("ASM shortening (%)");
         
         //Plot line
         var line = d3.line()
