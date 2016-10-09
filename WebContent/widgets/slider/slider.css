@@ -93,19 +93,7 @@
 	font-size:14px;
 }
 
-#Airway_Description{
-	margin-left:20%;
-	color:blue;
-	font-size:14px;
-}
 
- #ASM_methacholine{
-	position:absolute;
-	margin-left:2%;
-	margin-top:35%;
-	color:blue;
-	font-size:14px;
-}
 
 #single_plot {
 	position:relative;
@@ -113,20 +101,6 @@
 	margin-bottom:5%;
 }
 
-#ASM_Description
-{
-	margin-left:20%;
-	color:red;
-	font-size:14px;
-}
-
-#ASM_methacholine{
-	position:absolute;
-	margin-left:80%;
-	margin-top:40%;
-	color:red;
-	font-size:14px;
-}
 #footer{
 	position:absolute;
 	left:35%;
