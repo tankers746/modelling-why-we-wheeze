@@ -1,22 +1,22 @@
 .ui-spinner {
-	height: 50px;
-	width: 150px;
-
+    height: 50px;
+    width: 100%;
+    display: block;
+    margin : 0 auto;
 }
-
 .pi-spinner .ui-spinner:before{
 	content: "%";
 
 }
 
 .ui-spinner-input {
-	height: 100%;
-	width: 100px;
+	height: 90%;
+	width: 70%;
 }
 
 input[type="text"] {
     font-size:25px;
-	margin-top:2%;
+    margin-top:2%;
 }
 
 
@@ -33,4 +33,24 @@ input[type="text"] {
 	position:absolute;
 	top:50%;
 	left:70%;
+}
+
+.param
+{
+    width: 120px;
+    margin-top: 10px;
+}
+
+.spinner_label
+{
+    display: block;
+    text-align: center;
+    display: list-item;
+    list-style:none;
+}
+
+.spinner_label label
+{
+    display: block;
+    font-size:25px;
 }
