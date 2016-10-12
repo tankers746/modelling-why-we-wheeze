@@ -20,14 +20,6 @@ input[type="text"] {
 }
 
 
-
-#cross_section
-{
-	position:absolute;
-	top:50%;
-	left:45%;
-}
-
 #dynamic_plot
 {
 	position:absolute;

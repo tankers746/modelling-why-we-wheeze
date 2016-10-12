@@ -7,17 +7,6 @@
 
 
 
-.slider {
-    position: relative;
-    height: 10px;
-    width: 50%;
-    left: 30%;
-	margin-top:5%;
-	margin-bottom:10%
-	        
-}
-
-
 
 .noUi-handle {
     background: white;
@@ -39,80 +28,4 @@
 .dose .noUi-handle {
     border: 2px solid red;
 }
-
-#title
-{
-	text-align:center;
-	font-size:1.5em;
-	font-family:Open Sans;
-}
-#asthma-text{
-	text-align:center;
-	font-family:Open Sans;
-	font-size:1.2em;
-	margin-top:2%;
-}
-
-#methacholine-text{
-	text-align:center;
-	font-family:Open Sans,sans-serif;;
-	font-size:1.2em;
-	margin-top:15%;
-}
-#cross-section-text{
-	
-	text-align:center;
-	font-family:Open Sans;
-	font-size:1.2em;
-	margin-top:15%;
-	
-}
-
-
-#continuous
-{
-	
-}
-
-#discrete
-{
-	margin-top:10%;
-	margin-bottom:5%;
-}
-#cross_section
-{
-	
-	margin-top:5%;
-}
-
-.multiple{
-	position:relative;
-}
-
-.single{
-	position:relative;
-}
-
-#multi_plot{
-	position:relative;
-	margin-bottom:5%;
-	margin-top:3%;
-}
-
-
-
-
-
-#single_plot {
-	position:relative;
-	margin-top:5%;
-	margin-bottom:5%;
-}
-
-#footer{
-	position:absolute;
-	left:35%;
-}
-
-
 
