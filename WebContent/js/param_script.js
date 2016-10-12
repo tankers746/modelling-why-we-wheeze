@@ -153,7 +153,7 @@ $(document).ready(function() {
         min: 15,
         max: 30,
         step: 0.5,
-        unit: "% max",
+        unit: "%max",
         altLabel: "x<sub>max</sub>",
         desc: "ASM shortening"
     });

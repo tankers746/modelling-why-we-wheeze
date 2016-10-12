@@ -1,17 +1,28 @@
 .ui-spinner {
     height: 50px;
-    width: 100%;
     display: block;
-    margin : 0 auto;
-}
-.pi-spinner .ui-spinner:before{
-	content: "%";
-
+    margin-left: 40%;
+	margin-top: 10%;
+	position: absolute;
+	top: 0; bottom: 0;
 }
 
 .ui-spinner-input {
 	height: 90%;
 	width: 70%;
+}
+
+.spinner_label
+{
+    float: left;
+	width: 40%;
+    text-align: center;
+}
+
+.spinner_label label
+{
+	display: block;
+    font-size:25px;
 }
 
 input[type="text"] {
@@ -29,20 +40,6 @@ input[type="text"] {
 
 .param
 {
-    width: 120px;
     margin-top: 10px;
 }
 
-.spinner_label
-{
-    display: block;
-    text-align: center;
-    display: list-item;
-    list-style:none;
-}
-
-.spinner_label label
-{
-    display: block;
-    font-size:25px;
-}
