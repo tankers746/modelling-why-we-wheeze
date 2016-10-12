@@ -103,8 +103,8 @@ $.widget('mwww.multi_plot_d3', {
         //Create svg element
         this.svg = d3.select(this.element.get(0)).append("svg")
             .attr("height",  this.height)
-            .attr("width",   Math.floor(this.height * this.options.aspect))
-            .attr("style", "outline: 1px solid black;");
+         .attr("width",   Math.floor(this.height * this.options.aspect));
+            //.attr("style", "outline: 1px solid black;");
             
         //Set up margins and scales
         var margin = {top: 30, right: 30, bottom: 60, left: 60};
