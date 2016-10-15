@@ -26,17 +26,10 @@
 }
 
 input[type="text"] {
-    font-size:25px;
+    font-size:1.1em;
     margin-top:2%;
 }
 
-
-#dynamic_plot
-{
-	position:absolute;
-	top:50%;
-	left:70%;
-}
 
 .param
 {
