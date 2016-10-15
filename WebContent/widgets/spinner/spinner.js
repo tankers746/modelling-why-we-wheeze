@@ -33,7 +33,6 @@ $.widget("mwww.spinner2", $.ui.spinner, {
             html:  options.altLabel || options.topic
         });
 
-        $(this.element).wrap("<div class=param></div>");
         $(this.element).before(label);
         label.wrap("<div class=spinner_label></div>");
 

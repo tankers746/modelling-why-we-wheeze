@@ -1,9 +1,4 @@
-.param
-{
-    width: 90%;
-    margin-top: 5%;
-    margin-bottom: 5%;
-}
+
 
 .ui-spinner {
     height: 45px;
@@ -11,11 +6,13 @@
     display: block;
     margin-left: 40%;
     position: absolute;
-    transform: translate(0, 50%);
+    top: 50%;
+    transform: translate(0, -50%);
 }
 
 .spinner_label
 {
+    margin-top: 5%;
     float: left;
     width: 40%;
     text-align: center;
