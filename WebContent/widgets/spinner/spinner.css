@@ -1,38 +1,43 @@
-.ui-spinner {
-    height: 50px;
-    display: block;
-    margin-left: 40%;
-	margin-top: 10%;
-	position: absolute;
-	top: 0; bottom: 0;
+.param
+{
+    width: 90%;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
-.ui-spinner-input {
-	height: 90%;
-	width: 70%;
+.ui-spinner {
+    height: 45px;
+    width: 40%;
+    display: block;
+    margin-left: 40%;
+    position: absolute;
+    transform: translate(0, 50%);
 }
 
 .spinner_label
 {
     float: left;
-	width: 40%;
+    width: 40%;
     text-align: center;
 }
 
+
 .spinner_label label
 {
-	display: block;
+    display: block;
     font-size:25px;
 }
 
-input[type="text"] {
-    font-size:1.1em;
-    margin-top:2%;
+
+.ui-spinner-input {
+    height: 90%;
+    width: 70%;
 }
 
 
-.param
-{
-    margin-top: 10px;
+
+input[type="text"] {
+    font-size:1.3em;
+    margin-top:2%;
 }
 
