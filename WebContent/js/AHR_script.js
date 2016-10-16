@@ -16,13 +16,13 @@ var AHR = (function() {
         if(s<0) {
             return {y: 0, z: 0};
         } else {
-            //return {y: 0.02*s, z: 0.1*s};
-            //return {y: 0.016*s*(s+0.1), z: 0.08*s*(s+0.1)};
-            //return {y: 0.016*s*(s+0.2), z: 0.08*s*(s+0.2)};
-            //return {y: 0.016*s*(s+0.3), z: 0.08*s*(s+0.3)};
-            //return {y: 0.02*s*s, z: 0.1*s*s};
-            //return {y: 0.018*s*(s+0.11111), z: 0.09*s*(s+0.11111)};
-            return {y: 0.019*s*(s+0.1), z: 0.095*s*(s+0.1)};
+            //var y = 0.02*s;
+            //var y = 0.016*s*(s+0.1);
+            //var y = 0.02*s*s;
+            //var y = 0.019*s*(s+0.1);
+            var y = 0.0012*s*s*(s+9.7);
+            
+            return {y: y, z: 5*y};
         }
     }
     
