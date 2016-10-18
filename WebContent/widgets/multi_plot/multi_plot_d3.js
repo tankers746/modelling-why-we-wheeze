@@ -153,7 +153,7 @@ $.widget('mwww.multi_plot_d3', {
 		this.svg.append("text")
 			.attr("transform", "translate(" + this.svg.attr("width")/2 + "," + (this.svg.attr("height") - xAxisTextFromBottom) + ")")
 			.style("text-anchor", "middle")
-			.text("Methocholine dose [uM]");
+			.text("Methocholine dose (\u03BCM)");
         
         var y_axis = d3.axisLeft()
             .scale(this.y_scale);

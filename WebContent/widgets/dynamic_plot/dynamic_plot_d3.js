@@ -38,9 +38,9 @@ $.widget('mwww.dynamic_plot_d3', {
             data[i].y = model(data[i].x);
             
             if(isNaN(data[i].y)) {
-                data[i].y = 2*y_max;
+                data[i].y = 10*y_max;
             } else {
-                data[i].y = Math.min(data[i].y, 2*y_max);
+                data[i].y = Math.min(data[i].y, 10*y_max);
                 data[i].y = Math.max(data[i].y, 0);
             }
             
@@ -131,7 +131,7 @@ $.widget('mwww.dynamic_plot_d3', {
 		this.svg.append("text")
 			.attr("transform", "translate(" + this.svg.attr("width")/2 + "," + (this.svg.attr("height") - xAxisTextFromBottom) + ")")
 			.style("text-anchor", "middle")
-			.text("Methocholine dose [uM]");
+			.text("Methocholine dose (\u03BCM)");
         
         var y_axis = d3.axisLeft()
             .scale(this.y_scale);
