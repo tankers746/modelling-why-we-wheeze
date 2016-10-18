@@ -165,7 +165,7 @@ $(document).ready(function() {
         min: 0,
         max: 100,
         step: 1,
-        desc: "Percentage increase in submucosa (%)"
+        desc: "Percentage increase in submucosa area (%)"
     });
 
     $("#z_spinner").spinner2({
