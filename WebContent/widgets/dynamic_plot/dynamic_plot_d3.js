@@ -1,3 +1,47 @@
+/**
+ * Dynamic Plot d3
+ *
+ * This widget creates a plot of Airway Resistance vs [methacholine].
+ * It is called "dynamic plot" since thers is a single curve, but it responds dynamically to input.
+ *
+ * Authors:
+ *     Damon van der Linde
+ *     Michael Baxter <20503664@student.uwa.edu.au>
+ *
+ * Since:
+ *     19/10/2016
+ *
+ * Use:
+ *     Insert the widget into a div using jquery, eg:
+ *         $.(#my_div).dynamic_plot_d3({model: myfunction});
+ *
+ *     It is important to provide a refernce to the function plotted.
+ *
+ *     The widget listens to the topics specified in the topic array, and updates on event.
+ *
+ *
+ *     The size of the widget can be set using the width option.
+ *     Height = width/aspect
+ *
+ *     Delete the widget using:
+ *         $.(#my_div).dynamic_plot_d3("destroy");
+ *
+ *
+ * Options:
+ *     channel:     Prefix of subscribed topics
+ *     topics:      Array of topic suffixes to listen on
+ *     model:       Reference to function that will be plotted
+ *     x_min:       Minimum value of logd on x axis
+ *     x_max:       Maximum value of logd on x axis
+ *     y_min:       Minimum value on y axis
+ *     y_max:       Maximum value on y axis
+ *     num_points:  Number of points plotted on graph (curve is smoothly interploated)
+ *     animation_speed: Duration of animation when graph is updated
+ *     width:       Width of widget
+ *     aspect:      Aspect ration of graph as a fraction
+ *
+ */
+
 $.widget('mwww.dynamic_plot_d3', {
     options: {
         
@@ -32,6 +76,10 @@ $.widget('mwww.dynamic_plot_d3', {
     y_axis:     {},
     
     
+    /*
+     * generate_data
+     * Helper functon that generates an array of data points from the model funciton.
+     */
     generate_data:  function(data, model, y_max) {
         for(var i=0; i<data.length; i++) {
             data[i].y = model(data[i].x);
@@ -47,6 +95,11 @@ $.widget('mwww.dynamic_plot_d3', {
         }
     },
     
+    /*
+     * callback
+     * Function that is called whenever an event on one of the topics is triggered.
+     * Re-geneates the set of points and animates curve.
+     */
     callback:   function(e) {
         //console.log("event");
         this.generate_data(this.data, this.options.model, this.options.y_max);
@@ -60,6 +113,12 @@ $.widget('mwww.dynamic_plot_d3', {
             
     },
     
+    /*
+     * _create
+     * Function that is called on creation of the widget
+     * Attatches an svg canvas to the continer div and draws graph inside.
+     * Also sets up subscribers.
+     */
     _create: function() {
         
         //Check size of widget.
@@ -165,6 +224,11 @@ $.widget('mwww.dynamic_plot_d3', {
         
     },
     
+    /*
+     * _destroy
+     * Function that is called on removal of the widget
+     * Unsubscribes the widget and empties the containing div.
+     */
     _destroy: function() {
         //Unsubscribe
         for(var i=0; i<this.options.topics.length; i++) {

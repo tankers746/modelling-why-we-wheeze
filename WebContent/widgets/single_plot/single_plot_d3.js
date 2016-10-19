@@ -68,7 +68,7 @@ $.widget('mwww.single_plot_d3', {
     /*
      * callback_logd
      * Function called whent there is an event on the logd topic
-     * Updates the local logd and animates marker point along curve.
+     * Animates marker dot along curve.
      */
     callback_logd:  function(e, logd_) {
         //console.log("event");
