@@ -178,8 +178,8 @@ $(document).ready(function() {
         desc: "Percentage increase in mucosa area (%)"
     });
     
-    $("#cross_section").cross_section_d3({channel : "mwww/", rmax: 4.4, width: 275});
-    $("#dynamic_plot").dynamic_plot_d3({channel : "mwww/", model : param.resistance});
+    $("#cross_section").cross_section_d3({channel: "mwww/", rmax: 4.4, width: 275});
+    $("#dynamic_plot").dynamic_plot_d3({channel: "mwww/", model: param.resistance, width: 400});
     
     param.update();
 });
