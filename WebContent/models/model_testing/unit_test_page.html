@@ -4,38 +4,53 @@
 		<meta charset="UTF-8">
 		<title>MWWW Unit Test Page</title>
 		
-		<script src=".../vendor/PapaParse-4.1.2/papaparse.min.js"</script>
-		<script src="../airway_model.js"</script>
+		<script src="https://d3js.org/d3.v4.js"></script>
+		<script src="../airway_model_B.js"></script>
 		
 		<script>
-			var data = 
-			var model = new Airway();
-			
-			var parse_config =
+			function test(data)
 			{
-				header: true,
-				dynamicTyping: true,
-				complete:	function(results, file)
-							{
-								for(i = 0; i < 596; i++)
-								{
-									model.update(results[i].A, results[i].B, results[i].C, results[i].D, results[i].xmax, results[i].y, results[i].z, results[i].logd);
-									var r_match = Boolean(model.resistance(results[i].logd) == results[i].R);
-									
-									if(r_match)
-									{document.write((i+1) + " CORRECT")};
-									else
-									{document.write((i+1) + " FALSE")};
-								}
-							}
-				skipEmptyLines: true
+				model = new Airway();
+				var short, short_match, res, res_match;
+				
+				for (i = 0; i < data.length; i++)
+				{
+					model.update(data[i].A, data[i].B, data[i].C, data[i].D, data[i].xmax, data[i].y, data[i].z, data[i].logd);
+					
+					short = model.shortening(data[i].logd);
+					short_match = Boolean(Math.abs(short - data[i].x) < 0.00000000009);
+					res = model.resistance(data[i].logd);
+					res_match = Boolean(Math.abs(res - data[i].R) < 0.00000000009);
+					
+					document.write((i+1)+",&emsp;"+(data[i].x)+",&emsp;"+(short)+",&emsp;"+(short_match)+",&emsp;"+(data[i].R)+",&emsp;"+(res)+",&emsp;"+(res_match)+"<br>");
+				}
 			}
 			
-			Papa.parse(data,parse_config);
+			function convert(data)
+			{
+				var row = new Object();
+				
+				row.A = +data.A;
+				row.B = +data.B;
+				row.C = +data.C;
+				row.D = +data.D;
+				row.xmax = +data.xmax;
+				row.y = +data.y;
+				row.z = +data.z;
+				row.logd = +data.logd;
+				row.x = +data.x;
+				row.R = +data.R;
+				
+				return row;
+			}
 		</script>
 	</head>
 
 	<body>
-		
+		<h1>Row,&emsp;Shortening (expected),&emsp;Shortening (result),&emsp;Match?,&emsp;Resistance (expected),&emsp;Resistance (result),&emsp;Match?</h1><br>
+			
+		<script>
+			d3.csv("test_values.csv", convert, test);
+		</script>
 	</body>
 </html> 
