@@ -1,17 +1,47 @@
+/**
+ * AHR script
+ *
+ * This script sets up the widgets and the model, and links them with pub/sub.
+ *
+ * Authors:
+ *     Michael Baxter <20503664@student.uwa.edu.au>
+ *
+ * Since:
+ *     19/10/2016
+ *
+ * Description:
+ *     This script has two parts: the AHR module at the top and the part that adds widgets to the
+ *     page at the bottom.
+ *
+ *     The AHR module contains the model object (see model.js or model_B.js), a copies of state
+ *     variables (x, y, z, logd) and a set of callback functions.  The input widgets (sliders)
+ *     publish on topics logd and S.  This triggers an event and pub/sub calls one of the 
+ *     callback functions.  This updates the model and the state parameters.  The data calculated
+ *     by the model functions are then published on differnt channels for the graphs and the
+ *     cross-section diagram.
+ *
+ *     The second part of the script below the AHR module is respossible for putting the widgets
+ *     on the page.  Use that part to change widget options, such as width.
+ *
+ */
+
+
 var AHR = (function() {
     var channel = "mwww/";
     
-    //Need to store these variables for when S changes and logd doesn't,
-    //  and vice versa
+    // Need to store these variables for when S changes and logd doesn't,
+    // and vice versa
     var x=defaults.x;
     var y=defaults.y;
     var z=defaults.z;
     var logd=-9;
     
-    //Create the model using default starting values;
+    // Create the model using default starting values;
     var model = new Airway();
     
-    //y and z as a function of asthma severity
+    // This is (y, z) as a function of S.  At one point, it was suggested that asthma severity
+    // be a continuous amount, which is why this isn't an array.  I'm currently using a cubic fcn.
+    // This function changes the spread of curves on the multiplot.
     function S(s) {
         if(s<0) {
             return {y: 0, z: 0};
@@ -26,7 +56,8 @@ var AHR = (function() {
         }
     }
     
-    //Function to update model and publish results
+    // Helper function that updates the model and publishes output for the c/s diagram
+    // and graphs to listen out for.
     function update_and_publish() {
         model.update(defaults.A, defaults.B, defaults.C, defaults.D, x, y, z, logd);
         $.publish(channel + "radii", [model.radii.lumen, model.radii.mucosal, model.radii.sub_mucosal, model.radii.asm]);
@@ -34,40 +65,44 @@ var AHR = (function() {
         $.publish(channel + "ASM_short", [100*model.shortening(logd)]);
     }
     
-    //Callback function for when S changes
+    // Callback function for when S changes
     function callback_S(e, S_) {
-        //alert(S);
         y = S(S_).y;
         z = S(S_).z;
-        // Magic numbers. Bad Michael!
         update_and_publish();
     }
     
-    //Callback function for when logd changes
+    // Callback function for when logd changes
     function callback_logd(e, logd_) {
         logd = logd_;
         update_and_publish();
     }
     
-    //Initialise the subscribers.
+    // Initialise the model and start the subscribers.
     function create() {
         model.update(defaults.A, defaults.B, defaults.C, defaults.D, x, y, z, logd);
         $.subscribe((channel+"S"),callback_S);
         $.subscribe((channel+"logd"),callback_logd);
     }
     
-    //Unsubscribe all.
+    // Unsubscribe all.
     function destroy() {
         $.unsubscribe((channel+"S"),callback_S);
         $.unsubscribe((channel+"logd"),callback_logd);
     }
     
-    //The magic revealing module pattern.
+    // Revealing module patten: returns an interface to the object.
+    // create:      Initialises model and starts sunscribers.
+    // destroy:     Stops subscribers.
+    // update:      Publishes current data on all channels.
+    // resistance:  Returns reference to Airway Resistance as a function of logd and S.
+    //              Required by the multiplot.
+    // shortening:  Returns reference to ASM shortening (%) as a function of logd.
+    //              Required by the single plot.
     return {
         create:     create,
         destroy:    destroy,
         update:     update_and_publish,
-        //This is really bad.  Cannot be updating model every time this function is called.
         resistance: function(logd_, S_) {model.update(defaults.A, defaults.B, defaults.C, defaults.D, x, S(S_).y, S(S_).z, logd_); return model.resistance(logd_);},
         shortening: function(logd_) {return 100*model.shortening(logd_);}
     };
