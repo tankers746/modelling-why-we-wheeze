@@ -8,6 +8,9 @@
 		<script src="../airway_model.js"</script>
 		
 		<script>
+			var data = 
+			var model = new Airway();
+			
 			var parse_config =
 			{
 				header: true,
@@ -16,10 +19,19 @@
 							{
 								for(i = 0; i < 596; i++)
 								{
+									model.update(results[i].A, results[i].B, results[i].C, results[i].D, results[i].xmax, results[i].y, results[i].z, results[i].logd);
+									var r_match = Boolean(model.resistance(results[i].logd) == results[i].R);
 									
+									if(r_match)
+									{document.write((i+1) + " CORRECT")};
+									else
+									{document.write((i+1) + " FALSE")};
 								}
 							}
+				skipEmptyLines: true
 			}
+			
+			Papa.parse(data,parse_config);
 		</script>
 	</head>
 
