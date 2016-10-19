@@ -1,3 +1,41 @@
+/**
+ * Cross Section d3
+ *
+ * This widget displays a cross section diagram of an airway using the d3 library.
+ *
+ * Authors:
+ *     Michael Baxter <20503664@student.uwa.edu.au>
+ *
+ * Since:
+ *     19/10/2016
+ * 
+ * Use:
+ *     Insert the widget into a div using jquery, eg:
+ *         $.(#my_div).cross_section_d3({rmax: 100});
+ *
+ *     The only essential option is rmax, which is default set to 0 for starting animation.
+ *
+ *     The widget listens to channel/topic_radii and expects the array: [ra, rb, rc, rd].
+ *     It then animates the circles to match.
+ *
+ *     The size of the widget can be set using the width option.  Height = width.
+ *
+ *     Delete the widget using:
+ *         $.(#my_div).cross_section_d3("destroy");
+ *
+ *
+ * Options:
+ *     ra:  Inital lumen radius
+ *     rb:  Initial mucosal layer outer radius
+ *     rc:  Initial submucosal layer outer radius
+ *     rd:  Initial ASM layer outer radius
+ *     rmax:        Maximum ASM layer outer radius;
+ *     channel:     Prefix of subscribed topics
+ *     topic_radii: Topic suffix radii data
+ *     animation_speed:     Duration of animations in ms
+ *     width:   Width (and height) of widget
+ *
+ */
 
 $.widget('mwww.cross_section_d3', {
     options: {
@@ -5,7 +43,7 @@ $.widget('mwww.cross_section_d3', {
         rb:     0,
         rc:     0,
         rd:     0,
-        rmax:  0,
+        rmax:   1,
         
         channel:        "default/",
         topic_radii:    "radii",
@@ -26,6 +64,13 @@ $.widget('mwww.cross_section_d3', {
     colours:    ['#ffffff', '#00ff00', '#ffff00', '#ff0000'],
     dot:        {},
     
+    
+    /*
+     * callback_radii
+     * Function called whent there is an event on the radii topic
+     * Takes [ra, rb, rc, rd], updates local copies and animates
+     * circles to match
+     */
     callback_radii: function(e, ra_, rb_, rc_, rd_) {
         //USE $.PROXY WHEN INVOVIKING THIS METHOD IN $.SUBSCRIBE
         if(0 <= ra_ && ra_ <= this.options.rmax) {
@@ -60,6 +105,12 @@ $.widget('mwww.cross_section_d3', {
         }
     },
     
+    /*
+     * animate
+     * Helper function for animating the circles to new radii
+     *   i:  circle number
+     *   r:  new radius
+     */
     animate: function(i, r) {
         if(i<0 || i >= this.circles.length) {
             console.log("Error: Cannot select circle (animate)");
@@ -77,6 +128,10 @@ $.widget('mwww.cross_section_d3', {
         }
     },
     
+    /*
+     * update
+     * Helper function that calls animate on all circles
+     */
     update: function() {
         this.animate(0, this.options.ra);
         this.animate(1, this.options.rb);
@@ -84,7 +139,13 @@ $.widget('mwww.cross_section_d3', {
         this.animate(3, this.options.rd);
     },
     
-    
+    /*
+     * _create
+     * Function that is called on creation of the widget
+     * Attatches an sgv element to the container div and draws
+     * cross section diagram instide using sgv circle objects.
+     * Also sets up subscriber and begins a starting animation.
+     */
     _create: function() {
         
         //Check size of widget.
@@ -135,7 +196,12 @@ $.widget('mwww.cross_section_d3', {
         this.update();
         
     },
-         
+    
+    /*
+     * _destroy
+     * Function that is called on removal of the widget
+     * Unsubscribes the widget and empties the containing div.
+     */
     _destroy: function() {
         //Unsubscribe
         $.unsubscribe(this.options.channel + this.options.topic_radii, this.callback_radii);

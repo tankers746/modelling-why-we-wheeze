@@ -1,3 +1,52 @@
+/**
+ * Multi Plot d3
+ *
+ * This widget creates a plot of Airway Resistance vs [methacholine].
+ * It is called "multi plot" since there are many static curves.
+ *
+ * Authors:
+ *     Damon van der Linde
+ *     Michael Baxter <20503664@student.uwa.edu.au>
+ *
+ * Since:
+ *     19/10/2016
+ *
+ * Use:
+ *     Insert the widget into a div using jquery, eg:
+ *         $.(#my_div).multi_plot_d3({model: myfunction});
+ *
+ *     It is important to provide a refernce to the function plotted.
+ *
+ *     The widget listens to channel/topic_logd and expects a double: [logd].
+ *     The marker dot moves along the curve to the corresponding point.
+ *
+ *     The widget listens to channel/topic_S for the second "selector" argument to the fuction.
+ *     This highlights a curve on the plot.
+ *
+ *     The size of the widget can be set using the width option.
+ *     Height = width/aspect
+ *
+ *     Delete the widget using:
+ *         $.(#my_div).multi_plot_d3("destroy");
+ *
+ *
+ * Options:
+ *     channel:     Prefix of subscribed topics
+ *     topic_logd:  Topic suffix for logd data
+ *     topic_S:     Topic suffix for selector
+ *     model:       Reference to function that will be plotted
+ *     num_plots:   Number of curves to be drawn on graph
+ *     x_min:       Minimum value of logd on x axis
+ *     x_max:       Maximum value of logd on x axis
+ *     y_min:       Minimum value on y axis
+ *     y_max:       Maximum value on y axis
+ *     num_points:  Number of points plotted on graph (curve is smoothly interploated)
+ *     animation_speed: Duration of animation when marker dot jumps curves when S is changed
+ *     width:       Width of widget
+ *     aspect:      Aspect ration of graph as a fraction
+ *
+ */
+
 $.widget('mwww.multi_plot_d3', {
     options: {
         channel:    "default/",
@@ -37,6 +86,10 @@ $.widget('mwww.multi_plot_d3', {
     marker:     {},
     
     
+    /*
+     * clip_input
+     * Helper functon for truncating input to suitable range.
+     */
     clip_input:     function(y, max) {
         if(isNaN(y))    return 2*max;
         y = Math.min(y, 2*max);
@@ -44,6 +97,12 @@ $.widget('mwww.multi_plot_d3', {
         return y;
     },
     
+    /*
+     * callback_S
+     * Function called when there is an event on the S topic
+     * Updates the local S, highlights curve and animated dot marker
+     * so it "jumps" to the selected curve.
+     */
     callback_S:     function(e, S_) {
         //console.log("event");
         
@@ -64,6 +123,11 @@ $.widget('mwww.multi_plot_d3', {
         }
     },
     
+    /*
+     * callback_logd
+     * Function called when there is an event on the logd topic
+     * Updates local logd and animates marker dot along curve.
+     */
     callback_logd:  function(e, logd_) {
         //console.log("event");
         
@@ -82,7 +146,12 @@ $.widget('mwww.multi_plot_d3', {
             .ease(d3.easeLinear);
     },
     
-    
+    /*
+     * _create
+     * Function that is called on creation of the widget
+     * Attatches an svg canvas to the continer div and draws graph inside.
+     * Also sets up subscribers.
+     */
     _create: function() {
         
         //Check size of widget.
@@ -203,6 +272,11 @@ $.widget('mwww.multi_plot_d3', {
     
     },
     
+    /*
+     * _destroy
+     * Function that is called on removal of the widget
+     * Unsubscribes the widget and empties the containing div.
+     */
     _destroy: function() {
         //Unsubscribe
         $.unsubscribe(this.options.channel + this.options.topic_S, this.callback_S);
