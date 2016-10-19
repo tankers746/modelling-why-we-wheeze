@@ -13,14 +13,14 @@
  *     This script has two parts: the AHR module at the top and the part that adds widgets to the
  *     page at the bottom.
  *
- *     The AHR module contains the model object (see model.js or model_B.js), a copies of state
- *     variables (x, y, z, logd) and a set of callback functions.  The input widgets (sliders)
+ *     The AHR module contains the model object (see airway_model.js or airway_model_B.js), copies
+ *     of state variables (x, y, z, logd) and a set of callback functions.  The slider widgets
  *     publish on topics logd and S.  This triggers an event and pub/sub calls one of the 
  *     callback functions.  This updates the model and the state parameters.  The data calculated
- *     by the model functions are then published on differnt channels for the graphs and the
+ *     by the model functions is then published on different channels for the graphs and the
  *     cross-section diagram.
  *
- *     The second part of the script below the AHR module is respossible for putting the widgets
+ *     The second part of the script below the AHR module is responsible for putting the widgets
  *     on the page.  Use that part to change widget options, such as width.
  *
  */
@@ -92,7 +92,7 @@ var AHR = (function() {
     }
     
     // Revealing module patten: returns an interface to the object.
-    // create:      Initialises model and starts sunscribers.
+    // create:      Initialises model and starts subscribers.
     // destroy:     Stops subscribers.
     // update:      Publishes current data on all channels.
     // resistance:  Returns reference to Airway Resistance as a function of logd and S.

@@ -1,8 +1,35 @@
+/**
+ * param script
+ *
+ * This script sets up the widgets and the model, and links them with pub/sub.
+ *
+ * Authors:
+ *     Michael Baxter <20503664@student.uwa.edu.au>
+ *
+ * Since:
+ *     19/10/2016
+ *
+ * Description:
+ *     This script has two parts: the param module at the top and the part that adds widgets to the
+ *     page at the bottom.
+ *
+ *     The param module at the top contains the model object (see airway_model.js or
+ *     airway_model_B.js), the state variables (A, B, C, D, xmax, etc.) and a long list
+ *     of callback functions.  When someone clicks on one of the spinners, it triggers an event in
+ *     one of the subscribers.  This updates that state variable, makes calculations using
+ *     model functions and publishes on other topics to trigger events in the airway cross-section
+ *     diagram and graph.
+ *
+ *     The bottom part of the script is responsible for adding the widgets into empty divs
+ *     (or input elements in the case of spinners).  Change widget options such as width there.
+ *
+ */
+
 
 var param = (function() {
     var channel = "mwww/";
     
-    //Now, all the parameters are variables.
+    // For this page, all the parameters are variables.
     var A = defaults.A;
     var B = defaults.B;
     var C = defaults.C;
@@ -13,30 +40,29 @@ var param = (function() {
     var logd = defaults.logd;
     
     
-    //Create the model usign default starting values;
+    // Create the model using default starting values.
     var model = new Airway();
     
     
-    //Update and publish all
+    // Update model and publish radii for c/s diagram.
     function update_and_publish() {
         model.update(A, B, C, D, xmax, y, z, logd);
         $.publish(channel + "radii", [model.radii.lumen, model.radii.mucosal, model.radii.sub_mucosal, model.radii.asm]);
     }
     
-    //Callback function for when A changes
+    // Callback function for when A changes.
     function callback_A(e, A_) {
         A = A_;
-        //$.publish(channel + "rmax", [A]);
         update_and_publish();
     }
     
-    //And B etc.
+    // Callback function for when B changes.
     function callback_B(e, B_) {
         B = B_ * Math.PI;
         update_and_publish();
     }
     
-    //Really need an array.  TODO.
+    // C, etc.
     function callback_C(e, C_) {
         C = C_ * Math.PI;
         update_and_publish();
@@ -62,7 +88,7 @@ var param = (function() {
         update_and_publish();
     }
     
-    //Initialise the subscribers.
+    // Initialise the model and start the subscribers.
     function create() {
         model.update(A, B, C, D, xmax, y, z, logd);
         $.subscribe((channel+"A"),callback_A);
@@ -74,7 +100,7 @@ var param = (function() {
         $.subscribe((channel+"z"),callback_z);
     }
     
-    //Unsubscribe all.
+    // Unsubscribe all.
     function destroy() {
         $.unsubscribe((channel+"A"),callback_A);
         $.unsubscribe((channel+"B"),callback_B);
@@ -85,7 +111,12 @@ var param = (function() {
         $.unsubscribe((channel+"z"),callback_z);
     }
     
-    //The magic revealing module pattern.
+    // Interface for the param module
+    // create:      Initialises model and starts subscribers.
+    // destroy:     Stops subscribers.
+    // update:      Publishes current data on all channels.
+    // resistance:  Returns a reference to Airway Resistance as a function of logd.
+    //              Required by the dynamic plot.  Function is updated automatically by callbacks.
     return {
         create:     create,
         destroy:    destroy,
