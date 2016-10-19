@@ -53,12 +53,12 @@ var param = (function() {
     }
     
     function callback_y(e, y_) {
-        y = y_;
+        y = y_/100;
         update_and_publish();
     }
     
     function callback_z(e, z_) {
-        z = z_;
+        z = z_/100;
         update_and_publish();
     }
     
@@ -163,9 +163,9 @@ $(document).ready(function() {
         topic: "y",
         initval: 0,
         min: 0,
-        max: 1,
-        step: 0.01,
-        desc: "Fractional increase in submucosa"
+        max: 100,
+        step: 1,
+        desc: "Percentage increase in submucosa area (%)"
     });
 
     $("#z_spinner").spinner2({
@@ -173,13 +173,13 @@ $(document).ready(function() {
         topic: "z",
         initval: 0,
         min: 0,
-        max: 5,
-        step: 0.05,
-        desc: "Fractional increase in mucosa area"
+        max: 500,
+        step: 5,
+        desc: "Percentage increase in mucosa area (%)"
     });
     
-    $("#cross_section").cross_section_d3({channel : "mwww/", rmax: 4.4});
-    $("#dynamic_plot").dynamic_plot_d3({channel : "mwww/", model : param.resistance});
+    $("#cross_section").cross_section_d3({channel: "mwww/", rmax: 4.4, width: 275});
+    $("#dynamic_plot").dynamic_plot_d3({channel: "mwww/", model: param.resistance, width: 400});
     
     param.update();
 });

@@ -8,11 +8,11 @@ $.widget('mwww.single_plot_d3', {
         x_max:      -3,
         num_points: 20,
         
+        width:      -1,
         aspect:     4/3,
     },
     
-    default_height:   300,
-    height:           0,
+    default_width:  400,
     
     svg:        {},
     g:          {},
@@ -29,10 +29,10 @@ $.widget('mwww.single_plot_d3', {
         //console.log("event");
         
         this.marker.transition()
-        .attr("cx", this.x_scale(logd_))
-        .attr("cy", this.y_scale(this.options.model(logd_)))
-        .duration(20)
-        .ease(d3.easeLinear);
+            .attr("cx", this.x_scale(logd_))
+            .attr("cy", this.y_scale(this.options.model(logd_)))
+            .duration(20)
+            .ease(d3.easeLinear);
         
         //this.marker
         //    .attr("cx", this.x_scale(logd_))
@@ -42,27 +42,24 @@ $.widget('mwww.single_plot_d3', {
     
     _create: function() {
         
-        //Resize widget if too small
-        if(this.element.height() < 1) {
-            this.element.height(this.default_height);
+        //Check size of widget.
+        if(this.options.aspect < 1e-12) {
+            console.log("Error: graph aspect ration must be > 0");
+            this.options.aspect = 4/3;
         }
         
-        if(this.element.width() < 1) {
-            this.element.width(Math.floor(this.default_height * this.options.aspect));
+        if(this.options.width < 90 || this.options.width/this.options.aspect < 90) {
+            this.options.width = this.default_width;
         }
-        
-        
-        //Find size for svg and set it to center.
-        if(this.options.aspect < 1e-12) throw ("ERROR: aspect cannot be <= 0 (in single_plot_d3._create())");
-        this.height = Math.min(this.element.height(), Math.floor(this.element.width() / this.options.aspect));
-        this.element.css({"text-align": 'center'});
         
         
         //Create svg element
         this.svg = d3.select(this.element.get(0)).append("svg")
-            .attr("height",  this.height)
-            .attr("width",   Math.floor(this.height * this.options.aspect));
+            .attr("height",  Math.floor(this.options.width/this.options.aspect))
+            .attr("width",   this.options.width);
             //.attr("style", "outline: 1px solid black;");
+            
+        this.element.css({"text-align": 'center'});
         
         
         //Set up margins and x scale
@@ -109,7 +106,7 @@ $.widget('mwww.single_plot_d3', {
 		this.svg.append("text")
 			.attr("transform", "translate(" + this.svg.attr("width")/2 + "," + (this.svg.attr("height") - xAxisTextFromBottom) + ")")
 			.style("text-anchor", "middle")
-			.text("Methocholine dose [uM]");
+			.text("Methocholine dose (\u03BCM)");
         
         var y_axis = d3.axisLeft()
             .scale(this.y_scale);

@@ -1,16 +1,16 @@
 
-$.widget('mwww.cross_section_d3', {
+$.widget('mwww.cross_section_div', {
     options: {
-        ra:     0,
-        rb:     0,
-        rc:     0,
-        rd:     0,
-        rmax:  0,
+        ra:     25,
+        rb:     50,
+        rc:     75,
+        rd:     100,
+        rmax:   100,
         
         channel:        "default/",
         topic_radii:    "radii",
         
-        animation_speed: 400,
+        animation_speed:    400,
         
         width:   -1,
         
@@ -18,13 +18,10 @@ $.widget('mwww.cross_section_d3', {
     
     default_width:   275,
     
-    svg:    {},
-    g:      {},
-    scale:  {},
-    
+    container:  {},
     circles:    {},
     colours:    ['#ffffff', '#00ff00', '#ffff00', '#ff0000'],
-    dot:        {},
+    
     
     callback_radii: function(e, ra_, rb_, rc_, rd_) {
         //USE $.PROXY WHEN INVOVIKING THIS METHOD IN $.SUBSCRIBE
@@ -48,40 +45,53 @@ $.widget('mwww.cross_section_d3', {
             this.animate(3, this.options.rd);
         }
         
-        if(ra_ == 0 && this.dot.attr("fill") == "none") {
-            //this.dot.attr("fill", "black");
-            this.dot.transition()
-                .attr("fill", "black")
-                .delay(this.options.animation_speed);
-        }
-        
-        if(ra_ > 0 && this.dot.attr("fill") != "none"){
-            this.dot.attr("fill", "none");
-        }
     },
     
     animate: function(i, r) {
         if(i<0 || i >= this.circles.length) {
             console.log("Error: Cannot select circle (animate)");
             return;
-        } else if (r < 0) {
+        } else if(r < 0) {
             console.log("Error: Radius r must be +ve (animate)");
+            return;
+        } else if(this.options.rmax < 1e-12) {
+            console.log("Error: rmax must be +ve and non-zero (animate)");
             return;
         } else {
             //console.log("animate");
             //this.circles[i].attr("r", this.scale(r));
-            this.circles[i].transition()
-                .attr("r", this.scale(r))
-                .duration(this.options.animation_speed)
-                .ease(d3.easeLinear);
+            var scaled_r = this.options.width * r / this.options.rmax;
+            
+            this.circles[i].stop();
+            this.circles[i].animate({
+                height:     scaled_r + "px",
+                width:      scaled_r + "px",
+                'margin-top':   -scaled_r/2 + "px",
+                'margin-left':  -scaled_r/2 + "px",
+            }, {
+                queue: !1,
+                duration: this.options.animation_speed,
+                easing: "linear"
+            });
+            
         }
     },
+    
     
     update: function() {
         this.animate(0, this.options.ra);
         this.animate(1, this.options.rb);
         this.animate(2, this.options.rc);
         this.animate(3, this.options.rd);
+    },
+    
+    circles_css_rules : {
+        'position'  : 'absolute',
+        'top'       : '50%',
+        'left'      : '50%',
+        'border'    : '1px solid #000',
+        'box-sizing': 'border-box',
+        'border-radius': '100%'
     },
     
     
@@ -92,45 +102,29 @@ $.widget('mwww.cross_section_d3', {
             this.options.width = this.default_width;
         }
         
-        //Create svg element
-        this.svg = d3.select(this.element.get(0)).append("svg")
-            .attr("height",  this.options.width)
-            .attr("width",   this.options.width);
-            
-        this.element.css({"text-align": 'center'});
         
-        //Add an svg group element.  We will use a transform to center the circles.
-        this.g = this.svg.append("g")
-            .attr("transform", "translate(" + this.svg.attr("width")/2 + "," + this.svg.attr("height")/2 + ")");
+        //Create container div for circles
+        this.container = $("<div/>")
+            .height(this.options.width)
+            .width(this.options.width)
+            .css({'position': 'relative', 'left': '50%', 'margin-left': -this.options.width/2 + "px"});
+        $(this.element).append(this.container);
         
-        //Create a scale for the circles.
-        this.scale = d3.scaleLinear()
-            .domain([0, this.options.rmax])
-            .range([0, this.svg.attr("width")/2-1]);
         
         //Create circles
         this.circles = new Array(this.colours.length);
         
         for(var i=this.circles.length-1; i>-1; i--) {
-            this.circles[i] = this.g.append("circle")
-                .attr("cx", 0)
-                .attr("cy", 0)
-                .attr("r", 0)
-                .attr("fill", this.colours[i])
-                .attr("stroke", "black")
-                .attr("stroke-width", "1px");
+            this.circles[i] = $("<div/>")
+                .css(this.circles_css_rules)
+                .css({'background-color' : this.colours[i]});
+            this.container.append(this.circles[i]);
         }
-        
-        //Create center dot for when ra = 0
-        this.dot = this.g.append("circle")
-            .attr("cx", 0)
-            .attr("cy", 0)
-            .attr("r", 1)
-            .attr("fill", "none");
-        
+
+
         //Set up subscriber
         $.subscribe(this.options.channel + this.options.topic_radii, $.proxy(this.callback_radii, this));
-        
+
         //Starting animation
         this.update();
         

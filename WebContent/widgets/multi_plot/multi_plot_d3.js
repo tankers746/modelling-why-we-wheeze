@@ -12,18 +12,19 @@ $.widget('mwww.multi_plot_d3', {
         y_min:      0,
         y_max:      20,
         num_points: 50,
-        
-        aspect:     4/3,
-        
+         
         animation_speed:    200,
         
+        width:      -1,
+        aspect:     4/3,
     },
     
-    S:      0,
-    logd:   -9, 
+    default_width:   400,
     
-    default_height:   300,
-    height:           0,
+    
+    S:      0,
+    logd:   -9,
+    
     
     svg:        {},
     g:          {},
@@ -84,28 +85,26 @@ $.widget('mwww.multi_plot_d3', {
     
     _create: function() {
         
-        //Resize widget if too small
-        if(this.element.height() < 1) {
-            this.element.height(this.default_height);
+        //Check size of widget.
+        if(this.options.aspect < 1e-12) {
+            console.log("Error: graph aspect ration must be > 0");
+            this.options.aspect = 4/3;
         }
         
-        if(this.element.width() < 1) {
-            this.element.width(Math.floor(this.default_height * this.options.aspect));
+        if(this.options.width < 90 || this.options.width/this.options.aspect < 90) {
+            this.options.width = this.default_width;
         }
-        
-        
-        //Find size for svg and set it to center.
-        if(this.options.aspect < 1e-12) throw ("ERROR: aspect cannot be <= 0 (in multi_plot_d3._create())");
-        this.height = Math.min(this.element.height(), Math.floor(this.element.width() / this.options.aspect));
-        this.element.css({"text-align": 'center'});
         
         
         //Create svg element
         this.svg = d3.select(this.element.get(0)).append("svg")
-            .attr("height",  this.height)
-         .attr("width",   Math.floor(this.height * this.options.aspect));
+            .attr("height",  Math.floor(this.options.width/this.options.aspect))
+            .attr("width",   this.options.width);
             //.attr("style", "outline: 1px solid black;");
-            
+        
+        this.element.css({"text-align": 'center'});
+        
+        
         //Set up margins and scales
         var margin = {top: 30, right: 30, bottom: 60, left: 60};
         var inner_height = this.svg.attr("height") - margin.top - margin.bottom;
@@ -153,7 +152,7 @@ $.widget('mwww.multi_plot_d3', {
 		this.svg.append("text")
 			.attr("transform", "translate(" + this.svg.attr("width")/2 + "," + (this.svg.attr("height") - xAxisTextFromBottom) + ")")
 			.style("text-anchor", "middle")
-			.text("Methocholine dose [uM]");
+			.text("Methocholine dose (\u03BCM)");
         
         var y_axis = d3.axisLeft()
             .scale(this.y_scale);
