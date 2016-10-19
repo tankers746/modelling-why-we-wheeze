@@ -11,10 +11,12 @@ $.widget('mwww.cross_section_d3', {
         topic_radii:    "radii",
         
         animation_speed: 400,
+        
+        width:   -1,
+        
     },
     
-    default_size:   275,
-    size:           0,
+    default_width:   275,
     
     svg:    {},
     g:      {},
@@ -85,32 +87,26 @@ $.widget('mwww.cross_section_d3', {
     
     _create: function() {
         
-        //First resize widget if too small.
-        if(this.element.height() < 1) {
-            this.element.height(this.default_size);
+        //Check size of widget.
+        if(this.options.width < 1) {
+            this.options.width = this.default_width;
         }
-        
-        if(this.element.width() < 1) {
-            this.element.width(this.default_size);
-        }
-        
-        //Find size for svg and set it to center.
-        this.size = Math.min(this.element.height(), this.element.width());
-        this.element.css({"text-align": 'center'});
         
         //Create svg element
         this.svg = d3.select(this.element.get(0)).append("svg")
-            .attr("height",  this.size)
-            .attr("width",   this.size);
+            .attr("height",  this.options.width)
+            .attr("width",   this.options.width);
+            
+        this.element.css({"text-align": 'center'});
         
         //Add an svg group element.  We will use a transform to center the circles.
         this.g = this.svg.append("g")
-            .attr("transform", "translate(" + this.size/2 + "," + this.size/2 + ")");
+            .attr("transform", "translate(" + this.svg.attr("width")/2 + "," + this.svg.attr("height")/2 + ")");
         
         //Create a scale for the circles.
         this.scale = d3.scaleLinear()
             .domain([0, this.options.rmax])
-            .range([0, this.size/2-1]);
+            .range([0, this.svg.attr("width")/2-1]);
         
         //Create circles
         this.circles = new Array(this.colours.length);

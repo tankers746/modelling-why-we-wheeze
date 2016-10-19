@@ -10,12 +10,13 @@ $.widget('mwww.cross_section_div', {
         channel:        "default/",
         topic_radii:    "radii",
         
-        animation_speed: 400,
+        animation_speed:    400,
+        
+        width:   -1,
         
     },
     
-    default_size:   275,
-    size:           0,
+    default_width:   275,
     
     container:  {},
     circles:    {},
@@ -59,7 +60,7 @@ $.widget('mwww.cross_section_div', {
         } else {
             //console.log("animate");
             //this.circles[i].attr("r", this.scale(r));
-            var scaled_r = this.size * r / this.options.rmax;
+            var scaled_r = this.options.width * r / this.options.rmax;
             
             this.circles[i].stop();
             this.circles[i].animate({
@@ -96,23 +97,17 @@ $.widget('mwww.cross_section_div', {
     
     _create: function() {
         
-        //First resize widget if too small.
-        if(this.element.height() < 1) {
-            this.element.height(this.default_size);
+        //Check size of widget.
+        if(this.options.width < 1) {
+            this.options.width = this.default_width;
         }
-        
-        if(this.element.width() < 1) {
-            this.element.width(this.default_size);
-        }
-        
-        this.size = Math.min(this.element.height(), this.element.width());
         
         
         //Create container div for circles
-        this.container = $("<div/>");
-        this.container.height(this.size)
-            .width(this.size)
-            .css({'position': 'relative', 'left': '50%', 'margin-left': -this.size/2 + "px"});
+        this.container = $("<div/>")
+            .height(this.options.width)
+            .width(this.options.width)
+            .css({'position': 'relative', 'left': '50%', 'margin-left': -this.options.width/2 + "px"});
         $(this.element).append(this.container);
         
         
@@ -120,8 +115,8 @@ $.widget('mwww.cross_section_div', {
         this.circles = new Array(this.colours.length);
         
         for(var i=this.circles.length-1; i>-1; i--) {
-            this.circles[i] = $("<div/>");
-            this.circles[i].css(this.circles_css_rules)
+            this.circles[i] = $("<div/>")
+                .css(this.circles_css_rules)
                 .css({'background-color' : this.colours[i]});
             this.container.append(this.circles[i]);
         }
