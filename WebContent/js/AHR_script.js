@@ -113,9 +113,9 @@ $(document).ready(function() {
     AHR.create();
     $("#discrete").discrete_slider({channel: "mwww/", topic: "S"});
     $("#continuous").continuous_slider({channel: "mwww/", topic: "logd"});
-    $("#multi_plot").multi_plot_d3({channel: "mwww/", model: AHR.resistance, width: 400});
+    $("#multi_plot").multi_plot_d3({channel: "mwww/", model: AHR.resistance, width: 420});
     $("#cross_section").cross_section_div({channel: "mwww/", rmax: defaults.A, width: 275});
-    $("#single_plot").single_plot_d3({channel: "mwww/", model: AHR.shortening, width: 400});
+    $("#single_plot").single_plot_d3({channel: "mwww/", model: AHR.shortening, width: 420});
     AHR.update();
 });
 
