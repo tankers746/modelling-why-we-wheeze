@@ -2,6 +2,7 @@
  * Cross Section div
  *
  * This widget displays a cross section diagram of an airway using the DOM divs.
+ * This work is derived from the original project by Daniel (quackingfrogs)
  *
  * Authors:
  *     Michael Baxter <20503664@student.uwa.edu.au>
