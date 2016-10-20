@@ -5,25 +5,30 @@
 		<title>MWWW Unit Test Page</title>
 		
 		<script src="https://d3js.org/d3.v4.js"></script>
+		<script src="https://raw.githubusercontent.com/AlexLibs/client-side-csv-generator/master/csv_generator.js"></script>
 		<script src="../airway_model_B.js"></script>
 		
 		<script>
 			function test(data)
 			{
 				model = new Airway();
-				var short, short_match, res, res_match;
+				var shortening, resistance;
+				
+				var results = new Array(data.length+1);
+				results[0] = ["shortening (expected)", "shortening (actual)", "resistance (expected)", "resistance (actual)"];
+				
 				
 				for (i = 0; i < data.length; i++)
 				{
 					model.update(data[i].A, data[i].B, data[i].C, data[i].D, data[i].xmax, data[i].y, data[i].z, data[i].logd);
 					
-					short = model.shortening(data[i].logd);
-					short_match = Boolean(Math.abs(short - data[i].x) < 0.00000000009);
-					res = model.resistance(data[i].logd);
-					res_match = Boolean(Math.abs(res - data[i].R) < 0.00000000009);
+					shortening = model.shortening(data[i].logd);
+					resistance = model.resistance(data[i].logd);
 					
-					document.write((i+1)+",&emsp;"+(data[i].x)+",&emsp;"+(short)+",&emsp;"+(short_match)+",&emsp;"+(data[i].R)+",&emsp;"+(res)+",&emsp;"+(res_match)+"<br>");
+					results[i+1] = [data[i].x, shortening, data[i].R, resistance];
 				}
+				
+				save_results(results);
 			}
 			
 			function convert(data)
@@ -43,14 +48,18 @@
 				
 				return row;
 			}
+			
+			function save_results(results)
+			{
+				var csvGenerator = new CsvGenerator(results, "test_results.csv");
+				csvGenerator.download(true);
+			}
+			
+			d3.csv("test_values.csv", convert, test);
 		</script>
 	</head>
 
 	<body>
-		<h1>Row,&emsp;Shortening (expected),&emsp;Shortening (result),&emsp;Match?,&emsp;Resistance (expected),&emsp;Resistance (result),&emsp;Match?</h1><br>
-			
-		<script>
-			d3.csv("test_values.csv", convert, test);
-		</script>
+		<p>Testing finished.</p>
 	</body>
 </html> 
