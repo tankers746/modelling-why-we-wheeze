@@ -28,21 +28,23 @@ $.widget("mwww.spinner2", $.ui.spinner, {
         var self = this;
         var options = this.options;
 
-
+		var labeldiv = $("<div/>", {
+			class: "spinner_label",
+		});
         var label = $("<label/>", {
             html:  options.altLabel || options.topic
         });
+		
+		$(this.element).before(labeldiv);
+		labeldiv.append(label);	   
 
-        $(this.element).before(label);
-        label.wrap("<div class=spinner_label></div>");
-
-        
-        if(options.unit) {
-            label.after(" (" + options.unit + ")");
-        }
         if(options.desc) {
-            label.after(options.desc);
+            labeldiv.append(options.desc);
         }
+        if(options.unit) {
+            labeldiv.append(" (" + options.unit + ")");
+        }
+		
 
 
         function updateValue(sp, options) {
