@@ -8,7 +8,7 @@
 | 5pm Friday 26th August 2016             | Deliverable A due | Yes!
 | 5pm Friday 2nd September 2016           | Essay due         | Yes! 
 | 5pm Friday 9th September 2016           | Deliverable B due | Yes!
-| 5pm Friday 21st October 2016            | Deliverable C due | No
+| 5pm Friday 21st October 2016            | Deliverable C due | Yes!
 | 3pm-6pm, Mon/Wed 31/10/2016, 2/11/2016  | Deliverable D due | No
 
 ### Some project/unit related resources:
@@ -30,12 +30,12 @@
   - Ben Alman's tiny pub/sub -> https://gist.github.com/cowboy/661855
 
 ### Project Members:
-| Student numbers | Name                |   
-| :-------------: |:-------------       | 
-| 21490093        | Tom Ankers          | 
-| 20503664        | Michael Baxter      | 
-| 21469038        | Dylan Johnson       | 
-| 21480279        | Gary Liao           | 
-| 21522889        | Harrison Marley     | 
-| 21506136        | Damon van der Linde | 
+| Name                |   
+|:-------------       | 
+| Tom Ankers          | 
+| Michael Baxter      | 
+| Dylan Johnson       | 
+| Gary Liao           | 
+| Harrison Marley     | 
+| Damon van der Linde | 
   
